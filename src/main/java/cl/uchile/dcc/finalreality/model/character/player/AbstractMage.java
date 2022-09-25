@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public abstract class AbstractMage extends AbstractPlayerCharacter {
+public abstract class AbstractMage extends AbstractPlayerCharacter implements Mage {
     protected int currentMp;
     protected final int maxMp;
 

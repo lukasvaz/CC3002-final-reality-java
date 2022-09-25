@@ -23,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class WhiteMage extends AbstractMage {
 
-
-
   /**
    * Creates a new character.
    *
