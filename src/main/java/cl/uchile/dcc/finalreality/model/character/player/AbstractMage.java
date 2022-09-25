@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
 
 public abstract class AbstractMage extends AbstractPlayerCharacter {
-    private int currentMp;
-    private final int maxMp;
+    protected int currentMp;
+    protected final int maxMp;
 
     /**
      * Creates a new Mage.

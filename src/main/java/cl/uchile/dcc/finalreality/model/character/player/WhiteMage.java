@@ -23,8 +23,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class WhiteMage extends AbstractMage {
 
-  private int currentMp;
-  private  int maxMp;
+
 
   /**
    * Creates a new character.

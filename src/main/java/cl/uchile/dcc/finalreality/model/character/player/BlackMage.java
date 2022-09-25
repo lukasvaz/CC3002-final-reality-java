@@ -24,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BlackMage extends AbstractMage {
 
-  private int currentMp;
-  private int maxMp;
+
+
 
   /**
    * Creates a new Black Mage.
@@ -67,7 +67,7 @@ public class BlackMage extends AbstractMage {
   public String toString() {
 
     return "BlackMage{currentMp=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(this.getcurrentMp(), this.getmaxMp(), maxHp, defense, name);
+        .formatted(getcurrentMp(), getmaxMp(), maxHp, defense, name);
   }
 
   @Override
