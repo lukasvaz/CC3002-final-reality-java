@@ -15,5 +15,18 @@ Broadly speaking for the combat the player has a group of characters to control 
 enemies controlled by the computer.
 
 ---
+Changes
+-------
+Some features have been modified to guarante a proper design of the software.Here is  a quick summary of the main 
+changes: 
+<ol>
+<li> A new <em>Abstract Class </em>  called <b><em>AbstractMage</em></b>  class was added to group the behaviour of 
+<em>WhiteMages</em> and  <em>BlackMages</em>. Now the proyect is <b>open</b>
+to get new features of <em>Mages</em>.</li>
+<li> <em>waitTurn()</em> was impemented for each <em>Enemy</em> and  <em>AbstractPlayerCharacter</em> 
+ classes, this following the encapsulation principle where each class handles its funcionalities. </li>
 
-**The rest of the documentation is left for the users of this template to complete**
+<li></li>
+<li></li>
+</ol>
+
