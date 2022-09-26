@@ -1,9 +1,9 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
 
-public interface Mage extends PlayerCharacter {
+
+public interface PlayerMage extends PlayerCharacter {
 
     /**
      * Sets the Mage's current MP.

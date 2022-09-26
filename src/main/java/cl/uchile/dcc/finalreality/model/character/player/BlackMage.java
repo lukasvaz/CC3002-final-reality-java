@@ -25,8 +25,6 @@ import org.jetbrains.annotations.NotNull;
 public class BlackMage extends AbstractMage {
 
 
-
-
   /**
    * Creates a new Black Mage.
    *

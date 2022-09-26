@@ -20,18 +20,18 @@ Changes
 Some features have been modified to guarante a proper design of the software.Here is  a quick summary of the main 
 changes: 
 <ol>
-<li> A new <em>Abstract Class </em>  called <b><em>AbstractMage</em></b>  class was added to group the behaviour of 
+<li> A new <em>Abstract Class </em>  called <b><em>AbstractMage</em></b>  class was added to implement the behaviours of 
 <em>WhiteMages</em> and  <em>BlackMages</em>. Now the proyect is <b>open</b>
-to get new features of <em>Mages</em>.The proyect has also been given with the interface <em>Mage</em> (extending 
-of <em>Playercharacter</em> ) wich guaranted that some methods related to <em>Mages</em> must be implemented in the 
+to get new features of <em>Mages</em>.The proyect has also gotten  the interface <b><em>PlayerMage</em></b> (extending 
+of <em>Playercharacter</em> ) wich guarantees that  methods related to <em>Mages</em> must be implemented in the 
 <em>AbstractMage</em> class.</li>
-
-<li> <em>waitTurn()</em> was impemented for each <em>Enemy</em> and  <em>AbstractPlayerCharacter</em> 
- classes.The purpouse of this is following the encapsulation principle where each class handles its funcionalities. </li>
-
-<li><em>Enemy</em> was given  with the  method  <em>toString</em>, now it can be compared consistently with 
+<br>
+<li> <b><em>waitTurn()</em></b> was impemented for each <em>Enemy</em> and  <em>AbstractPlayerCharacter</em> 
+ classes.The purpouse of this is follow the encapsulation principle where each class handles its funcionalities. </li>
+<br>
+<li><em>Enemy</em> got  the  method  <b><em>toString</em></b>, now it can be compared consistently with 
 the other classes</li>
 
-<li></li>
+
 </ol>
 
