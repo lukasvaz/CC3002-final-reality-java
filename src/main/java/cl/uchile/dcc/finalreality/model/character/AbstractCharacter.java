@@ -2,12 +2,10 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
+import cl.uchile.dcc.finalreality.model.character.player.TurnsQueue;
+
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -9,13 +9,9 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -66,12 +62,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   @Override
   public void waitTurn() {
-    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    scheduledExecutor.schedule(
-            /* command = */ this::addToQueue,
-            /* delay = */ this.getEquippedWeapon().getWeight() / 10,
-            /* unit = */ TimeUnit.SECONDS);
+        return this.getEquippedWeapon().getWeight();
+
   }
 
 }

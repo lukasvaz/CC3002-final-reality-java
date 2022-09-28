@@ -2,11 +2,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.BlockingQueue;
 
 public abstract class AbstractMage extends AbstractPlayerCharacter implements PlayerMage {
     protected int currentMp;
