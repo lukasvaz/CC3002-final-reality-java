@@ -17,7 +17,7 @@ import java.util.concurrent.*;
 
 public class TurnsQueue {
 
-    final @NotNull BlockingQueue<GameCharacter> queue;
+    final @NotNull BlockingQueue<AbstractCharacter> queue;
     /**
      * Creates a Queue Object that recieves messages from the character classes .
      *
@@ -30,7 +30,7 @@ public class TurnsQueue {
      * Returns the queue object itself.
      */
 
-    public BlockingQueue<GameCharacter> get_queue(){
+    public BlockingQueue<AbstractCharacter> get_queue(){
         return  this.queue;
     }
 
