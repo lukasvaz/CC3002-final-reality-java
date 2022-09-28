@@ -10,6 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -36,7 +37,7 @@ public class WhiteMage extends AbstractMage {
    *     the queue with the characters waiting for their turn
    */
   public WhiteMage(final @NotNull String name, final int maxHp, final int defense,
-      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+      int maxMp, final @NotNull TurnsQueue turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense,maxMp,turnsQueue);
     Require.statValueAtLeast(0, maxMp, "Max MP");
