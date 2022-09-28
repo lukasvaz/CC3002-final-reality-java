@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
 public class Engineer extends AbstractPlayerCharacter {
 

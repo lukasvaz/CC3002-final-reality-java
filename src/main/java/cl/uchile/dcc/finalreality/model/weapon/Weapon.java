@@ -16,7 +16,15 @@ public class Weapon {
   private final WeaponType type;
 
   /**
-   * Creates a weapon with a name, a base damage, speed, and it's type.
+   * Creates a weapon .
+   *    @param name
+   *         the weapon's name
+   *     @param damage
+   *         the damage due the weapon
+   *     @param weight
+   *         the character's defense
+   *     @param type
+   *         the type of the weapon i.e. {SWORD, AXE, KNIFE, STAFF, BOW}
    */
   public Weapon(final String name, final int damage, final int weight,
       final WeaponType type) {
@@ -25,11 +33,16 @@ public class Weapon {
     this.weight = weight;
     this.type = type;
   }
-
+  /**
+   * Returns the name of the weapon.
+   */
   private String getName() {
     return name;
   }
 
+  /**
+   * Returns the damageof the weapon.
+   */
   private int getDamage() {
     return damage;
   }
@@ -41,9 +54,14 @@ public class Weapon {
     return weight;
   }
 
+  /**
+   * Returns the type of the weapon.
+   */
   private WeaponType getType() {
     return type;
   }
+
+
 
   @Override
   public boolean equals(final Object o) {
@@ -64,6 +82,7 @@ public class Weapon {
   public int hashCode() {
     return Objects.hash(Weapon.class, name, damage, weight, type);
   }
+
 
   @Override
   public String toString() {

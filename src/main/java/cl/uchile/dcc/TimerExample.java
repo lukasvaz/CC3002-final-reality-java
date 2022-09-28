@@ -5,6 +5,7 @@ import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.AbstractPlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
+import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.weapon.WeaponType;
@@ -26,10 +27,11 @@ public class TimerExample {
       // Gives a random speed to each character to generate different waiting times
       var weapon = new Weapon("", 0, rng.nextInt(50), WeaponType.KNIFE);
       var character = new Thief(Integer.toString(i), 10, 10, turns);
-      var enemy=new Enemy(Integer.toString(i), rng.nextInt(50), 10, 10,turns);
+      var wmage=new WhiteMage(Integer.toString(i), rng.nextInt(50), 10, 10,turns);
       character.equip(weapon);
+      wmage.equip(weapon);
       character.waitTurn();
-      enemy.waitTurn();
+      wmage.waitTurn();
     }
     // Waits for 6 seconds to ensure that all characters have finished waiting
     Thread.sleep(6000);

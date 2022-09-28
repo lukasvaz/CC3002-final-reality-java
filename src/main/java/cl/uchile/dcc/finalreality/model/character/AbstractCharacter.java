@@ -3,18 +3,16 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
+
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
  * An abstract class that holds the common behaviour of all the characters in the game.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
 public abstract class AbstractCharacter implements GameCharacter {
 
@@ -48,8 +46,6 @@ public abstract class AbstractCharacter implements GameCharacter {
     this.name = name;
   }
 
-
-
   /**
    * Adds this character to the turns queue.
    */
@@ -59,26 +55,38 @@ public abstract class AbstractCharacter implements GameCharacter {
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * returns the character's name.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Returns the character's current Hp points.
+   */
   @Override
   public int getCurrentHp() {
     return currentHp;
   }
-
+  /**
+   * Returns the limit of hp points that this character could have.
+   */
   @Override
   public int getMaxHp() {
     return maxHp;
   }
-
+  /**
+   * Returns the Defense points.
+   */
   @Override
   public int getDefense() {
     return defense;
   }
-
+  /**
+   *Set the Hp points.
+   */
   @Override
   public void setCurrentHp(int hp) throws InvalidStatValueException {
     Require.statValueAtLeast(0, hp, "Current HP");

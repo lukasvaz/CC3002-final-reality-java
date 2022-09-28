@@ -4,10 +4,19 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
-
+/**
+ * A class that holds all the information of a  Mage in the game.
+ *
+ * <p>All mages characters have a maximum amount of <i>mana points</i>
+ * ({@code maxMp}), a {@code currenMp} value, .
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Lukas Vasquez~
+ */
 public abstract class AbstractMage extends AbstractPlayerCharacter implements PlayerMage {
     protected int currentMp;
     protected final int maxMp;

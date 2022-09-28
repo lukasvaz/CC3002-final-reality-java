@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  * waiting for their turn ({@code turnsQueue}), and can equip a {@link Weapon}.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
     PlayerCharacter {

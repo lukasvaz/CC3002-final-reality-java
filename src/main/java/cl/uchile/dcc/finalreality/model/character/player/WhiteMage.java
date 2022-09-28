@@ -20,12 +20,12 @@ import org.jetbrains.annotations.NotNull;
  * A {@link PlayerCharacter} that can equip {@code Staff}s and use <i>white magic</i>.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
 public class WhiteMage extends AbstractMage {
 
   /**
-   * Creates a new character.
+   * Creates a new White Mage.
    *
    * @param name
    *     the character's name
@@ -33,6 +33,8 @@ public class WhiteMage extends AbstractMage {
    *     the character's max hp
    * @param defense
    *     the character's defense
+   * @param maxMp
+   *         the character's limit of Mana Points.
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
    */
