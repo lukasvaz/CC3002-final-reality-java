@@ -15,14 +15,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * This is an axample of use of the turn´s system. Here we create a character of each class, we add them into the
- * queue.Then the names will be printed in the order of the turns order by its weights.
+ * queue.Then the names will be printed  ordered by its weights.
  */
 public class TimerExample {
 
   public static void main(String[] args)
       throws InterruptedException, InvalidStatValueException {
-    TurnsQueue turns = new TurnsQueue();
-
+      TurnsQueue turns = new TurnsQueue();
     Random rng = new Random();
     for (int i = 0; i < 2; i++) {
       // Create a weapon for playable characters, the weight is random

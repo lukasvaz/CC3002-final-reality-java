@@ -36,7 +36,7 @@ public class Weapon {
   /**
    * Returns the name of the weapon.
    */
-  private String getName() {
+  public String getName() {
     return name;
   }
 

@@ -14,7 +14,17 @@ by [_Square Enix_](https://www.square-enix.com)
 Broadly speaking for the combat the player has a group of characters to control and a group of 
 enemies controlled by the computer.
 
----
+------
+
+Run Instructions
+-------
+
+This project has two testing files:<em>TimerExample.java</em> and  <em>Main.java</em>.TimerExample will test the 
+functionality of the turn system, crating an instance of each class and printing them in the right order.Main.java will 
+test the functionality of  every method of each class (i.e. getters ,setters,to string etc).Run both files for testing. 
+
+
+------
 Changes
 -------
 Some features have been modified to guarante a proper design of the software.Here is  a quick summary of the main 
