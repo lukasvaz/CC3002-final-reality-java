@@ -5,9 +5,10 @@ import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.BlockingQueue;
+
 /**
  * A class that holds all the information of a  Mage in the game.
  *

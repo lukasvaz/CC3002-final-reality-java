@@ -3,16 +3,14 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
-
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An abstract class that holds the common behaviour of all the characters in the game.
+ *An abstract class that holds the common behaviour of all the characters in the game.
  *
- * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Lukas Vasquez~
+ *@author <a href="https://www.github.com/r8vnhill">R8V</a>
+ *@author ~Lukas Vasquez~
  */
 public abstract class AbstractCharacter implements GameCharacter {
 
@@ -73,6 +71,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   /**
    * Returns the limit of hp points that this character could have.
    */
+
   @Override
   public int getMaxHp() {
     return maxHp;
@@ -80,10 +79,12 @@ public abstract class AbstractCharacter implements GameCharacter {
   /**
    * Returns the Defense points.
    */
+
   @Override
   public int getDefense() {
     return defense;
   }
+
   /**
    *Set the Hp points.
    */

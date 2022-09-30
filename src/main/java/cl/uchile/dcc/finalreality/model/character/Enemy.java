@@ -2,19 +2,18 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * A class that holds all the information of a single enemy of the game.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
 public class Enemy extends AbstractCharacter {
 
@@ -23,14 +22,15 @@ public class Enemy extends AbstractCharacter {
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
-   *   @param name
-   *    *         the Enemy's name
-   *    *     @param weight
-   *    *         the Enemy's weight
-   *    *     @param maxHp
-   *    *         the character's limit of HP
-   *    *     @param turnsqueue
-   *    *         the queue with the characters waiting for their turn
+   *
+   *  @param name
+   *     the Enemy's name
+   *   @param weight
+   *     the Enemy's weight
+   *   @param maxHp
+   *     the character's limit of HP
+   *   @param turnsQueue
+   *     the queue with the characters waiting for their turn
    */
   public Enemy(@NotNull final String name, final int weight, int maxHp, int defense,
       @NotNull final TurnsQueue turnsQueue)
@@ -66,8 +66,10 @@ public class Enemy extends AbstractCharacter {
   public int hashCode() {
     return Objects.hash(Enemy.class, name, weight, maxHp, defense);
   }
-
-
+  
+  /**
+   * Waits   @weight/ 10 seconds and then add the enemy to the queue.
+   */
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     var enemy = (Enemy) this;
@@ -80,6 +82,7 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public String toString() {
-    return "Enemy{maxHp=%d,wheight=%d, defense=%d, name='%s'}".formatted(maxHp,weight, defense, name);
+    return "Enemy{maxHp=%d,wheight=%d, defense=%d, name='%s'}".formatted(maxHp,
+            weight, defense, name);
   }
 }

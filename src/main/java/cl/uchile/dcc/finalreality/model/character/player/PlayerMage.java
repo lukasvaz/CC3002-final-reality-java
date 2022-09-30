@@ -12,19 +12,19 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
  */
 public interface PlayerMage extends PlayerCharacter {
 
-    /**
-     * Sets the Mage's current MP.
-     */
-     void setCurrentMp(final int currentMp) throws InvalidStatValueException ;
+  /**
+  * Sets the Mage's current MP.
+  */
+  void setCurrentMp(final int currentMp) throws InvalidStatValueException;
 
-    /**
-     * Returns the character's current MP.
-     */
-    int getcurrentMp() ;
-
-    /**
-     * Returns the Mage's max MP.
-     */
-     int getmaxMp();
+  /**
+   * Returns the character's current MP.
+   */
+  int getcurrentMp();  
+  /**
+   * Returns the Mage's max MP.
+   */
+  
+  int getmaxMp();
 
 }
