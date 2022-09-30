@@ -19,7 +19,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Main {
   /**
-  * Run the tests
+  * Run the tests.
   */
   public static void main(String[] args)
         throws InvalidStatValueException  {

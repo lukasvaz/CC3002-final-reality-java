@@ -24,7 +24,7 @@ public class TimerExample {
   /**
    * Run test
    * Waits for 12 seconds to ensure that all characters have finished waiting
-   *  Pops and prints the names of the characters of the queue to illustrate the turns
+   *  Pops and prints the names of the characters of the queue to illustrate the turns.
    */
 
   public static void main(String[] args)

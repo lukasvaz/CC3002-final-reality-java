@@ -15,8 +15,9 @@ public class Weapon {
   private final int weight;
   private final WeaponType type;
 
-  /**
-   * Creates a weapon .
+  /**Creates a weapon.
+   *
+   *
    *    @param name
    *         the weapon's name
    *     @param damage

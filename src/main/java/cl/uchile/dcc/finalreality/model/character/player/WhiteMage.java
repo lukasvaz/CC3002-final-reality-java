@@ -41,7 +41,7 @@ public class WhiteMage extends AbstractMage {
   public WhiteMage(final @NotNull String name, final int maxHp, final int defense,
       int maxMp, final @NotNull TurnsQueue turnsQueue)
       throws InvalidStatValueException {
-    super(name, maxHp, defense,maxMp,turnsQueue);
+    super(name, maxHp, defense, maxMp, turnsQueue);
     Require.statValueAtLeast(0, maxMp, "Max MP");
   }
 
