@@ -17,7 +17,6 @@ public class Weapon {
 
   /**Creates a weapon.
    *
-   *
    *    @param name
    *         the weapon's name
    *     @param damage

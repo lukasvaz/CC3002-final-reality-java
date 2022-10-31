@@ -2,15 +2,11 @@ package cl.uchile.dcc;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.*;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import cl.uchile.dcc.finalreality.model.weapon.WeaponType;
 import java.util.Random;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * This is an axample of use of the turn´s system. Here we create a character
@@ -67,11 +63,11 @@ public class TimerExample {
       // order
       var character = turns.get_queue().poll();
       if (character instanceof AbstractPlayerCharacter) {
-        System.out.println(character.toString());
+        System.out.println(character);
         System.out.println(((AbstractPlayerCharacter) character).getEquippedWeapon().getWeight());
       }
       if (character instanceof Enemy)  {
-        System.out.println(character.toString());
+        System.out.println(character);
         System.out.println(((Enemy) character).getWeight());
       }
     }
