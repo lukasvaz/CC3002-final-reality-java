@@ -4,9 +4,12 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.*;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
-import cl.uchile.dcc.finalreality.model.weapon.WeaponType;
-import java.util.Random;
+
 
 
 /**
@@ -19,29 +22,29 @@ public class Main {
   public static void main(String[] args)
         throws InvalidStatValueException  {
     TurnsQueue turns = new TurnsQueue();
-    Random rng = new Random();
+    
     // Create a weapon for playable characters, the weight is random
     // Create a character if each class
     //we equip weapon to the playable characters
-    Weapon knife = new Weapon("knife1", 0, 10, WeaponType.KNIFE);
+    Weapon knife = new Knife("knife1", 0, 10);
     Thief thief = new Thief("thief1", 100, 10, turns);
     thief.equip(knife);
     
-    Weapon axe = new Weapon("axe1", 0, 20, WeaponType.AXE);
+    Weapon axe = new Axe("axe1", 0, 20);
     Engineer engineer = new Engineer("engineer1", 100, 10, turns);
     engineer.equip(axe);
     
-    Weapon wstaff = new Weapon("white staff1", 0, 40, WeaponType.STAFF);
+    Weapon wstaff = new Staff("white staff1", 0, 40);
     WhiteMage whitemage = new WhiteMage("white1", 50, 10, 50, turns);
     whitemage.equip(wstaff);
     
-    Weapon bstaff = new Weapon("black staff1", 0, 50, WeaponType.STAFF);
+    Weapon bstaff = new Staff("black staff1", 0, 50);
     BlackMage blackmage = new BlackMage("black1", 50, 80, 50, turns);
     blackmage.equip(bstaff);
    
     
     Knight knight = new Knight("knight1", 100, 10, turns);
-    Weapon sword = new Weapon("sword1", 0, 30, WeaponType.SWORD);
+    Weapon sword = new Sword("sword1", 0, 30);
     knight.equip(sword);
     
     Enemy enemy = new Enemy("enemy1",  50, 10, 50, turns);
@@ -57,12 +60,12 @@ public class Main {
     var blackmage2 = new BlackMage("black1", 50, 80, 50, turns);
     var whitemage2 = new WhiteMage("white1", 50, 10, 50, turns);
     var enemy2 = new Enemy("enemy1",  50, 10, 50, turns);
-    System.out.println(thief2.toString());
-    System.out.println(knight2.toString());
-    System.out.println(engineer2.toString());
-    System.out.println(blackmage2.toString());
-    System.out.println(whitemage2.toString());
-    System.out.println(enemy2.toString());
+    System.out.println(thief2);
+    System.out.println(knight2);
+    System.out.println(engineer2);
+    System.out.println(blackmage2);
+    System.out.println(whitemage2);
+    System.out.println(enemy2);
     System.out.printf("comparing thief1 with thief2 : %s %n", thief.equals(thief2));
     System.out.printf("comparing knight1 with knight2 : %s %n", knight.equals(knight2));
     System.out.printf("comparing engineer1 with engineer2 : %s %n", engineer.equals(engineer2));
@@ -79,12 +82,12 @@ public class Main {
     BlackMage blackmage3 = new BlackMage("Sidious", 60, 80, 50, turns);
     WhiteMage whitemage3 = new WhiteMage("Gandalf", 60, 10, 50, turns);
     Enemy enemy3 = new Enemy("enemy1",  60, 15, 50, turns);
-    System.out.println(thief2.toString());
-    System.out.println(knight2.toString());
-    System.out.println(engineer2.toString());
-    System.out.println(blackmage2.toString());
-    System.out.println(whitemage2.toString());
-    System.out.println(enemy2.toString());
+    System.out.println(thief2);
+    System.out.println(knight2);
+    System.out.println(engineer2);
+    System.out.println(blackmage2);
+    System.out.println(whitemage2);
+    System.out.println(enemy2);
     System.out.printf("comparing thief1 with thief2 : %s %n", thief.equals(thief3));
     System.out.printf("comparing knight1 with knight2 : %s %n", knight.equals(knight3));
     System.out.printf("comparing engineer1 with engineer2 : %s %n", engineer.equals(engineer3));
@@ -170,16 +173,16 @@ public class Main {
     System.out.println(" Testing equals in weapons: ");
     System.out.println("First we create  a new set of characters "
                                + "with same parameters than the originals.....");
-    var knife2 = new Weapon("knife1", 0, 10, WeaponType.KNIFE);
-    var axe2 = new Weapon("axe1", 0, 20, WeaponType.AXE);
-    var sword2 = new Weapon("sword1", 0, 30, WeaponType.SWORD);
-    var wstaff2 = new Weapon("white staff1", 0, 40, WeaponType.STAFF);
-    var bstaff2 = new Weapon("black staff1", 0, 50, WeaponType.STAFF);
-    System.out.println(knife2.toString());
-    System.out.println(axe2.toString());
-    System.out.println(sword2.toString());
-    System.out.println(wstaff2.toString());
-    System.out.println(bstaff2.toString());
+    var knife2 = new Knife("knife1", 0, 10);
+    var axe2 = new Axe("axe1", 0, 20);
+    var sword2 = new Sword("sword1", 0, 30);
+    var wstaff2 = new Staff("white staff1", 0, 40);
+    var bstaff2 = new Staff("black staff1", 0, 50);
+    System.out.println(knife2);
+    System.out.println(axe2);
+    System.out.println(sword2);
+    System.out.println(wstaff2);
+    System.out.println(bstaff2);
     System.out.printf("comparing knife with knife2 : %s %n", knife.equals(knife2));
     System.out.printf("comparing axe with axe2 : %s %n", axe.equals(axe2));
     System.out.printf("comparing sword with sword2 : %s %n", sword.equals(sword2));
@@ -187,21 +190,20 @@ public class Main {
     System.out.printf("comparing b_staff with bstaff2 : %s %n", bstaff.equals(bstaff2));
     System.out.println("Then we create  a new set of characters "
                                + "with different parameters than the originals.....");
-    var knife3 = new Weapon("cuchila", 0, 10, WeaponType.KNIFE);
-    var axe3 = new Weapon("twosidedaxe", 0, 20, WeaponType.AXE);
-    var sword3 = new Weapon("scalibur", 0, 30, WeaponType.SWORD);
-    var wstaff3 = new Weapon("woodstaff", 0, 40, WeaponType.STAFF);
-    var bstaff3 = new Weapon("steel staff1", 0, 50, WeaponType.STAFF);
-    System.out.println(knife3.toString());
-    System.out.println(axe3.toString());
-    System.out.println(sword3.toString());
-    System.out.println(wstaff3.toString());
-    System.out.println(bstaff3.toString());
+    var knife3 = new Knife("cuchila", 0, 10);
+    var axe3 = new Axe("twosidedaxe", 0, 20);
+    var sword3 = new Sword("scalibur", 0, 30);
+    var wstaff3 = new Staff("woodstaff", 0, 40);
+    var bstaff3 = new Staff("steel staff1", 0, 50);
+    System.out.println(knife3);
+    System.out.println(axe3);
+    System.out.println(sword3);
+    System.out.println(wstaff3);
+    System.out.println(bstaff3);
     System.out.printf("comparing knife with knife3 : %s %n", knife.equals(knife3));
     System.out.printf("comparing axe with axe3 : %s %n", axe.equals(axe3));
     System.out.printf("comparing sword with sword3 : %s %n", sword.equals(sword3));
     System.out.printf("comparing w_staff with wstaff3 : %s %n", wstaff.equals(wstaff3));
     System.out.printf("comparing b_staff with bstaff3 : %s %n", bstaff.equals(bstaff3));
-        
   }
 }

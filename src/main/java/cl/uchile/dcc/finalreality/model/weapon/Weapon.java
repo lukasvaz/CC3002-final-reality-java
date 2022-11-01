@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Your name~
  */
-public class Weapon {
+public abstract class Weapon {
 
   private final String name;
   private final int damage;

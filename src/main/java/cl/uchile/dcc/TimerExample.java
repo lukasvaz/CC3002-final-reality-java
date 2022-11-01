@@ -4,8 +4,11 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.*;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
-import cl.uchile.dcc.finalreality.model.weapon.WeaponType;
 import java.util.Random;
 
 /**
@@ -31,20 +34,20 @@ public class TimerExample {
       // Create a weapon for playable characters, the weight is random
       // Create a character of each class
       //we equip weapon to the playable characters
-      Weapon knife = new Weapon("knife weight", 0, rng.nextInt(10, 100), WeaponType.KNIFE);
+      Weapon knife = new Knife("knife weight", 0, rng.nextInt(10, 100));
       Thief thief = new Thief(Integer.toString(i), 100, 10, turns);
       thief.equip(knife);
-      Weapon axe = new Weapon("axe", 0, rng.nextInt(10, 100), WeaponType.AXE);
+      Weapon axe = new Axe("axe", 0, rng.nextInt(10, 100));
       Engineer engineer = new Engineer(Integer.toString(i), 100, 10, turns);
       engineer.equip(axe);
-      Weapon sword = new Weapon("sword", 0, rng.nextInt(10, 100), WeaponType.SWORD);
+      Weapon sword = new Sword("sword", 0, rng.nextInt(10, 100));
       Knight knight = new Knight(Integer.toString(i), 100, 10, turns);
       knight.equip(sword);
-      Weapon wstaff = new Weapon("white staff", 0, rng.nextInt(10, 100), WeaponType.STAFF);
+      Weapon wstaff = new Staff("white staff", 0, rng.nextInt(10, 100));
       WhiteMage whitemage = new WhiteMage(Integer.toString(i), 50, 10, 50, turns);
       whitemage.equip(wstaff);
       BlackMage blackmage = new BlackMage(Integer.toString(i), 50, 80, 50, turns);
-      Weapon bstaff = new Weapon("black staff", 0, rng.nextInt(10, 100), WeaponType.STAFF);
+      Weapon bstaff = new Staff("black staff", 0, rng.nextInt(10, 100));
       blackmage.equip(bstaff);
       Enemy enemy = new Enemy(Integer.toString(i),  rng.nextInt(10, 100), 10, 50, turns);
       //each caracter waits for their turns
