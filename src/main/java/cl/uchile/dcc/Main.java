@@ -41,25 +41,24 @@ public class Main {
     Weapon bstaff = new Staff("black staff1", 0, 50);
     BlackMage blackmage = new BlackMage("black1", 50, 80, 50, turns);
     blackmage.equip(bstaff);
-   
     
     Knight knight = new Knight("knight1", 100, 10, turns);
     Weapon sword = new Sword("sword1", 0, 30);
     knight.equip(sword);
-    
     Enemy enemy = new Enemy("enemy1",  50, 10, 50, turns);
-    
     
     // tesing equals() for each class
     System.out.println("testing equals:\n");
     System.out.println("First we create  a new set of characters "
                                + "with same parameters than the originals.....");
+    
     var thief2 = new Thief("thief1", 100, 10, turns);
     var knight2 = new Knight("knight1", 100, 10, turns);
     var engineer2 = new Engineer("engineer1", 100, 10, turns);
     var blackmage2 = new BlackMage("black1", 50, 80, 50, turns);
     var whitemage2 = new WhiteMage("white1", 50, 10, 50, turns);
     var enemy2 = new Enemy("enemy1",  50, 10, 50, turns);
+    
     System.out.println(thief2);
     System.out.println(knight2);
     System.out.println(engineer2);
@@ -113,6 +112,7 @@ public class Main {
     System.out.printf("  engineer´s defense: %s %n", engineer.getDefense());
     System.out.printf("  black mage´s defense: %s %n", blackmage.getDefense());
     System.out.printf("  white mage´s defense: %s %n", whitemage.getDefense());
+    
     //
     System.out.println("getCurrentHP():");
     System.out.printf("  thief´s current Hp: %d %n", thief.getCurrentHp());
@@ -120,11 +120,13 @@ public class Main {
     System.out.printf("  engineer´s current Hp: %d %n", engineer.getCurrentHp());
     System.out.printf("  black_mage´s current Hp: %d %n", blackmage.getCurrentHp());
     System.out.printf("  white_mage´s current Hp: %d %n", whitemage.getCurrentHp());
+    
     thief.setCurrentHp(1);
     knight.setCurrentHp(1);
     engineer.setCurrentHp(1);
     blackmage.setCurrentHp(1);
     whitemage.setCurrentHp(1);
+    
     System.out.println("setting current Hp points to 1 in all playable classes :");
     System.out.printf(" new  thief´s current Hp: %d %n", thief.getCurrentHp());
     System.out.printf(" new  knight´s current Hp: %d %n", knight.getCurrentHp());

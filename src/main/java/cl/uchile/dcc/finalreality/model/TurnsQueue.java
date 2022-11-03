@@ -1,14 +1,12 @@
 package cl.uchile.dcc.finalreality.model;
 
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
-import cl.uchile.dcc.finalreality.model.character.Enemy;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.concurrent.*;
 import org.jetbrains.annotations.NotNull;
 
 
 /**
- * A class that manages mathods about the turns system.
+ * A class that manages mathods from  turn´s system.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Lukas Vasquez~

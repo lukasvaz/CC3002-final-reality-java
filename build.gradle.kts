@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.openjfx:javafx:18.0.2:pom")
+    implementation("org.openjfx:javafx:19:pom")
     implementation("org.jetbrains:annotations:23.0.0")
     implementation("org.apache.commons:commons-lang3:3.12.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
