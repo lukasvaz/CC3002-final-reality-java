@@ -5,6 +5,7 @@ import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import java.util.Objects;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   private final int weight;
+  protected ScheduledExecutorService scheduledExecutor;
 
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
@@ -76,6 +78,8 @@ public class Enemy extends AbstractCharacter {
             /* command = */ this::addToQueue,
             /* delay = */ enemy.getWeight() / 10,
             /* unit = */ TimeUnit.SECONDS);
+    this.addToQueue();
+    scheduledExecutor.shutdown();
   }
 
   @Override

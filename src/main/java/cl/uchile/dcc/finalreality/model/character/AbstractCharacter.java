@@ -3,7 +3,6 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import java.util.concurrent.ScheduledExecutorService;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -19,7 +18,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   protected int defense;
   protected final TurnsQueue turnsQueue;
   protected final String name;
-  protected ScheduledExecutorService scheduledExecutor;
+  
 
   /**
    * Creates a new character.
@@ -48,9 +47,7 @@ public abstract class AbstractCharacter implements GameCharacter {
    * Adds this character to the turns queue.
    */
   protected void addToQueue() {
-
     turnsQueue.push(this);
-    scheduledExecutor.shutdown();
   }
 
   /**

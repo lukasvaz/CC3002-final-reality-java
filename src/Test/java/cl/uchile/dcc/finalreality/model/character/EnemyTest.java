@@ -3,8 +3,6 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +26,7 @@ class EnemyTest {
   Enemy enemy4 = new Enemy("enemy1", 30, 10,40,queue);
   Enemy enemy5 = new Enemy("enemy2", 30, 10,40,queue);
   Knight enemy6 = new Knight("enemy2", 30, 40,queue);
-  assertTrue( enemy1.equals(enemy1));
+  assertTrue(enemy1.equals(enemy1));
   assertTrue( enemy1.equals(enemy2));
   assertFalse(enemy1.equals(enemy3));
   assertFalse(enemy1.equals(enemy4));
@@ -66,6 +64,7 @@ class EnemyTest {
   TurnsQueue queue = new TurnsQueue();
   Enemy enemy1 = new Enemy("enemy1", 10, 100, 40, queue);
  assertEquals("Enemy{maxHp=100,wheight=10, defense=40, name='enemy1'}",enemy1.toString());
+ 
  }
 
 }

@@ -13,6 +13,7 @@ import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
     PlayerCharacter {
-
+  protected ScheduledExecutorService scheduledExecutor;
   private Weapon equippedWeapon = null;
 
   /**
@@ -70,7 +71,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             /* command = */ this::addToQueue,
             /* delay = */ this.getEquippedWeapon().getWeight() / 10,
             /* unit = */ TimeUnit.SECONDS);
+    this.addToQueue();
+    scheduledExecutor.shutdown();
   }
+  
+  
 
 }
 
