@@ -34,7 +34,7 @@ class EngineerTest {
   Engineer engineer_name= new Engineer("engineer3",40,40,queue);
   Engineer engineer_defense= new Engineer("engineer1",44,40,queue);
   Engineer engineer_maxHp= new Engineer("engineer1",40,44,queue);
-  Enemy enemy=new Enemy("engineer1",40,40,40,queue);
+  Enemy enemy=new Enemy("enemy1",40,40,40,queue);
   assertTrue(engineer1.equals(engineer1));
   assertTrue(engineer1.equals(engineer2));
   assertFalse(engineer1.equals(engineer_name));

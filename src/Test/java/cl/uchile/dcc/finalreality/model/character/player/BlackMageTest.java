@@ -18,11 +18,12 @@ class BlackMageTest {
   BlackMage bmage_defense= new BlackMage("bmage1",44,40,100,queue);
   BlackMage bmage_maxHp= new BlackMage("bmage1",40,44,100,queue);
   BlackMage bmage_maxmp= new BlackMage("bmage1",40,40,80,queue);
-  Enemy enemy=new Enemy("bmage1",40,40,40,queue);
+  Enemy enemy=new Enemy("enemy",40,40,40,queue);
   assertTrue(bmage1.equals(bmage1));
   assertTrue(bmage1.equals(bmage2));
   assertFalse(bmage1.equals(bmage_name));
   assertFalse(bmage1.equals(bmage_maxHp));
+  assertFalse(bmage1.equals(bmage_defense));
   assertFalse(bmage1.equals(bmage_maxmp));
   assertFalse(bmage1.equals(enemy));
  }
