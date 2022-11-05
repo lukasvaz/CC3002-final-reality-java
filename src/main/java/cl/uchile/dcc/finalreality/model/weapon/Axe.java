@@ -84,7 +84,7 @@ public class  Axe implements Weapon {
   
   @Override
   public String toString() {
-    return "Weapon{name='%s', damage=%d, weight=%d, type=%s}"
+    return "Axe{name='%s', damage=%d, weight=%d, type=%s}"
                    .formatted(name, damage, weight, type);
   }
 }

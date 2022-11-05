@@ -85,7 +85,7 @@ public class Sword implements Weapon {
   
   @Override
   public String toString() {
-    return "Weapon{name='%s', damage=%d, weight=%d, type=%s}"
+    return "Sword{name='%s', damage=%d, weight=%d, type=%s}"
                    .formatted(name, damage, weight, type);
   }
 }

@@ -30,7 +30,7 @@ public class TimerExample {
       throws InterruptedException, InvalidStatValueException {
     TurnsQueue turns = new TurnsQueue();
     Random rng = new Random();
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 1; i++) {
       // Create a weapon for playable characters, the weight is random
       // Create a character of each class
       //we equip weapon to the playable characters

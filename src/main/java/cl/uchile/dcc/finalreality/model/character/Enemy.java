@@ -78,7 +78,7 @@ public class Enemy extends AbstractCharacter {
             /* command = */ this::addToQueue,
             /* delay = */ enemy.getWeight() / 10,
             /* unit = */ TimeUnit.SECONDS);
-    this.addToQueue();
+    
     scheduledExecutor.shutdown();
   }
 

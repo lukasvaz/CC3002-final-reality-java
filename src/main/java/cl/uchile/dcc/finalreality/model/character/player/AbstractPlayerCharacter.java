@@ -72,7 +72,7 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
               /* command = */ this::addToQueue,
               /* delay = */ this.getEquippedWeapon().getWeight() / 10,
               /* unit = */ TimeUnit.SECONDS);
-      this.addToQueue();
+     
       scheduledExecutor.shutdown();
     } catch (Exception e) {
       System.out.println("Debe equipar un arma");
