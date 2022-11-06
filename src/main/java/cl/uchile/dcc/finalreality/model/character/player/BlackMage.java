@@ -9,9 +9,12 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import java.util.Objects;
+
+import cl.uchile.dcc.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -43,8 +46,9 @@ public class BlackMage extends AbstractMage {
     super(name, maxHp, defense, maxMp, turnsQueue);
     Require.statValueAtLeast(0, maxMp, "Max MP");
   }
-
-
+  
+ 
+  
   // region : UTILITY METHODS
   @Override
   public boolean equals(final Object o) {
@@ -71,6 +75,31 @@ public class BlackMage extends AbstractMage {
   @Override
   public int hashCode() {
     return Objects.hash(BlackMage.class, name, maxHp, defense, maxMp);
+  }
+  
+  @Override
+  public void equipSword(Sword sword) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipAxe(Axe axe) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipKnife(Knife knife) {
+    this.equippedWeapon = knife;
+  }
+  
+  @Override
+  public void equipStaff(Staff staff) {
+    this.equippedWeapon = staff;
+  }
+  
+  @Override
+  public void equipBow(Bow bow) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
   }
   // endregion
 }

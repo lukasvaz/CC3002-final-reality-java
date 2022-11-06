@@ -9,6 +9,7 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractPlayerCharacter  extends AbstractCharacter implements
     PlayerCharacter {
   protected ScheduledExecutorService scheduledExecutor;
-  private Weapon equippedWeapon = null;
+  protected Weapon equippedWeapon = null;
 
   /**
    * Creates a new character.
@@ -51,12 +52,14 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
   }
-
+  /**
+   * Equips a weapon to the character.
+   */
   @Override
-  public void equip(Weapon weapon) {
-    this.equippedWeapon = weapon;
+  public void equip(Weapon weapon) throws InvalidWeaponAssignmentException {
+    weapon.equippedby(this);
   }
-
+  
   @Override
   public Weapon getEquippedWeapon() {
     return equippedWeapon;

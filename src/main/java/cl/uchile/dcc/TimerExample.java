@@ -1,6 +1,7 @@
 package cl.uchile.dcc;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.*;
@@ -27,7 +28,7 @@ public class TimerExample {
    */
 
   public static void main(String[] args)
-      throws InterruptedException, InvalidStatValueException {
+          throws InterruptedException, InvalidStatValueException, InvalidWeaponAssignmentException {
     TurnsQueue turns = new TurnsQueue();
     Random rng = new Random();
     for (int i = 0; i < 1; i++) {

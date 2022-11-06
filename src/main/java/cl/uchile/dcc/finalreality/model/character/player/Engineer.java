@@ -9,8 +9,11 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import java.util.Objects;
+
+import cl.uchile.dcc.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -63,5 +66,31 @@ public class Engineer extends AbstractPlayerCharacter {
         && name.equals(that.name)
         && maxHp == that.maxHp
         && defense == that.defense;
+  }
+  
+  @Override
+  public void equipSword(Sword sword) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipAxe(Axe axe) {
+    this.equippedWeapon = axe;
+  }
+  
+  @Override
+  public void equipKnife(Knife knife) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipStaff(Staff staff) throws InvalidWeaponAssignmentException {
+    throw  new InvalidWeaponAssignmentException();
+  
+  }
+  
+  @Override
+  public void equipBow(Bow bow) throws InvalidWeaponAssignmentException {
+    this.equippedWeapon = bow;
   }
 }

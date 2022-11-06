@@ -1,5 +1,8 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.character.player.*;
+
 import java.util.Objects;
 
 import static cl.uchile.dcc.finalreality.model.weapon.WeaponType.AXE;
@@ -87,4 +90,10 @@ public class  Axe implements Weapon {
     return "Axe{name='%s', damage=%d, weight=%d, type=%s}"
                    .formatted(name, damage, weight, type);
   }
+  
+  @Override
+   public void equippedby(PlayerCharacter p) throws InvalidWeaponAssignmentException {
+    p.equipAxe(this);
+  }
+  
 }

@@ -1,5 +1,8 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.character.player.*;
+
 import java.util.Objects;
 
 
@@ -62,6 +65,12 @@ public class Sword implements Weapon {
   public WeaponType getType() {
     return type;
   }
+  
+  @Override
+  public void equippedby(PlayerCharacter p) throws InvalidWeaponAssignmentException {
+    p.equipSword(this);
+  }
+  
   
   @Override
   public boolean equals(final Object o) {

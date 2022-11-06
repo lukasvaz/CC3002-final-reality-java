@@ -1,17 +1,49 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.character.player.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static cl.uchile.dcc.finalreality.model.weapon.WeaponType.BOW;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BowTest {
- Bow bow=new Bow("bow1",30,30);
- Bow bow2=new Bow("bow1",30,30);
- Bow bow3=new Bow("",1,1);
- Staff staff=new Staff("staff",30,30);
+ Bow bow;
+ Bow bow2;
+ Bow bow3;
+ Staff staff;
+ Knight knight;
+ Engineer engineer;
+ Thief thief;
+ BlackMage bmage;
+ WhiteMage wmage;
+ TurnsQueue queue;
  
+ @BeforeEach
+ void setup() throws InvalidStatValueException {
+  bow=new Bow("bow1",30,30);
+  bow2=new Bow("bow1",30,30);
+  bow3=new Bow("",1,1);
+  staff=new Staff("staff",30,30);
+  queue=new TurnsQueue();
+  knight= new Knight("name",10,10,queue);
+  engineer=new Engineer("name",10,10,queue);
+  thief=new Thief("name",10,10,queue);
+  bmage=new BlackMage("name",10,10,10,queue);
+  wmage=new WhiteMage("name",10,10,10,queue);
+ }
  
+ @Test
+ void equippedby(){
+  assertThrows(InvalidWeaponAssignmentException.class,()->bow.equippedby(knight));
+  assertDoesNotThrow(()->bow.equippedby(engineer));
+  assertDoesNotThrow(()->bow.equippedby(thief));
+  assertThrows(InvalidWeaponAssignmentException.class,()->bow.equippedby(bmage));
+  assertThrows(InvalidWeaponAssignmentException.class,()->bow.equippedby(wmage));
+ }
  @Test
  void getName() {
   assertEquals("bow1",bow.getName());

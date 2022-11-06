@@ -1,5 +1,8 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.character.player.*;
+
 /**
  * A class that holds all the information of a weapon.
  *
@@ -28,5 +31,12 @@ public interface Weapon {
    */
   
   WeaponType getType();
+  /**
+   * Responses for Equips a weapon.
+   *
+   */
   
+  void equippedby(PlayerCharacter p) throws InvalidWeaponAssignmentException;
+  
+ 
 }

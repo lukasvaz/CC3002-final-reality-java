@@ -1,6 +1,7 @@
 package cl.uchile.dcc;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.*;
@@ -20,7 +21,7 @@ public class Main {
   * Run the tests.
   */
   public static void main(String[] args)
-        throws InvalidStatValueException  {
+          throws InvalidStatValueException, InvalidWeaponAssignmentException {
     TurnsQueue turns = new TurnsQueue();
     
     // Create a weapon for playable characters, the weight is random

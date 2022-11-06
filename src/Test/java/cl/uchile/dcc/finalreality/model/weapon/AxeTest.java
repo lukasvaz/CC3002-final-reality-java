@@ -1,5 +1,9 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.character.player.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,16 +12,43 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AxeTest {
  
- Axe axe=new Axe("axe1",30,30);
- Axe axe2=new Axe("axe1",30,30);
- Axe axe3=new Axe("",1,1);
- Staff staff=new Staff("staff",30,30);
+ Axe axe;
+ Axe axe2;
+ Axe axe3;
+ Staff staff;
+ Knight knight;
+ Engineer engineer;
+ Thief thief;
+ BlackMage bmage;
+ WhiteMage wmage;
+ TurnsQueue queue;
+ 
+ @BeforeEach
+ void setup() throws InvalidStatValueException {
+  axe=new Axe("axe1",30,30);
+  axe2=new Axe("axe1",30,30);
+  axe3=new Axe("",1,1);
+  staff=new Staff("staff",30,30);
+  queue=new TurnsQueue();
+  knight= new Knight("name",10,10,queue);
+  engineer=new Engineer("name",10,10,queue);
+  thief=new Thief("name",10,10,queue);
+  bmage=new BlackMage("name",10,10,10,queue);
+  wmage=new WhiteMage("name",10,10,10,queue);
+ }
  @Test
  void getName() {
   assertEquals("axe1",axe.getName());
   assertEquals("",axe3.getName());
  }
- 
+ @Test
+ void equippedby(){
+  assertDoesNotThrow(()->axe.equippedby(knight));
+  assertDoesNotThrow(()->axe.equippedby(engineer));
+  assertThrows(InvalidWeaponAssignmentException.class,()->axe.equippedby(thief));
+  assertThrows(InvalidWeaponAssignmentException.class,()->axe.equippedby(bmage));
+  assertThrows(InvalidWeaponAssignmentException.class,()->axe.equippedby(wmage));
+ }
  @Test
  void getDamage() {
   assertEquals(30,axe.getDamage());
