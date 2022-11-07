@@ -29,6 +29,8 @@ Changes
 -------
 Some features have been modified to guarante a proper design of the software.Here is  a quick summary of the main 
 changes: 
+
+<b>T1</b>
 <ol>
 <li> A new <em>Abstract Class </em>  called <b><em>AbstractMage</em></b>  class was added to implement the behaviours of 
 <em>WhiteMages</em> and  <em>BlackMages</em>. Now the proyect is <b>open</b>
@@ -44,6 +46,18 @@ or Weapon´s weights. </li>
 handle the functionalities related to the turns.</li><br>
 <li><em>Enemy</em> got  the  method  <b><em>toString</em></b>, now it can be compared consistently with 
 the other classes</li>
-
 </ol>
 
+<b>T2</b>
+<ol>
+<li>Tests were implemented.It was added a unit test for each  player class  and weapon class.</li>
+<li>Weapon assignment restrictions were implemented.To do this the
+<em>Weapon</em> interface got the method <em>equipedby()</em> and  <em>PlayerCharacter</em> 
+interface got the methods <em>equipSword()</em>,<em>equipAxe()</em> 
+,<em>equipKnife()</em>, <em>equipStaff()</em> and equipBow()</em>.<br>
+Following the double dispatch design pattern,the method <em>equip()</em> in <em>AbstractPlayerCharacter</em> calls the method <em>equipedby()</em>
+in <em>Weapon</em> (first dispatch) in order to disambiguate the weapon.Then the method 
+<em>equippedby()</em> calls the respective method to equip the weapon in the 
+differents characters classes (double dispatch).</li>
+
+</ol>

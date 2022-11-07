@@ -73,7 +73,7 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
   
       scheduledExecutor.schedule(
               /* command = */ this::addToQueue,
-              /* delay = */ this.getEquippedWeapon().getWeight() / 10,
+              /* delay = */ this.getEquippedWeapon().getWeight() /10,
               /* unit = */ TimeUnit.SECONDS);
      
       scheduledExecutor.shutdown();
@@ -81,6 +81,7 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
       System.out.println("Debe equipar un arma");
     }
   }
+  
 }
 
 
