@@ -1,7 +1,7 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
-import cl.uchile.dcc.finalreality.model.character.player.*;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 
 /**
  * A class that holds all the information of a weapon.

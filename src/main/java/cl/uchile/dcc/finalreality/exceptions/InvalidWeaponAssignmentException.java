@@ -1,8 +1,5 @@
 package cl.uchile.dcc.finalreality.exceptions;
 
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
-
 /**
  * This error is used to represent an invalid weapon assignment.
  *

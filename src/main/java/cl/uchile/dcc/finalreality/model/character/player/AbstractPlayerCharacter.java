@@ -10,6 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
@@ -55,6 +56,7 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
   /**
    * Equips a weapon to the character.
    */
+  
   @Override
   public void equip(Weapon weapon) throws InvalidWeaponAssignmentException {
     weapon.equippedby(this);
@@ -67,18 +69,19 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
 
 
   @Override
-  public void waitTurn() {
+  public void waitTurn() throws NullWeaponException {
     try {
       scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
   
       scheduledExecutor.schedule(
               /* command = */ this::addToQueue,
-              /* delay = */ this.getEquippedWeapon().getWeight() /10,
+              /* delay = */ this.getEquippedWeapon().getWeight() / 10,
               /* unit = */ TimeUnit.SECONDS);
      
       scheduledExecutor.shutdown();
+    
     } catch (Exception e) {
-      System.out.println("Debe equipar un arma");
+      throw new NullWeaponException();
     }
   }
   

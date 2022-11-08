@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.weapon.Axe;
 import cl.uchile.dcc.finalreality.model.weapon.Bow;
@@ -38,74 +39,107 @@ class AbstractPlayerCharacterTest {
   bmage=new BlackMage("bmage",100,100,100,queue);
   
   sword= new Sword("sword1",30,10);
-  axe = new Axe("axe1",30,30);
-  knife= new Knife("knife1", 30,20);
-  staff= new Staff("staf",30,30);
-  bow=new Bow("bow",30,30);
+  axe = new Axe("axe1",30,20);
+  knife= new Knife("knife1", 30,30);
+  staff= new Staff("staf",30,40);
+  bow=new Bow("bow",30,50);
  }
   @Test
- void equipAndGet(){
+ void RestrictionsWeapontests(){
   assertDoesNotThrow(()->knight.equip(sword));
-  assertEquals(sword,knight.getEquippedWeapon());
   assertDoesNotThrow(()->knight.equip(axe));
-  assertEquals(axe,knight.getEquippedWeapon());
   assertDoesNotThrow(()->knight.equip(knife));
-  assertEquals(knife,knight.getEquippedWeapon());
   assertThrows(InvalidWeaponAssignmentException.class,()->knight.equip(staff));
   assertThrows(InvalidWeaponAssignmentException.class,()->knight.equip(bow));
  
   assertThrows(InvalidWeaponAssignmentException.class,()->engineer.equip(sword));
   assertDoesNotThrow(()->engineer.equip(axe));
-  assertEquals(axe,engineer.getEquippedWeapon());
   assertThrows(InvalidWeaponAssignmentException.class,()->engineer.equip(knife));
   assertThrows(InvalidWeaponAssignmentException.class,()->engineer.equip(staff));
   assertDoesNotThrow(()->engineer.equip(bow));
-  assertEquals(bow,engineer.getEquippedWeapon());
+ 
  
   assertDoesNotThrow(()->thief.equip(sword));
-  assertEquals(sword,thief.getEquippedWeapon());
   assertThrows(InvalidWeaponAssignmentException.class,()->thief.equip(axe));
   assertDoesNotThrow(()->thief.equip(knife));
-  assertEquals(knife,thief.getEquippedWeapon());
   assertThrows(InvalidWeaponAssignmentException.class,()->thief.equip(staff));
   assertDoesNotThrow(()->thief.equip(bow));
-  assertEquals(bow,thief.getEquippedWeapon());
   
-   assertThrows(InvalidWeaponAssignmentException.class,()->bmage.equip(sword));
+  assertThrows(InvalidWeaponAssignmentException.class,()->bmage.equip(sword));
   assertThrows(InvalidWeaponAssignmentException.class,()->bmage.equip(axe));
   assertDoesNotThrow(()->bmage.equip(knife));
-  assertEquals(knife,bmage.getEquippedWeapon());
   assertDoesNotThrow(()->bmage.equip(staff));
-  assertEquals(staff,bmage.getEquippedWeapon());
   assertThrows(InvalidWeaponAssignmentException.class,()->bmage.equip(bow));
  
   assertThrows(InvalidWeaponAssignmentException.class,()->wmage.equip(sword));
   assertThrows(InvalidWeaponAssignmentException.class,()->wmage.equip(axe));
   assertThrows(InvalidWeaponAssignmentException.class,()->wmage.equip(knife));
   assertDoesNotThrow(()->wmage.equip(staff));
-  assertEquals(staff,wmage.getEquippedWeapon());
   assertThrows(InvalidWeaponAssignmentException.class,()->wmage.equip(bow));
   
  }
+ @Test
+ void equipAndGetWeapontests() throws InvalidWeaponAssignmentException {
+  knight.equip(sword);
+  assertEquals(sword,knight.getEquippedWeapon());
+  knight.equip(axe);
+  assertEquals(axe,knight.getEquippedWeapon());
+  knight.equip(knife);
+  assertEquals(knife,knight.getEquippedWeapon());
+  engineer.equip(axe);
+  assertEquals(axe,engineer.getEquippedWeapon());
+  engineer.equip(bow);
+  assertEquals(bow,engineer.getEquippedWeapon());
+  thief.equip(sword);
+  assertEquals(sword,thief.getEquippedWeapon());
+  thief.equip(knife);
+  assertEquals(knife,thief.getEquippedWeapon());;
+  thief.equip(bow);
+  assertEquals(bow,thief.getEquippedWeapon());
+  bmage.equip(knife);
+  assertEquals(knife,bmage.getEquippedWeapon());
+  bmage.equip(staff);
+  assertEquals(staff,bmage.getEquippedWeapon());
+  wmage.equip(staff);
+  assertEquals(staff,wmage.getEquippedWeapon());
+ }
 
  @Test
- void waitTurn() throws InterruptedException, InvalidWeaponAssignmentException {
-
+ void waitTurn() throws InterruptedException, InvalidWeaponAssignmentException, NullWeaponException {
+ 
+  //correct order//
   knight.equip(sword);
-  thief.equip(knife);
   engineer.equip(axe);
-  
+  bmage.equip(knife);
+  wmage.equip(staff);
+  thief.equip(bow);
+
+  //unordered waitTurn()//
+  bmage.waitTurn();
+  knight.waitTurn();
+  wmage.waitTurn();
   engineer.waitTurn();
   thief.waitTurn();
-  knight.waitTurn();
-  Thread.sleep(12000);
+  Thread.sleep(8000);
+  
   assertEquals(knight,queue.get_queue().poll());
-  assertEquals(thief,queue.get_queue().poll());
   assertEquals(engineer,queue.get_queue().poll());
- 
+  assertEquals(bmage,queue.get_queue().poll());
+  assertEquals(wmage,queue.get_queue().poll());
+  assertEquals(thief,queue.get_queue().poll());
+  
  }
  @Test
- void testinvalidexception() {
+ void NullweaponExceptiontest(){
+  assertThrows(NullWeaponException.class,()->wmage.waitTurn());
+  assertThrows(NullWeaponException.class,()->bmage.waitTurn());
+  assertThrows(NullWeaponException.class,()->engineer.waitTurn());
+  assertThrows(NullWeaponException.class,()->knight.waitTurn());
+  assertThrows(NullWeaponException.class,()->thief.waitTurn());
+  
+ }
+ @Test
+ void testinvaliStatdexception() {
   assertThrows(InvalidStatValueException.class, ()-> {new BlackMage("name",20,20,-100,queue);});
   assertThrows(InvalidStatValueException.class, ()-> {new Knight("name",20,-1,queue);});
   assertThrows(InvalidStatValueException.class, ()-> {new Engineer("name",0,100,queue);});

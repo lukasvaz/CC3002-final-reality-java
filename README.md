@@ -50,7 +50,13 @@ the other classes</li>
 
 <b>T2</b>
 <ol>
+<li>A new weapon interface was added,which is implemented by each weapon classes.</li>
 <li>Tests were implemented.It was added a unit test for each  player class  and weapon class.</li>
+
+<li> New exceptions were added. <em>NullWeaponException</em> to guarantee the assignment of a weapon to a character
+ before it get push to the queue.And also <em>InvalidWeaponAssignentException</em> which throws an error if
+the assignment doesn't follow the weapon´s assignment conditions.</li>
+
 <li>Weapon assignment restrictions were implemented.To do this the
 <em>Weapon</em> interface got the method <em>equipedby()</em> and  <em>PlayerCharacter</em> 
 interface got the methods <em>equipSword()</em>,<em>equipAxe()</em> 

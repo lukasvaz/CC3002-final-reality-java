@@ -1,11 +1,12 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
-import cl.uchile.dcc.finalreality.model.character.player.*;
+import static cl.uchile.dcc.finalreality.model.weapon.WeaponType.KNIFE;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import java.util.Objects;
 
-import static cl.uchile.dcc.finalreality.model.weapon.WeaponType.KNIFE;
+
 
 /**
  * A class that holds all the information of a Bow.

@@ -14,7 +14,7 @@ package cl.uchile.dcc.finalreality.exceptions;
  * @author <a href="https://github.com/r8vnhill">R8V</a>
  * @author ~Your name~
  */
-public class InvalidStatValueException extends Exception {
+public class InvalidStatValueException extends RuntimeException {
 
   /**
    * Creates a new {@code InvalidStatValueException} with a {@code description} of the
