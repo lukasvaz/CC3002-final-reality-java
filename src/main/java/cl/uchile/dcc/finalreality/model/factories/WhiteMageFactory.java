@@ -14,7 +14,7 @@ import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 public class WhiteMageFactory extends AbstractMageFactory {
  
   @Override
- public PlayerCharacter create(TurnsQueue queue) {
+ public WhiteMage create(TurnsQueue queue) {
     return new WhiteMage(super.name, super.maxHp, super.defense, super.maxMp, queue);
   }
 }

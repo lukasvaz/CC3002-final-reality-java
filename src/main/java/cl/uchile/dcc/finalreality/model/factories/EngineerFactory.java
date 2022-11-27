@@ -12,7 +12,7 @@ import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
  */
 public class EngineerFactory extends AbstractFactory {
   @Override
- public PlayerCharacter create(TurnsQueue queue) {
+ public Engineer create(TurnsQueue queue) {
     return new Engineer(super.name, super.maxHp, super.defense, queue);
   }
 }

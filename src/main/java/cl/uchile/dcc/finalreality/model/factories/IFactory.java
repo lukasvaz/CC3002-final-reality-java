@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.factories;
 
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 /**
  * This represents a Factory for creating characters.
@@ -10,7 +11,7 @@ import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 
 public interface IFactory {
  
-  PlayerCharacter create(TurnsQueue queue);
+  GameCharacter create(TurnsQueue queue);
  
   void setMaxHp(int maxHp);
  

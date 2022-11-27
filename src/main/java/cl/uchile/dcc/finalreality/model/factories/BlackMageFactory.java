@@ -14,7 +14,7 @@ import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 public class BlackMageFactory extends AbstractMageFactory {
  
   @Override
- public PlayerCharacter create(TurnsQueue queue) {
+ public BlackMage create(TurnsQueue queue) {
     return new BlackMage(super.name, super.maxHp, super.defense, super.maxMp, queue);
   }
 }

@@ -13,9 +13,23 @@ import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 
 public class KnightFactory extends AbstractFactory {
   
+  KnightFactory uniqueInstance;
+  
+  /**
+   * This method guarantee an unique instance if this factory (Singleton Pattern).
+   *
+   * @author ~Lukas Vasquez Verdejo~
+   */
+  public KnightFactory  uniqueInstance() {
+    if (this.uniqueInstance == null) {
+      this.uniqueInstance = new KnightFactory();
+    }
+    return  this.uniqueInstance;
+    
+  }
  
   @Override
-  public PlayerCharacter create(TurnsQueue queue) {
+  public Knight create(TurnsQueue queue) {
     return new Knight(super.name, super.maxHp, super.defense, queue);
   }
 }

@@ -12,7 +12,7 @@ import cl.uchile.dcc.finalreality.model.character.player.Thief;
 
 public class ThiefFactory extends AbstractFactory {
   @Override
- public PlayerCharacter create(TurnsQueue queue) {
+ public Thief create(TurnsQueue queue) {
     return new Thief(super.name, super.maxHp, super.defense, queue);
   }
 }
