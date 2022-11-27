@@ -1,4 +1,4 @@
-package cl.uchile.dcc.finalreality.controller;
+package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import java.util.ArrayList;

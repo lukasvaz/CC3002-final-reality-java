@@ -1,5 +1,8 @@
 package cl.uchile.dcc.finalreality.controller;
 
+import cl.uchile.dcc.finalreality.model.character.EnemyParty;
+import cl.uchile.dcc.finalreality.model.character.player.Player;
+
 /**
  * Game class which determines the rules of the game.
  */
@@ -7,7 +10,7 @@ package cl.uchile.dcc.finalreality.controller;
 public class Game {
   boolean notOver;
   Player player;
-  EnemyParty  enemies;
+  EnemyParty enemies;
   /**
   * Constructor Initialize a game.
   */

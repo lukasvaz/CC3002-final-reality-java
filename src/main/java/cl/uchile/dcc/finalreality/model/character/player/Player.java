@@ -1,4 +1,4 @@
-package cl.uchile.dcc.finalreality.controller;
+package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.*;
