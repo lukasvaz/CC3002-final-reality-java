@@ -25,7 +25,7 @@ class ThiefTest {
   thief_name = new Thief("thief3", 40, 40, queue);
   thief_defense = new Thief("thief1", 44, 40, queue);
   thief_maxHp = new Thief("thief1", 40, 44, queue);
-  enemy = new Enemy("enemy1", 40, 40, 40, queue);
+  enemy = new Enemy("enemy1", 40, 40, 40, 10,queue);
  }
  
  @Test

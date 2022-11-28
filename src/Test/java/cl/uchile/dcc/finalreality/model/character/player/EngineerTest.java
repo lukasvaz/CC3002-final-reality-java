@@ -25,7 +25,7 @@ class EngineerTest {
   engineer_name= new Engineer("engineer3",40,40,queue);
   engineer_defense= new Engineer("engineer1",44,40,queue);
   engineer_maxHp= new Engineer("engineer1",40,44,queue);
-  enemy=new Enemy("enemy1",40,40,40,queue);
+  enemy=new Enemy("enemy1",40,40,40,10 ,queue);
  }
  
  

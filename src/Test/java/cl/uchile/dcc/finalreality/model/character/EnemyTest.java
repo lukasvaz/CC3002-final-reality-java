@@ -19,11 +19,11 @@ class EnemyTest {
  @BeforeEach
  void setup() throws InvalidStatValueException {
   queue = new TurnsQueue();
-  enemy1 = new Enemy("enemy1", 30, 100, 40, queue);
-  enemy2 = new Enemy("enemy1", 30, 100,40,queue);
-  enemy3 = new Enemy("enemy1", 1, 100,40,queue);
-  enemy4 = new Enemy("enemy1", 30, 10,40,queue);
-  enemy5 = new Enemy("enemy1", 30, 100,30,queue);
+  enemy1 = new Enemy("enemy1", 30, 100, 40,10, queue);
+  enemy2 = new Enemy("enemy1", 30, 100,40,20,queue);
+  enemy3 = new Enemy("enemy1", 1, 100,40,30,queue);
+  enemy4 = new Enemy("enemy1", 30, 10,40,40,queue);
+  enemy5 = new Enemy("enemy1", 30, 100,30,10,queue);
   knight = new Knight("enemy1", 30, 40,queue);
  
  }
@@ -51,9 +51,9 @@ class EnemyTest {
  
  @Test
  void waitTurn() throws InvalidStatValueException, InterruptedException {
-  enemy1 = new Enemy("enemy1", 30, 100, 40, queue);
-  enemy2 = new Enemy("enemy2", 20, 100,40,queue);
-  enemy3 = new Enemy("enemy3", 10, 100,40,queue);
+  enemy1 = new Enemy("enemy1", 30, 100, 40,10, queue);
+  enemy2 = new Enemy("enemy2", 20, 100,40,10,queue);
+  enemy3 = new Enemy("enemy3", 10, 100,40,10,queue);
   enemy1.waitTurn();
   enemy2.waitTurn();
   enemy3.waitTurn();
@@ -66,13 +66,23 @@ class EnemyTest {
  
  @Test
  void testToString() throws InvalidStatValueException {
- assertEquals("Enemy{maxHp=100,wheight=30, defense=40, name='enemy1'}",enemy1.toString());
+ assertEquals("Enemy{maxHp=100,weight=30, defense=40, name='enemy1', attack=10}",enemy1.toString());
  }
  @Test
  void testInvalidStatException() throws InvalidStatValueException {
-  assertThrows(InvalidStatValueException.class, ()-> {new Enemy("name",0,0,40,queue);});
-  assertThrows(InvalidStatValueException.class, ()-> {new Enemy("name",40,40,-1,queue);});
-  assertThrows(InvalidStatValueException.class, ()-> {new Enemy("name",0,40,-1,queue);});
+  assertThrows(InvalidStatValueException.class, ()-> {new Enemy("name",0,0,40,10,queue);});
+  assertThrows(InvalidStatValueException.class, ()-> {new Enemy("name",40,40,-1,10,queue);});
+  assertThrows(InvalidStatValueException.class, ()-> {new Enemy("name",0,40,-1,10,queue);});
+ }
+ @Test
+ void getAttack(){
+ assertEquals(enemy1.getAttack(),10);
+ assertEquals(enemy2.getAttack(),20);
+ assertEquals(enemy3.getAttack(),30);
+ assertEquals(enemy4.getAttack(),40);
+ assertEquals(enemy5.getAttack(),10);
+ 
+ 
  }
 
 }

@@ -3,11 +3,10 @@ package cl.uchile.dcc.finalreality.controller;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.factories.*;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -56,6 +55,23 @@ public class Controller {
   public ArrayList<Enemy> getEnemies() {
     return this.enemies;
   }
+  
+  /**
+   * A setter for the maximum numbers of characters.
+   */
+  
+  public void setMaxCharacters(int max) {
+    this.maxCharacters = max;
+  }
+  
+  /**
+   * A method that checks if the number of character is equal to  the max number.
+   */
+  
+  public boolean isMaxCharacters() {
+    return (this.maxCharacters == this.getCharacters().size());
+  }
+  
   /**
    * This method asks for the user for the characters to use.
    */
@@ -64,7 +80,7 @@ public class Controller {
     System.out.println("Type your character:\n Options: Engineer | BlackMage | Knight | Thief | WhiteMage");
     Scanner sc = new Scanner(System.in); //System.in is a standard input stream
     String str = sc.nextLine();             //reads string
-    this.selectCharacter(str);
+    this.selectCharacterCreation(str);
     System.out.println("Type a name:");
     String name = sc.nextLine();
     this.factory.setName(name);
@@ -75,7 +91,7 @@ public class Controller {
    * This method set the factory for character cration.
    */
   
-  public void selectCharacter(String s) {
+  public void selectCharacterCreation(String s) {
     if (s.equals("Engineer")) {
       this.factory = new EngineerFactory();
       this.factory.setDefense(80);
@@ -109,10 +125,6 @@ public class Controller {
     }
     if (s.equals("Enemy")) {
       this.factory = new EnemyFactory();
-      this.factory.setDefense(100);
-      this.factory.setMaxHp(100);
-      EnemyFactory fac = (EnemyFactory) this.factory;
-      fac.setWeight(40);
     }
   }
   
@@ -123,39 +135,27 @@ public class Controller {
   public void createCharacter(TurnsQueue queue) {
     this.characters.add((PlayerCharacter) this.factory.create(queue));
   }
+  
   /**
    *This method creates a new Enemy instance and append it  to the Enemies Array.
    */
-  
   public void createEnemy(TurnsQueue queue) {
-    this.selectCharacter("Enemy");
+    Random random = new Random();
+    int p = random.nextInt(30, 120);
+    this.selectCharacterCreation("Enemy");
+    this.factory.setDefense(p);
+    this.factory.setMaxHp(p);
+    ((EnemyFactory) this.factory).setWeight(p);
+    ((EnemyFactory) this.factory).setAttack(p - 20);
     int i = this.enemies.size();
-    this.factory.setName("enemy"+i);
-    enemies.add( (Enemy) this.factory.create(queue));
+    this.factory.setName("enemy" + i);
+    enemies.add((Enemy) this.factory.create(queue));
   }
-  
-  
   
   /**
-   *Main Example method.
+   *Method to simulate an attack between two GameCharacters, an attacker  and  a target.
    */
-  public static void main(String[] args) {
-    Controller c = new Controller();
-    while (c.characters.size() != c.maxCharacters) {
-      c.askForSingleCharacter();
-      for (PlayerCharacter ch : c.characters) {
-        System.out.println(ch);
-      }
-    }
-    System.out.println("versus\nEnemies:");
-    for (int i = 0;i <=6; i++){
-      c.createEnemy(c.queue);
-      System.out.println(c.enemies.get(i));
-    }
-  
-    System.out.println("end");
+  public void attack(GameCharacter c1, GameCharacter c2) {
+    c2.setCurrentHp(c2.getCurrentHp() - Math.max(0, c1.getAttack() - c2.getDefense()));
   }
-  
-  
-  
 }

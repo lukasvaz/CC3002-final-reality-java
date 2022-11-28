@@ -13,7 +13,7 @@ class TurnsQueueTest {
  @BeforeEach
  void setup() throws InvalidStatValueException {
   queue= new TurnsQueue();
-  enemy= new Enemy("enemy",20,20,20,queue);
+  enemy= new Enemy("enemy",20,20,20,10,queue);
  }
  
  @Test

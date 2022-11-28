@@ -24,7 +24,7 @@ class KnightTest {
   knight_name= new Knight("knight3",40,40,queue);
   knight_defense= new Knight("knight1",44,40,queue);
   knight_maxHp= new Knight("knight1",40,44,queue);
-  enemy=new Enemy("enemy",40,40,40,queue);
+  enemy=new Enemy("enemy",40,40,40,10,queue);
   
  }
  @Test

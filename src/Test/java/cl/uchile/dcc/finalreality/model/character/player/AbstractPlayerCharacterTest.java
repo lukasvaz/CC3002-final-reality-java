@@ -44,6 +44,17 @@ class AbstractPlayerCharacterTest {
   staff= new Staff("staf",30,40);
   bow=new Bow("bow",30,50);
  }
+ 
+ @Test
+ void getAttack() throws InvalidWeaponAssignmentException {
+  knight.equip(sword);
+  assertEquals(knight.getAttack(),sword.getDamage());
+  wmage.equip(staff);
+  assertEquals(wmage.getAttack(),staff.getDamage());
+  thief.equip(knife);
+  assertEquals(thief.getAttack(),knife.getDamage());
+  
+ }
   @Test
  void RestrictionsWeapontests(){
   assertDoesNotThrow(()->knight.equip(sword));

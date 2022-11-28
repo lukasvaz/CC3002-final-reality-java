@@ -27,7 +27,7 @@ class WhiteMageTest {
   wmage_defense= new WhiteMage("wmage1",44,40,100,queue);
   wmage_maxHp= new WhiteMage("wmage1",40,44,100,queue);
   wmage_maxmp= new WhiteMage("wmage1",40,40,80,queue);
-  enemy=new Enemy("enemy",40,40,40,queue);
+  enemy=new Enemy("enemy",40,40,40,10,queue);
   
  }
  

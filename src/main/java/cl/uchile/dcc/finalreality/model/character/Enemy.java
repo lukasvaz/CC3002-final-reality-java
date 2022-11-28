@@ -16,7 +16,8 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Lukas Vasquez~
  */
 public class Enemy extends AbstractCharacter {
-
+  
+  private final int attack;
   private final int weight;
   protected ScheduledExecutorService scheduledExecutor;
 
@@ -33,12 +34,13 @@ public class Enemy extends AbstractCharacter {
    *   @param turnsQueue
    *     the queue with the characters waiting for their turn
    */
-  public Enemy(@NotNull final String name, final int weight, int maxHp, int defense,
+  public Enemy(@NotNull final String name, final int weight, int maxHp, int defense, int attack,
       @NotNull final TurnsQueue turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(1, weight, "Weight");
     this.weight = weight;
+    this.attack = attack;
   }
 
   /**
@@ -84,7 +86,14 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public String toString() {
-    return "Enemy{maxHp=%d,wheight=%d, defense=%d, name='%s'}".formatted(maxHp,
-            weight, defense, name);
+    return "Enemy{maxHp=%d,weight=%d, defense=%d, name='%s', attack=%d}".formatted(maxHp,
+            weight, defense, name, attack);
   }
+  /**
+   * Returns enemy's attack points .
+   */
+  public int getAttack() {
+    return this.attack;
+  }
+  
 }

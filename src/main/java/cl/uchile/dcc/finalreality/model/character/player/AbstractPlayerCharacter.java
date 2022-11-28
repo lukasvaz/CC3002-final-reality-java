@@ -66,7 +66,14 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
   public Weapon getEquippedWeapon() {
     return equippedWeapon;
   }
-
+  
+  /**
+   * get the attack points for this character.
+   */
+  @Override
+  public int getAttack() {
+    return this.getEquippedWeapon().getDamage();
+  }
 
   @Override
   public void waitTurn() throws NullWeaponException {

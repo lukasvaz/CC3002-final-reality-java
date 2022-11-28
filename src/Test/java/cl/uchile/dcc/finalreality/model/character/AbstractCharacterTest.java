@@ -18,8 +18,8 @@ class AbstractCharacterTest {
  void setup() throws InvalidStatValueException {
   queue = new TurnsQueue();
   knight = new Knight("knight1", 100, 30, queue);
-  enemy = new Enemy("", 300, 1, 1, queue);
-  enemy2 = new Enemy("enemy", 2, 100, 30, queue);
+  enemy = new Enemy("", 300, 1, 1, 10,queue);
+  enemy2 = new Enemy("enemy", 2, 100, 30, 10,queue);
  }
  
  @Test
@@ -73,4 +73,5 @@ class AbstractCharacterTest {
   assertThrows(InvalidStatValueException.class, ()-> {new Thief("thirf1",0,40,queue);});
   assertThrows(InvalidStatValueException.class, ()-> {new Knight("thirf1",40,-1,queue);});
  }
+ 
 }

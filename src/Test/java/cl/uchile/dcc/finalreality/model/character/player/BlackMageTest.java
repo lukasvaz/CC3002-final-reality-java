@@ -27,7 +27,7 @@ class BlackMageTest {
   bmage_defense = new BlackMage("bmage1", 44, 40, 100, queue);
   bmage_maxHp = new BlackMage("bmage1", 40, 44, 100, queue);
   bmage_maxmp = new BlackMage("bmage1", 40, 40, 80, queue);
-  enemy = new Enemy("enemy", 40, 40, 40, queue);
+  enemy = new Enemy("enemy", 40, 40, 40, 10 ,queue);
  }
  
  @Test
