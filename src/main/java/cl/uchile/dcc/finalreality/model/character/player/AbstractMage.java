@@ -63,4 +63,13 @@ public abstract class AbstractMage extends AbstractPlayerCharacter implements Pl
   public int getmaxMp() {
     return maxMp;
   }
+  
+  /**
+   * get the attack points for this character.
+   */
+  @Override
+  public int getAttack() {
+    return this.getEquippedWeapon().magicAttack();
+  }
+  
 }

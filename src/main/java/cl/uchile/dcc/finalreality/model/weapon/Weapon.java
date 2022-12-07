@@ -37,6 +37,12 @@ public interface Weapon {
    */
   
   void equippedby(PlayerCharacter p) throws InvalidWeaponAssignmentException;
+  /**
+   * Returns the type of the weapon.
+   *
+   */
   
- 
+  int magicAttack();
+  
+  
 }

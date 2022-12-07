@@ -97,6 +97,13 @@ public class Knife implements Weapon {
     return "Knife{name='%s', damage=%d, weight=%d, type=%s}"
                  .formatted(name, damage, weight, type);
   }
-
+  
+  @Override
+  public int magicAttack() {
+    return this.getDamage()/2;
+  }
+  
+  
+  
 }
 

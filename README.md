@@ -65,5 +65,13 @@ Following the double dispatch design pattern,the method <em>equip()</em> in <em>
 in <em>Weapon</em> (first dispatch) in order to disambiguate the weapon.Then the method 
 <em>equippedby()</em> calls the respective method to equip the weapon in the 
 differents characters classes (double dispatch).</li>
+</ol>
 
+<b>T3</b>
+<ol>
+<li>factories</li>
+<li>getattack</li>
+<li>Null object in NUll effect and Singleton in effects</li>
+<li>factories</li>
+<li> bool implements </li>
 </ol>

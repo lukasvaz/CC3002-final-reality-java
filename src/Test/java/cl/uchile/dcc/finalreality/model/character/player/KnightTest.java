@@ -54,4 +54,5 @@ class KnightTest {
   assertThrows(InvalidStatValueException.class, ()-> {new Knight("knigh1",0,40,queue);});
   assertThrows(InvalidStatValueException.class, ()-> {new Knight("knight1",40,-1,queue);});
  }
+ 
 }

@@ -27,7 +27,7 @@ class SwordTest {
   sword=new Sword("sword1",30,30);
   sword2=new Sword("sword1",30,30);
   sword3=new Sword("",1,1);
-  staff=new Staff("staff",30,30);
+  staff=new Staff("staff",30,30,10);
   queue=new TurnsQueue();
   knight= new Knight("name",10,10,queue);
   engineer=new Engineer("name",10,10,queue);
@@ -51,9 +51,10 @@ class SwordTest {
  }
  
  @Test
- void getDamage() {
+ void getDamageAndAttack() {
   assertEquals(30,sword.getDamage());
   assertEquals(1,sword3.getDamage());
+  assertEquals(1,sword3.magicAttack());
  }
  
  @Test

@@ -1,4 +1,4 @@
-package cl.uchile.dcc.finalreality.model.factories;
+package cl.uchile.dcc.finalreality.controller.factories;
 
 
 /**

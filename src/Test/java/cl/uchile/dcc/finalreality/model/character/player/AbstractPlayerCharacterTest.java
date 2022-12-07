@@ -41,7 +41,7 @@ class AbstractPlayerCharacterTest {
   sword= new Sword("sword1",30,10);
   axe = new Axe("axe1",30,20);
   knife= new Knife("knife1", 30,30);
-  staff= new Staff("staf",30,40);
+  staff= new Staff("staf",30,40,10);
   bow=new Bow("bow",30,50);
  }
  
@@ -50,7 +50,7 @@ class AbstractPlayerCharacterTest {
   knight.equip(sword);
   assertEquals(knight.getAttack(),sword.getDamage());
   wmage.equip(staff);
-  assertEquals(wmage.getAttack(),staff.getDamage());
+  assertEquals(wmage.getAttack(),staff.getMagicDamage());
   thief.equip(knife);
   assertEquals(thief.getAttack(),knife.getDamage());
   

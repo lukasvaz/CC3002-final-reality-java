@@ -1,7 +1,4 @@
-package cl.uchile.dcc.finalreality.model.factories;
-
-import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
-import org.jetbrains.annotations.NotNull;
+package cl.uchile.dcc.finalreality.controller.factories;
 
 /**
  * This represents an AbstractFactory for Mages.

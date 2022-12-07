@@ -96,4 +96,10 @@ public class  Axe implements Weapon {
     p.equipAxe(this);
   }
   
+  @Override
+  public int magicAttack() {
+    return this.getDamage()/2;
+  }
+  
+  
 }

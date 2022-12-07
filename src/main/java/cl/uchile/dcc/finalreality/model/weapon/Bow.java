@@ -96,4 +96,11 @@ public class Bow implements Weapon {
     return "Bow{name='%s', damage=%d, weight=%d, type=%s}"
                    .formatted(name, weight, damage, type);
   }
+  
+  @Override
+  public int magicAttack() {
+    return this.getDamage()/2;
+  }
+  
+  
 }

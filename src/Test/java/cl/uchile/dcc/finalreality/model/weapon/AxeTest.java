@@ -28,7 +28,7 @@ class AxeTest {
   axe=new Axe("axe1",30,30);
   axe2=new Axe("axe1",30,30);
   axe3=new Axe("",1,1);
-  staff=new Staff("staff",30,30);
+  staff=new Staff("staff",30,30,10);
   queue=new TurnsQueue();
   knight= new Knight("name",10,10,queue);
   engineer=new Engineer("name",10,10,queue);
@@ -50,9 +50,11 @@ class AxeTest {
   assertThrows(InvalidWeaponAssignmentException.class,()->axe.equippedby(wmage));
  }
  @Test
- void getDamage() {
+ void getDamageandAttack() {
   assertEquals(30,axe.getDamage());
   assertEquals(1,axe3.getDamage());
+  assertEquals(15,axe.magicAttack());
+  
  }
  
  @Test

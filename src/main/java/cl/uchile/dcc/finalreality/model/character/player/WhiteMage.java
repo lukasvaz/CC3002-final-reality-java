@@ -8,10 +8,10 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.exceptions.*;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 import cl.uchile.dcc.finalreality.model.weapon.Axe;
 import cl.uchile.dcc.finalreality.model.weapon.Bow;
 import cl.uchile.dcc.finalreality.model.weapon.Knife;
@@ -98,5 +98,19 @@ public class WhiteMage extends AbstractMage {
   @Override
   public void equipBow(Bow bow) throws InvalidWeaponAssignmentException {
     throw  new InvalidWeaponAssignmentException();
+  }
+  
+  public boolean implementsWhiteMagic() {
+    return true;
+  }
+  
+  
+  public boolean implementsBlackMagic() {
+    return false;
+  }
+  
+  @Override
+  public void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException {
+    magic.whiteMageOn(this, character);
   }
 }

@@ -26,9 +26,8 @@ import org.jetbrains.annotations.NotNull;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Lukas Vasquez~
  */
-public class Engineer extends AbstractPlayerCharacter {
-
-
+public class Engineer extends NonMagicCharacters {
+  
   /**
    * Creates a new engineer.
    *

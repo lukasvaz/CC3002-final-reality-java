@@ -27,7 +27,7 @@ class BowTest {
   bow=new Bow("bow1",30,30);
   bow2=new Bow("bow1",30,30);
   bow3=new Bow("",1,1);
-  staff=new Staff("staff",30,30);
+  staff=new Staff("staff",30,30,10);
   queue=new TurnsQueue();
   knight= new Knight("name",10,10,queue);
   engineer=new Engineer("name",10,10,queue);
@@ -52,9 +52,11 @@ class BowTest {
  }
  
  @Test
- void getDamage() {
+ void getDamageAndMagicAttack() {
   assertEquals(30,bow.getDamage());
   assertEquals(1,bow3.getDamage());
+  assertEquals(15,bow.magicAttack());
+ 
  }
  
  @Test

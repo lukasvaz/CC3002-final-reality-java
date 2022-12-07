@@ -15,6 +15,7 @@ class StaffTest {
  Staff staff;
  Staff staff2;
  Staff staff3;
+ Staff staff4;
  Axe axe;
  Knight knight;
  Engineer engineer;
@@ -24,9 +25,10 @@ class StaffTest {
  TurnsQueue queue;
  @BeforeEach
  void setup() throws InvalidStatValueException {
-  staff=new Staff("staff1",30,30);
-  staff2=new Staff("staff1",30,30);
-  staff3=new Staff("",1,1);
+  staff=new Staff("staff1",30,30,10);
+  staff2=new Staff("staff1",30,30,10);
+  staff3=new Staff("",1,1,10);
+  staff4=new Staff("",1,1,15);
   axe=new Axe("",1,1);
   queue=new TurnsQueue();
   knight= new Knight("name",10,10,queue);
@@ -51,9 +53,11 @@ class StaffTest {
  }
  
  @Test
- void getDamage() {
+ void getDamageAndAttack() {
   assertEquals(30,staff.getDamage());
   assertEquals(1,staff3.getDamage());
+  assertEquals(15,staff4.magicAttack());
+ 
  }
  
  @Test
@@ -74,6 +78,7 @@ class StaffTest {
   assertTrue(staff.equals(staff2));
   assertFalse(staff.equals(staff3));
   assertFalse(staff.equals(axe));
+  assertFalse(staff.equals(staff4));
  }
  
  @Test
@@ -84,7 +89,12 @@ class StaffTest {
  
  @Test
  void testToString() {
-  assertEquals(  "Staff{name='staff1', damage=30, weight=30, type=STAFF}",staff.toString());
-  assertEquals(  "Staff{name='', damage=1, weight=1, type=STAFF}",staff3.toString());
+  assertEquals(  "Staff{name='staff1', damage=30, weight=30, type=STAFF, magicDamage=10}",staff.toString());
+  assertEquals(  "Staff{name='', damage=1, weight=1, type=STAFF, magicDamage=10}",staff3.toString());
+ }
+ @Test
+ void testGetMagicDamage() {
+  assertEquals(  10,staff.getMagicDamage());
+  assertEquals(  15,staff4.getMagicDamage());
  }
 }

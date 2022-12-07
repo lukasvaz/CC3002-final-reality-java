@@ -1,12 +1,18 @@
 package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
+import cl.uchile.dcc.finalreality.model.effects.NullEffect;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
+import cl.uchile.dcc.finalreality.model.magic.Thunder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -15,8 +21,10 @@ import org.jetbrains.annotations.NotNull;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Lukas Vasquez~
  */
+
 public class Enemy extends AbstractCharacter {
   
+  private EffectsInterface effect = NullEffect.uniqueInstance();
   private final int attack;
   private final int weight;
   protected ScheduledExecutorService scheduledExecutor;
@@ -89,11 +97,37 @@ public class Enemy extends AbstractCharacter {
     return "Enemy{maxHp=%d,weight=%d, defense=%d, name='%s', attack=%d}".formatted(maxHp,
             weight, defense, name, attack);
   }
+  
   /**
    * Returns enemy's attack points .
    */
+  
   public int getAttack() {
     return this.attack;
   }
+  
+  @Override
+  public void implementsMagic(MagicInterface magic, GameCharacter character)
+          throws NotImplementsMagicException {
+    magic.enemyOn(this,character);
+  }
+  
+  /**
+   * Returns enemy's Effect state .
+   */
+  
+  public EffectsInterface getEffect() {
+    return this.effect;
+  }
+  
+  /**
+   * Set enemy's Effect state .
+   */
+  
+  public void setEffect(EffectsInterface effect) {
+    this.effect = effect;
+  }
+  
+  
   
 }

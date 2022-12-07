@@ -1,8 +1,15 @@
 package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.effects.NullEffect;
+import cl.uchile.dcc.finalreality.model.effects.Paralysis;
+import cl.uchile.dcc.finalreality.model.magic.Heal;
+import cl.uchile.dcc.finalreality.model.magic.Thunder;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -81,8 +88,22 @@ class EnemyTest {
  assertEquals(enemy3.getAttack(),30);
  assertEquals(enemy4.getAttack(),40);
  assertEquals(enemy5.getAttack(),10);
- 
- 
  }
-
+ 
+ @Test
+ void getAndSetEffect(){
+  assertEquals(enemy1.getEffect(),  NullEffect.uniqueInstance());
+  enemy1.setEffect( Paralysis.uniqueInstance() );
+  assertEquals(enemy1.getEffect(),  Paralysis.uniqueInstance());
+  
+ }
+ 
+ @Test
+ void testImplementsMagic() throws InvalidWeaponAssignmentException {
+  Thunder t = new Thunder();
+  Heal h = new Heal();
+  assertThrows(NotImplementsMagicException.class, ()-> enemy1.implementsMagic (h,enemy2));
+  assertThrows(NotImplementsMagicException.class, ()-> enemy1.implementsMagic (t,enemy2));
+ }
+ 
 }

@@ -1,8 +1,4 @@
-package cl.uchile.dcc.finalreality.model.factories;
-
-import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import cl.uchile.dcc.finalreality.model.character.player.Knight;
-import org.jetbrains.annotations.NotNull;
+package cl.uchile.dcc.finalreality.controller.factories;
 
 /**
  * This represents an AbstractFactory for common methods.

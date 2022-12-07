@@ -18,6 +18,7 @@ import java.util.Objects;
 public class Staff implements  Weapon {
   final  String name;
   final int damage;
+  final int magicDamage;
   final int weight;
   final WeaponType type = STAFF;
  
@@ -32,10 +33,11 @@ public class Staff implements  Weapon {
   *
   *      the type of the weapon is BOW
   */
-  public Staff(final String name, final int damage, final int weight) {
+  public Staff(final String name, final int damage, final int weight,final int magicDamage) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
+    this.magicDamage = magicDamage;
   }
  
   /**
@@ -66,6 +68,13 @@ public class Staff implements  Weapon {
     return type;
   }
   
+  /**
+   * Returns the  magic damageof the weapon.
+   */
+  public int getMagicDamage() {
+    return magicDamage;
+  }
+  
   @Override
   public void equippedby(PlayerCharacter p) throws InvalidWeaponAssignmentException {
     p.equipStaff(this);
@@ -84,7 +93,8 @@ public class Staff implements  Weapon {
                  && damage == staff.damage
                  && weight == staff.weight
                  && name.equals(staff.name)
-                 && type == staff.type;
+                 && type == staff.type
+                  && magicDamage == staff.magicDamage;
   }
  
   @Override
@@ -94,7 +104,13 @@ public class Staff implements  Weapon {
  
   @Override
    public String toString() {
-    return "Staff{name='%s', damage=%d, weight=%d, type=%s}"
-                 .formatted(name, damage, weight, type);
+    return "Staff{name='%s', damage=%d, weight=%d, type=%s, magicDamage=%d}"
+                 .formatted(name, damage, weight, type,magicDamage);
   }
+  @Override
+  public int magicAttack() {
+    return this.getMagicDamage();
+  }
+  
+  
 }

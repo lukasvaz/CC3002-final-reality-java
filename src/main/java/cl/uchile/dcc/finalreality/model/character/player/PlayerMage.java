@@ -25,5 +25,19 @@ public interface PlayerMage extends PlayerCharacter {
    */
   
   int getmaxMp();
-
+  
+  /**
+   * Returns True or flase depending of a mage  is BlackMage.
+   */
+  
+  boolean implementsBlackMagic();
+  
+  
+  
+  /**
+   * Returns True or flase depending of a mage  is WhiteMage.
+   */
+  
+  boolean implementsWhiteMagic();
+  
 }

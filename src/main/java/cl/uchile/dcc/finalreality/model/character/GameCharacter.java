@@ -1,7 +1,10 @@
 package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
+import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
 import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 
 /**
  * This represents a character from the game.
@@ -47,5 +50,7 @@ public interface GameCharacter {
    */
   
   int getAttack();
+  
+  void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException;
 }
 

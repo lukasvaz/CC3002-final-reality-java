@@ -1,8 +1,13 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
+import cl.uchile.dcc.finalreality.model.magic.Heal;
+import cl.uchile.dcc.finalreality.model.magic.Thunder;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -58,4 +63,22 @@ class BlackMageTest {
   assertThrows(InvalidStatValueException.class, ()-> {new BlackMage("name",20,0,100,queue);});
   assertThrows(InvalidStatValueException.class, ()-> {new BlackMage("name",-1,100,100,queue);});
  }
+ @Test
+ void testImplementsWhiteAndBlackMagic() {
+  assertEquals( false,bmage1.implementsWhiteMagic());
+  assertEquals( true,bmage1.implementsBlackMagic());
+ }
+ @Test
+ void testImplementsMagic() throws InvalidWeaponAssignmentException {
+  Staff s=new Staff("",20,20,30);
+  bmage1.equip(s);
+  Thunder t = new Thunder();
+  Heal h = new Heal();
+  System.out.println(enemy);
+  assertDoesNotThrow(()-> bmage1.implementsMagic (t,enemy));
+  assertEquals(10, enemy.getCurrentHp());
+  assertEquals(85, bmage1.getcurrentMp());
+  assertThrows(NotImplementsMagicException.class, ()-> bmage1.implementsMagic (h,enemy));
+ }
+ 
 }

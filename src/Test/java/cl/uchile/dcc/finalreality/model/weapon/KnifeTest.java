@@ -26,7 +26,7 @@ class KnifeTest {
   knife=new Knife("knife1",30,30);
   knife2=new Knife("knife1",30,30);
   knife3=new Knife("",1,1);
-  staff=new Staff("staff",30,30);
+  staff=new Staff("staff",30,30,10);
   queue=new TurnsQueue();
   knight= new Knight("name",10,10,queue);
   engineer=new Engineer("name",10,10,queue);
@@ -47,12 +47,14 @@ class KnifeTest {
  void getName() {
   assertEquals("knife1",knife.getName());
   assertEquals("",knife3.getName());
+  
  }
  
  @Test
- void getDamage() {
+ void getDamageAndAttack() {
   assertEquals(30,knife.getDamage());
   assertEquals(1,knife3.getDamage());
+  assertEquals(15,knife.magicAttack());
  }
  
  @Test
