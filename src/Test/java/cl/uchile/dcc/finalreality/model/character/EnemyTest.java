@@ -5,13 +5,17 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
-import cl.uchile.dcc.finalreality.model.effects.NullEffect;
-import cl.uchile.dcc.finalreality.model.effects.Paralysis;
+import cl.uchile.dcc.finalreality.model.effects.*;
 import cl.uchile.dcc.finalreality.model.magic.Heal;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 import cl.uchile.dcc.finalreality.model.magic.Thunder;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EnemyTest {
@@ -91,11 +95,30 @@ class EnemyTest {
  }
  
  @Test
- void getAndSetEffect(){
-  assertEquals(enemy1.getEffect(),  NullEffect.uniqueInstance());
+ void getAndSetandIsAnyEffect(){
+  //inicialy emtpy
+  assertEquals(true, enemy1.getEffects().isEmpty());
+  //after setting some effects
   enemy1.setEffect( Paralysis.uniqueInstance() );
-  assertEquals(enemy1.getEffect(),  Paralysis.uniqueInstance());
-  
+  assertEquals(1, enemy1.getEffects().size());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance())), enemy1.getEffects());
+  assertEquals(true, enemy1.isAnyEffect(Paralysis.uniqueInstance()));
+  //after setting  the same effect remains equals
+  enemy1.setEffect( Paralysis.uniqueInstance() );
+  assertEquals(1, enemy1.getEffects().size());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance())), enemy1.getEffects());
+  assertEquals(true, enemy1.isAnyEffect(Paralysis.uniqueInstance()));
+ //setting another effect
+  enemy1.setEffect( Poisoned.uniqueInstance() );
+  assertEquals(2, enemy1.getEffects().size());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance(),Poisoned.uniqueInstance())), enemy1.getEffects());
+  assertEquals(true, enemy1.isAnyEffect(Poisoned.uniqueInstance()));
+  //setting another effect
+  enemy1.setEffect( Burned.uniqueInstance() );
+  assertEquals(3, enemy1.getEffects().size());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance(),Poisoned.uniqueInstance(),
+          Burned.uniqueInstance())), enemy1.getEffects());
+  assertEquals(true, enemy1.isAnyEffect(Burned.uniqueInstance()));
  }
  
  @Test

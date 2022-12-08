@@ -13,4 +13,7 @@ public interface EffectsInterface {
 
  void updateEffect(Enemy e);
  
+ public  static EffectsInterface uniqueInstance() {
+  return null;
+ }
 }

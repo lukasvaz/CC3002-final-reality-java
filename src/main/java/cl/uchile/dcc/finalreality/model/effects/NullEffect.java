@@ -18,7 +18,7 @@ public class NullEffect implements EffectsInterface {
    * @author ~Lukas Vasquez~
    * */
   
-  public static NullEffect uniqueInstance() {
+  public static  NullEffect uniqueInstance() {
     if (uniqueInstance == null) {
       uniqueInstance = new NullEffect();
     }

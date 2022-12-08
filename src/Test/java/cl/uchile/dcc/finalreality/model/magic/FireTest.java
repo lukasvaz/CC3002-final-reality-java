@@ -7,11 +7,14 @@ import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.effects.Burned;
+import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
 import cl.uchile.dcc.finalreality.model.effects.NullEffect;
 import cl.uchile.dcc.finalreality.model.effects.Paralysis;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,18 +40,19 @@ class FireTest {
  
   bm.equip(s);
   f.setSeed(100);
+  ArrayList<EffectsInterface> old=e.getEffects();
   f.magicOn( bm,e);
   //avg case not Effect
   assertEquals(90,e.getCurrentHp());
   assertEquals(15,bm.getcurrentMp());
-  assertEquals(NullEffect.uniqueInstance(),e.getEffect());
+  assertEquals(old,e.getEffects());
   
   // avg case burn effect
   bm.setCurrentMp(30);
   e.setCurrentHp(e.getMaxHp());
   f.setSeed(172);
   f.magicOn( bm,e);
-  assertEquals(Burned.uniqueInstance(),e.getEffect());
+  assertEquals(true,e.isAnyEffect(Burned.uniqueInstance()));
  
   // hp to 0
   bm.setCurrentMp(30);

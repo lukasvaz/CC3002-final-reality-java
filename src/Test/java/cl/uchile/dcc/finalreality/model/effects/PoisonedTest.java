@@ -30,9 +30,7 @@ class PoisonedTest {
  
  @Test
  void updateEffect() {
-  p.setAsociatedDmg(10);
-  p.updateEffect( e );
-  assertEquals(90 , e.getCurrentHp());
+ 
  }
  
 }

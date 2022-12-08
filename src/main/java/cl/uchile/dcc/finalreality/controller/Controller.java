@@ -22,9 +22,11 @@ public class Controller {
   private  ArrayList<PlayerCharacter> characters;
   private  ArrayList<Enemy> enemies;
   
+  private  ArrayList<Weapon> inventary;
+  
   //inventario
-  private  TurnsQueue queue;
-  private  int  maxCharacters = 5;
+  private static TurnsQueue queue;
+  private static  int  maxCharacters = 5;
   private IFactory factory;
   
   private MagicInterface magic;
@@ -91,63 +93,30 @@ public class Controller {
     return (this.maxCharacters == this.getCharacters().size());
   }
   
- 
-  
-  /**
-   * This method creates a Knight.
-   */
-  
-  public Knight createKnightCharacter(String name, int hp, int defense) {
-    return new Knight(name, hp, defense, queue);
-  }
-  
-  /**
-   * This method creates an Engineer.
-   */
-  
-  public Engineer createEngineerCharacter(String name, int hp, int defense) {
-    return new Engineer(name, hp, defense, queue);
-  }
-  /**
-   * This method creates a Thief.
-   */
-  
-  public Thief createThiefCharacter(String name, int hp, int defense) {
-    return new Thief(name, hp, defense, queue);
-  }
-  
-  /**
-   * This method creates a WhiteMage.
-   */
-  
-  public WhiteMage createWhiteMageCharacter(String name, int hp, int defense, int mp ) {
-    return new WhiteMage(name, hp, defense, mp, queue);
-  }
-  
   
   /**
    *This method creates a new character instance and append it  to the character's Array.
    */
   
-  public void createCharacter(TurnsQueue queue) {
-    this.characters.add((PlayerCharacter) this.factory.create(queue));
+  public void createCharacter() {
+    this.characters.add((PlayerCharacter) this.factory.create(this.getQueue()));
   }
   
   /**
    *This method creates a new Enemy instance and append it  to the Enemies Array.
    */
-  public void createRandomEnemy(TurnsQueue queue) {
+  public void createRandomEnemy() {
     Random random = new Random();
     int p = random.nextInt(30, 120);
-    //this.selectCharacterCreation("Enemy");
-    //this.factory.setDefense(p);
-    //this.factory.setMaxHp(p);
-    //((EnemyFactory) this.factory).setWeight(p);
-    //((EnemyFactory) this.factory).setAttack(p - 20);
+    setFactory(new EnemyFactory());
+    this.factory.setDefense(p);
+    this.factory.setMaxHp(p);
+    ((EnemyFactory) this.factory).setWeight(p);
+    ((EnemyFactory) this.factory).setAttack(p - 20);
+    
     int i = this.enemies.size();
-    //this.factory.setName("enemy" + i);
-    Enemy e =new Enemy("enemy"+i,p,p,p,p-20,queue);
-    enemies.add(e);
+    this.factory.setName("enemy" + i);
+    enemies.add((Enemy) factory.create(this.queue));
   }
   
   /**
@@ -166,12 +135,22 @@ public class Controller {
   }
   
   /**
+   *Method to get a Magic attack and set it into controller.
+   */
+  
+  public MagicInterface getMagic() {
+    return this.magic;
+  }
+  
+  
+  /**
    *Method to simulate a  magic attack  from a Mage to a Game Character.
    */
   
   public void useMagic(GameCharacter m, GameCharacter c) throws NotImplementsMagicException, NotEnughMpException {
       m.implementsMagic(this.magic,c);
   }
+  
   
   //metodo para equipar del inventario
   //gana player

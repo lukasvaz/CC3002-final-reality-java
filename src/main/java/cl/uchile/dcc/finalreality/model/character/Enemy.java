@@ -6,13 +6,14 @@ import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
 import cl.uchile.dcc.finalreality.model.effects.NullEffect;
+
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
-import cl.uchile.dcc.finalreality.model.magic.Thunder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Enemy extends AbstractCharacter {
   
-  private EffectsInterface effect = NullEffect.uniqueInstance();
+  private ArrayList<EffectsInterface> effects;
   private final int attack;
   private final int weight;
   protected ScheduledExecutorService scheduledExecutor;
@@ -49,6 +50,7 @@ public class Enemy extends AbstractCharacter {
     Require.statValueAtLeast(1, weight, "Weight");
     this.weight = weight;
     this.attack = attack;
+    this.effects = new ArrayList<>();
   }
 
   /**
@@ -116,16 +118,28 @@ public class Enemy extends AbstractCharacter {
    * Returns enemy's Effect state .
    */
   
-  public EffectsInterface getEffect() {
-    return this.effect;
+  public ArrayList<EffectsInterface> getEffects() {
+    return this.effects;
+  }
+  
+  
+  public boolean isAnyEffect(EffectsInterface effect) {
+   
+    for (EffectsInterface e : this.getEffects()) {
+      if (e.getClass() == effect.getClass()) {
+        return true;
+      }
+    }
+    return false;
   }
   
   /**
    * Set enemy's Effect state .
    */
-  
   public void setEffect(EffectsInterface effect) {
-    this.effect = effect;
+    if (!isAnyEffect(effect)) {
+      this.effects.add(effect);
+    }
   }
   
   

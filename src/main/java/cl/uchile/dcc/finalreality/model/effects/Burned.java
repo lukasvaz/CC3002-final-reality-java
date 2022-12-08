@@ -17,7 +17,7 @@ public class Burned implements EffectsInterface {
   * @author ~Lukas Vasquez~
   * */
  
-  public static Burned uniqueInstance() {
+  public static  Burned uniqueInstance() {
     if (uniqueInstance == null) {
       uniqueInstance = new Burned();
     }

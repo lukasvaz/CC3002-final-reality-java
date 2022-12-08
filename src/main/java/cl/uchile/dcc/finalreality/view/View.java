@@ -22,37 +22,29 @@ public class View {
     return this.controller;
   }
   
+  
   public void selectCharacterCreation(String s) {
     if (s.equals("Engineer")) {
       controller.setFactory(new EngineerFactory());
-      controller.getFactory().setDefense(80);
-      controller.getFactory().setMaxHp(200);
+     
     }
     if (s.equals("BlackMage")) {
       controller.setFactory(new BlackMageFactory());
-      controller.getFactory().setDefense(70);
-      controller.getFactory().setMaxHp(200);
-      IMageFactory fac = (IMageFactory) controller.getFactory();
-      fac.setMaxMp(250);
+     
     }
     
     if (s.equals("Knight")) {
       controller.setFactory(new KnightFactory());
-      controller.getFactory().setDefense(100);
-      controller.getFactory().setMaxHp(200);
+   
     }
     if (s.equals("Thief")) {
       controller.setFactory(new ThiefFactory());
-      controller.getFactory().setDefense(70);
-      controller.getFactory().setMaxHp(150);
+     
     }
     
     if (s.equals("WhiteMage")) {
       controller.setFactory(new WhiteMageFactory());
-      controller.getFactory().setDefense(50);
-      controller.getFactory().setMaxHp(180);
-      IMageFactory fac = (IMageFactory) controller.getFactory();
-      fac.setMaxMp(300);
+     
     }
     if (s.equals("Enemy")) {
       controller.setFactory(new EnemyFactory());
@@ -71,7 +63,7 @@ public class View {
     System.out.println("Type a name:");
     String name = sc.nextLine();
     this.controller.getFactory().setName(name);
-    this.controller.createCharacter(controller.getQueue());
+    this.controller.createCharacter();
   }
   /**
   *Main Example method.
@@ -89,7 +81,7 @@ public class View {
     }
     System.out.println("versus\nEnemies:");
     for (int i = 0; i <= 6; i++) {
-      c.createRandomEnemy(c.getQueue());
+      c.createRandomEnemy();
       System.out.println(c.getEnemies().get(i));
     }
     System.out.println("end");
