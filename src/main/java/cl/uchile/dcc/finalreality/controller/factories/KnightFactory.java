@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.controller.factories;
 
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 
 
@@ -10,25 +11,27 @@ import cl.uchile.dcc.finalreality.model.character.player.Knight;
  * @author ~Lukas Vasquez Verdejo~
  */
 
-public class KnightFactory extends AbstractFactory {
+public class KnightFactory implements IFactory {
   
-  KnightFactory uniqueInstance;
   
-  /**
-   * This method guarantee an unique instance if this factory (Singleton Pattern).
-   *
-   * @author ~Lukas Vasquez Verdejo~
-   */
-  public KnightFactory  uniqueInstance() {
-    if (this.uniqueInstance == null) {
-      this.uniqueInstance = new KnightFactory();
-    }
-    return  this.uniqueInstance;
-    
-  }
- 
+  private int maxHp = 200;
+  private int defense = 100;
+  private String name = "Knight";
+  
   @Override
   public Knight create(TurnsQueue queue) {
-    return new Knight(super.name, super.maxHp, super.defense, queue);
+    return new Knight(this.name, this.maxHp, this.defense, queue);
+  }
+  
+  public  void  setMaxHp(int maxHp) {
+    this.maxHp = maxHp;
+  }
+  
+  public  void  setDefense(int defense) {
+    this.defense = defense;
+  }
+  
+  public  void  setName(String name) {
+    this.name = name;
   }
 }

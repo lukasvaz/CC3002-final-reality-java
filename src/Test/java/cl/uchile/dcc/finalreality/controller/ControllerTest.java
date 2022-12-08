@@ -34,9 +34,9 @@ class ControllerTest {
  void createEnemy() {
   c.setFactory(efac);
   c.createRandomEnemy(q);
+  //avg cases
   assertEquals(c.getEnemies().size(),1);
   assertEquals(c.getEnemies().get(0).getClass() , Enemy.class);
-  
   c.createRandomEnemy(q);
   assertEquals(c.getEnemies().size(),2);
   assertEquals(c.getEnemies().get(1).getClass() , Enemy.class);
@@ -48,6 +48,7 @@ class ControllerTest {
   Axe a = new Axe("",50,40);
   Enemy e = new Enemy("",100,100,40,40,q);
   Enemy e2 = new Enemy("",100,100,60,40,q);
+  
   k.equip(a);
   c.attack(k,e);
   assertEquals(90,e.getCurrentHp());

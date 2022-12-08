@@ -8,9 +8,26 @@ import cl.uchile.dcc.finalreality.model.character.player.Engineer;
  *
  * @author ~Lukas Vasquez Verdejo~
  */
-public class EngineerFactory extends AbstractFactory {
+public class EngineerFactory implements IFactory {
+ 
+  private int maxHp = 150;
+  private int defense = 80;
+  private String name = "Engineer";
+  
   @Override
  public Engineer create(TurnsQueue queue) {
-    return new Engineer(super.name, super.maxHp, super.defense, queue);
+    return new Engineer(this.name, this.maxHp, this.defense, queue);
+  }
+  
+  public  void  setMaxHp(int maxHp) {
+    this.maxHp = maxHp;
+  }
+ 
+  public  void  setDefense(int defense) {
+    this.defense = defense;
+  }
+ 
+  public  void  setName(String name) {
+    this.name = name;
   }
 }
