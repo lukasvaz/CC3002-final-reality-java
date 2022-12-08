@@ -10,10 +10,16 @@ import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
  * @author ~Lukas Vasquez Verdejo~
  */
 
-public class WhiteMageFactory extends AbstractMageFactory {
- 
+public class WhiteMageFactory extends AbstractFactory {
+  int maxMp = 250;
+  
   @Override
  public WhiteMage create(TurnsQueue queue) {
-    return new WhiteMage(super.name, super.maxHp, super.defense, super.maxMp, queue);
+    return new WhiteMage(super.name, super.maxHp, super.defense, this.maxMp, queue);
+  }
+ 
+ 
+  public void setMaxMp(int maxMp) {
+    this.maxMp = maxMp;
   }
 }

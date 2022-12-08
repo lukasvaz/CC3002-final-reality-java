@@ -69,9 +69,11 @@ differents characters classes (double dispatch).</li>
 
 <b>T3</b>
 <ol>
+<>Random Enemy Specific Enemy<>
 <li>factories</li>
 <li>getattack</li>
 <li>Null object in NUll effect and Singleton in effects</li>
-<li>factories</li>
+<li>factories(default values)</li>
 <li> bool implements </li>
+<>refactor magic attacks<>
 </ol>

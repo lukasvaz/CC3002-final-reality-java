@@ -10,10 +10,17 @@ import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
  * @author ~Lukas Vasquez Verdejo~
  */
 
-public class BlackMageFactory extends AbstractMageFactory {
- 
+public class BlackMageFactory extends AbstractFactory {
+  int maxMp = 200;
+  
   @Override
  public BlackMage create(TurnsQueue queue) {
-    return new BlackMage(super.name, super.maxHp, super.defense, super.maxMp, queue);
+    
+    return new BlackMage(super.name, super.maxHp, super.defense, this.maxMp, queue);
+  }
+ 
+
+ public void setMaxMp(int maxMp) {
+    this.maxMp = maxMp;
   }
 }

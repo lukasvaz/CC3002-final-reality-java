@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.controller;
 
+import cl.uchile.dcc.finalreality.controller.factories.EnemyFactory;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
@@ -18,42 +19,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class ControllerTest {
  Controller c;
  TurnsQueue q;
+ 
+ KnightFactory kfac;
+ EnemyFactory efac;
  @BeforeEach
  void setup() throws InvalidStatValueException {
    c= new Controller();
-   
+   q = new TurnsQueue();
+   kfac = new KnightFactory();
+   efac = new EnemyFactory();
  }
  
  @Test
- void selectCharacter() {
-  c.selectCharacterCreation("Knight");
-  assertEquals(c.getFactory().getClass(),KnightFactory.class);
-  c.selectCharacterCreation("BlackMage");
-  assertEquals(c.getFactory().getClass(), BlackMageFactory.class);
-  c.selectCharacterCreation("WhiteMage");
-  assertEquals(c.getFactory().getClass(), WhiteMageFactory.class );
- }
- @Test
- void createCharacter() {
-  c.selectCharacterCreation("Knight");
-  c.createCharacter(q);
-  assertEquals(c.getCharacters().size(),1);
-  assertEquals(c.getCharacters().get(0).getClass() , Knight.class);
-  c.selectCharacterCreation("WhiteMage");
-  c.createCharacter(q);
-  assertEquals(c.getCharacters().size(),2);
-  assertEquals(c.getCharacters().get(1).getClass() , WhiteMage.class);
- }
- @Test
  void createEnemy() {
-  c.selectCharacterCreation("Enemy");
-  c.createEnemy(q);
+  c.setFactory(efac);
+  c.createRandomEnemy(q);
   assertEquals(c.getEnemies().size(),1);
   assertEquals(c.getEnemies().get(0).getClass() , Enemy.class);
-  c.createEnemy(q);
+  
+  c.createRandomEnemy(q);
   assertEquals(c.getEnemies().size(),2);
   assertEquals(c.getEnemies().get(1).getClass() , Enemy.class);
  }
+ 
  @Test
  void attack() throws InvalidWeaponAssignmentException {
   Knight k = new Knight("",100,20,q);
@@ -71,7 +59,7 @@ class ControllerTest {
  @Test
  void setAndIsMaxCharacter(){
   c.setMaxCharacters(1);
-  c.selectCharacterCreation("Knight");
+  c.setFactory( new KnightFactory());
   c.createCharacter(q);
   assertEquals(true,c.isMaxCharacters());
   c.setMaxCharacters(3);

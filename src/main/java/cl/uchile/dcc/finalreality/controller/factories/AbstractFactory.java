@@ -8,9 +8,9 @@ package cl.uchile.dcc.finalreality.controller.factories;
 
 public  abstract class AbstractFactory implements IFactory {
  
-  int maxHp;
-  int defense;
-  String name;
+  int maxHp = 1;
+  int defense = 1;
+  String name = "";
   
   public  void  setMaxHp(int maxHp) {
     this.maxHp = maxHp;

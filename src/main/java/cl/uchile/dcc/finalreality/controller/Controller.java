@@ -45,6 +45,14 @@ public class Controller {
   public IFactory getFactory() {
     return this.factory;
   }
+  
+  /**
+   * A getter for the controller's factory.
+   */
+  
+  public void setFactory(IFactory factory) {
+    this.factory=factory;
+  }
   /**
    * A getter for the controller's queue.
    */
@@ -83,26 +91,13 @@ public class Controller {
     return (this.maxCharacters == this.getCharacters().size());
   }
   
-  /**
-   * This method asks for the user for the characters to use.
-   */
-  
-  public void askForSingleCharacter() {
-    System.out.println("Type your character:\n Options: Engineer | BlackMage | Knight | Thief | WhiteMage");
-    Scanner sc = new Scanner(System.in); //System.in is a standard input stream
-    String str = sc.nextLine();             //reads string
-    this.selectCharacterCreation(str);
-    System.out.println("Type a name:");
-    String name = sc.nextLine();
-    this.factory.setName(name);
-    this.createCharacter(this.queue);
-  }
+ 
   
   /**
    * This method creates a Knight.
    */
   
-  public Knight createKnightPlayer(String name, int hp, int defense) {
+  public Knight createKnightCharacter(String name, int hp, int defense) {
     return new Knight(name, hp, defense, queue);
   }
   
@@ -110,14 +105,14 @@ public class Controller {
    * This method creates an Engineer.
    */
   
-  public Engineer createEngineerPlayer(String name, int hp, int defense) {
+  public Engineer createEngineerCharacter(String name, int hp, int defense) {
     return new Engineer(name, hp, defense, queue);
   }
   /**
    * This method creates a Thief.
    */
   
-  public Thief createThiefPlayer(String name, int hp, int defense) {
+  public Thief createThiefCharacter(String name, int hp, int defense) {
     return new Thief(name, hp, defense, queue);
   }
   
@@ -125,47 +120,10 @@ public class Controller {
    * This method creates a WhiteMage.
    */
   
-  public WhiteMage createWhiteMagePlayer(String name, int hp, int defense, int mp ) {
+  public WhiteMage createWhiteMageCharacter(String name, int hp, int defense, int mp ) {
     return new WhiteMage(name, hp, defense, mp, queue);
   }
   
-  public void selectCharacterCreation(String s) {
-    if (s.equals("Engineer")) {
-      this.factory = new EngineerFactory();
-      this.factory.setDefense(80);
-      this.factory.setMaxHp(200);
-    }
-    if (s.equals("BlackMage")) {
-      this.factory = new BlackMageFactory();
-      this.factory.setDefense(70);
-      this.factory.setMaxHp(200);
-      IMageFactory fac = (IMageFactory) this.factory;
-      fac.setMaxMp(150);
-    }
-    
-    if (s.equals("Knight")) {
-      this.factory = new KnightFactory();
-      this.factory.setDefense(100);
-      this.factory.setMaxHp(200);
-    }
-    if (s.equals("Thief")) {
-      this.factory = new ThiefFactory();
-      this.factory.setDefense(70);
-      this.factory.setMaxHp(150);
-    }
-  
-    if (s.equals("WhiteMage")) {
-      this.factory = new WhiteMageFactory();
-      this.factory.setDefense(50);
-      this.factory.setMaxHp(180);
-      IMageFactory fac = (IMageFactory) this.factory;
-      fac.setMaxMp(300);
-    }
-    if (s.equals("Enemy")) {
-      this.factory = new EnemyFactory();
-    }
-    
-  }
   
   /**
    *This method creates a new character instance and append it  to the character's Array.
@@ -178,17 +136,18 @@ public class Controller {
   /**
    *This method creates a new Enemy instance and append it  to the Enemies Array.
    */
-  public void createEnemy(TurnsQueue queue) {
+  public void createRandomEnemy(TurnsQueue queue) {
     Random random = new Random();
     int p = random.nextInt(30, 120);
-    this.selectCharacterCreation("Enemy");
-    this.factory.setDefense(p);
-    this.factory.setMaxHp(p);
-    ((EnemyFactory) this.factory).setWeight(p);
-    ((EnemyFactory) this.factory).setAttack(p - 20);
+    //this.selectCharacterCreation("Enemy");
+    //this.factory.setDefense(p);
+    //this.factory.setMaxHp(p);
+    //((EnemyFactory) this.factory).setWeight(p);
+    //((EnemyFactory) this.factory).setAttack(p - 20);
     int i = this.enemies.size();
-    this.factory.setName("enemy" + i);
-    enemies.add((Enemy) this.factory.create(queue));
+    //this.factory.setName("enemy" + i);
+    Enemy e =new Enemy("enemy"+i,p,p,p,p-20,queue);
+    enemies.add(e);
   }
   
   /**
@@ -213,8 +172,6 @@ public class Controller {
   public void useMagic(GameCharacter m, GameCharacter c) throws NotImplementsMagicException, NotEnughMpException {
       m.implementsMagic(this.magic,c);
   }
-  
-  
   
   //metodo para equipar del inventario
   //gana player
