@@ -5,15 +5,12 @@ import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
-import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
-import cl.uchile.dcc.finalreality.model.effects.NullEffect;
 import cl.uchile.dcc.finalreality.model.effects.Paralysis;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,20 +27,19 @@ class ThunderTest {
   Enemy e = new Enemy("",30,100,30,20,q);
   Thunder t = new Thunder();
   ArrayList<EffectsInterface> old = new ArrayList<>();
-  t.setSeed(100);
-  //avg case Not Aplied Effect
+  t.setSeed(1);
+  //avg case not  Aplied Effect
   t.magicOn( bm,e);
   assertEquals(90,e.getCurrentHp());
   assertEquals(15,bm.getcurrentMp());
-  assertEquals(true,e.getEffects().isEmpty());
+  assertEquals(1,e.getParalyseCounter());
+  e.setParalyseCounter(0);
   
-  
-  //avg case Aplied Effect
+  //avg case not Aplied Effect
   bm.setCurrentMp(15);
-  t.setSeed(102);
+  t.setSeed(14);
   t.magicOn( bm,e);
-  assertEquals(true,e.isAnyEffect(Paralysis.uniqueInstance()));
-  assertEquals(1,e.getEffects().size());
+  assertEquals(0,e.getParalyseCounter());
   
   //not enoughMp
   bm.setCurrentMp(14);

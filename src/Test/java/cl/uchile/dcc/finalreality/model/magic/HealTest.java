@@ -3,12 +3,8 @@ package cl.uchile.dcc.finalreality.model.magic;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
-import cl.uchile.dcc.finalreality.model.character.Enemy;
-import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
-import cl.uchile.dcc.finalreality.model.effects.NullEffect;
-import cl.uchile.dcc.finalreality.model.effects.Paralysis;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 

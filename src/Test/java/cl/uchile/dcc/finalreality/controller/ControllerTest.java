@@ -6,6 +6,7 @@ import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import cl.uchile.dcc.finalreality.controller.factories.BlackMageFactory;
 import cl.uchile.dcc.finalreality.controller.factories.KnightFactory;
@@ -17,11 +18,14 @@ import cl.uchile.dcc.finalreality.model.magic.Poison;
 import cl.uchile.dcc.finalreality.model.magic.Thunder;
 import cl.uchile.dcc.finalreality.model.magic.WhiteMagic;
 import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,13 +53,14 @@ class ControllerTest {
  }
  
  @Test
- void settersAndGetters() throws NullWeaponException, InterruptedException, InvalidWeaponAssignmentException {
+ void setandget() throws NullWeaponException, InterruptedException, InvalidWeaponAssignmentException {
   //setFactory
   c.setFactory(kfac);
   //getFactory
   assertEquals(kfac , c.getFactory());
   //getqueue
   Knight knight =kfac.create(c.getQueue());
+
   Sword sword= new Sword("",30,30);
   knight.equip(sword);
   knight.waitTurn();
@@ -82,9 +87,22 @@ class ControllerTest {
   assertEquals(c.getEnemies().size(),2);
   assertEquals(c.getEnemies().get(1).getClass() , Enemy.class);
   assertEquals("enemy1",c.getEnemies().get(1).getName());
+  assertEquals(c,c.getEnemies().get(1).getController());
   //max
-  
  }
+ 
+ @Test
+ void createCharacter() {
+  c.setFactory(kfac);
+  c.createCharacter();
+  //avg cases
+  assertEquals(c.getCharacters().size(),1);
+  assertEquals(c.getCharacters().get(0).getClass() , Knight.class);
+  assertEquals(c.getCharacters().get(0).getController() ,c);
+
+  //max
+ }
+ 
  
  @Test
  void attack() throws InvalidWeaponAssignmentException {
@@ -102,7 +120,7 @@ class ControllerTest {
  }
  
  @Test
- void setAndIsMaxCharacter(){
+ void setAndIsMaxCharacter() throws NullWeaponException {
   c.setMaxCharacters(1);
   c.setFactory( new KnightFactory());
   c.createCharacter();
@@ -112,15 +130,28 @@ class ControllerTest {
  }
  
  @Test
+ void uniqueInstance() {
+  e.setController(Controller.getUniqueInstance());
+  k=kfac.create(Controller.getUniqueInstance().getQueue());
+  k.setController(Controller.getUniqueInstance());
+ assertEquals(e.getController(),k.getController());
+ assertEquals(e.getController(),Controller.getUniqueInstance());
+ assertEquals(k.getController(),Controller.getUniqueInstance());
+ }
+ 
+ @Test
  void useMagic() throws NotImplementsMagicException, NotEnughMpException, InvalidWeaponAssignmentException {
+
   WhiteMage wm= wmfac.create(c.getQueue());
   BlackMage bm= bmfac.create(c.getQueue());
   //Whitemagic
   c.selectMagic(new Poison());
+  wm.equip(s);
   c.useMagic(wm,e);
-  assertEquals(true,e.isAnyEffect(Poisoned.uniqueInstance()));
+  System.out.println(e.getEffects());
+  assertEquals(true,e.isAnyEffect(new Poisoned()));
   assertThrows(NotImplementsMagicException.class,()->c.useMagic(bm,e));
- 
+  
   //BlackMagic
   int hp = e.getCurrentHp();
   bm.equip(s);
@@ -129,9 +160,67 @@ class ControllerTest {
   c.selectMagic(t);
   assertThrows(NotImplementsMagicException.class,()->c.useMagic(wm,e));
   c.useMagic(bm,e);
-  assertEquals(true,e.isAnyEffect(Paralysis.uniqueInstance()));
+  assertEquals(1,e.getEffects().size());
+  assertEquals(true, e.isAnyEffect(new Poisoned()));
   assertEquals(hp-s.getMagicDamage(),e.getCurrentHp());
  }
  
+ @Test
+ void updateDeaths(){
+  Knight k = kfac.create(c.getQueue());
+  e.setController(c);
+  k.setController(c);
+  c.getEnemies().add(e);
+  c.getCharacters().add(k);
+  c.getQueue().get_queue().add(k);
+  c.getQueue().get_queue().add(e);
+  assertEquals(new ArrayList<>(Arrays.asList(k)),c.getCharacters());
+  assertEquals(new ArrayList<>(Arrays.asList(e)),c.getEnemies());
+  
+  //setting Hp to zero
+  e.setCurrentHp(0);
+  k.setCurrentHp(0);
+  //should be extaracted from queue and enenmylist
+  c.updateDeaths(e);
+  assertEquals(false , c.getQueue().get_queue().contains(e));
+  assertEquals(true, c.getQueue().get_queue().contains(k));
+  assertEquals(true,c.getEnemies().isEmpty());
+ 
+  //should be extaracted from queue and characterlist
+  c.updateDeaths(k);
+  assertEquals(true,c.getCharacters().isEmpty());
+  assertEquals(false , c.getQueue().get_queue().contains(k));
+
+ }
+ 
+ @Test
+ void equipfromInventary() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+  BlackMage w = new BlackMage("",100,100,100,c.getQueue());
+  Staff s=new Staff("",30,30,30);
+  Knife k=new Knife("",30,30);
+  c.setInventary(new ArrayList<>(Arrays.asList( s)));
+  assertThrows(WeaponNotInInventoryException.class ,()->c.equipFromInvetory(w,k));
+  assertDoesNotThrow(()->c.equipFromInvetory(w,s));
+  assertEquals(s,w.getEquippedWeapon());
+ }
+ @Test
+ void defaultCharacterSelection(){
+  c.defaultCharacterSelection();
+  assertEquals(5,c.getCharacters().size());
+ }
+ @Test
+ void createnormalInventory(){
+  c.defaultInventary();
+  assertEquals(5,c.getInventary().size());
+ }
+ @Test
+ void defWeaponAssignment() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+  c.defaultInventary();
+  c.defaultCharacterSelection();
+  c.defaultWpnAssignment();
+  assertEquals(Axe.class,c.getCharacters().get(0).getEquippedWeapon().getClass());
+  assertEquals(Sword.class,c.getCharacters().get(1).getEquippedWeapon().getClass());
+  assertEquals(Knife.class,c.getCharacters().get(4).getEquippedWeapon().getClass());
+ }
  
 }

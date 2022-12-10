@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.effects;
 
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 
 /**
@@ -23,7 +24,12 @@ public class Paralysis implements EffectsInterface {
     }
     return  uniqueInstance;
   }
- 
+  
+  @Override
+  public void addTo(Enemy e) {
+    e.setParalyseCounter(e.getParalyseCounter()+1);
+  }
+  
   /**
   * This method implements the actions asociated to the effect.In this case
   * Paralysis sends inmediately the character to the queue.
@@ -31,8 +37,11 @@ public class Paralysis implements EffectsInterface {
   * @author ~Lukas Vasquez~
   * */
  
-  public void updateEffect(Enemy e) {
-    e.setEffect(NullEffect.uniqueInstance());
-    e.waitTurn();
+  public void applyEffect(Enemy e) throws NullWeaponException {
+    if (e.getParalyseCounter() > 0) {
+      e.setParalyseCounter(e.getParalyseCounter() - 1);
+      e.getController().sendToQueue(e);
+    }
+    //e.getController().newTurn;
   }
 }

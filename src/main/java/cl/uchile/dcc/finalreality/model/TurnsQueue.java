@@ -14,7 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class TurnsQueue {
+  
+  public static TurnsQueue uniqueInstance;
   final @NotNull BlockingQueue<AbstractCharacter> queue;
+  
   /**
    * Creates a Queue Object that recieves messages from the character classes .
    *
@@ -23,10 +26,17 @@ public class TurnsQueue {
   public TurnsQueue() {
     this.queue = new LinkedBlockingQueue<>();
   }
+  
+  public static TurnsQueue getUniqueInstance() {
+    if (uniqueInstance == null) {
+      uniqueInstance = new TurnsQueue();
+    }
+    return  uniqueInstance;
+  }
+  
   /**
    * Returns the queue object itself.
    */
-  
   public BlockingQueue<AbstractCharacter> get_queue() {
     return  this.queue;
   }

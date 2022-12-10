@@ -30,7 +30,7 @@ public class Thunder extends BlackMagic {
       ((PlayerMage) m).setCurrentMp(((PlayerMage) m).getcurrentMp() - 15);
       int num = random.nextInt(1, 100);
       if (num <= 30) {
-        ((Enemy) g).setEffect(Paralysis.uniqueInstance());
+        ((Enemy) g).setParalyseCounter(((Enemy) g).getParalyseCounter()+1);
       }
     }  else {
       throw new NotEnughMpException();

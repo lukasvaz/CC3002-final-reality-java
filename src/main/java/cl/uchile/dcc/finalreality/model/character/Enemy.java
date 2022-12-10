@@ -1,11 +1,14 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
+import cl.uchile.dcc.finalreality.controller.States.EnemyTurn;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
-import cl.uchile.dcc.finalreality.model.effects.NullEffect;
+import cl.uchile.dcc.finalreality.model.effects.EffectsObservable;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -13,6 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import cl.uchile.dcc.finalreality.model.effects.Paralysis;
 import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,9 +27,10 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Lukas Vasquez~
  */
 
-public class Enemy extends AbstractCharacter {
+public class Enemy extends AbstractCharacter implements EffectsObservable {
   
   private ArrayList<EffectsInterface> effects;
+  int paralyseCounter;
   private final int attack;
   private final int weight;
   protected ScheduledExecutorService scheduledExecutor;
@@ -51,6 +56,7 @@ public class Enemy extends AbstractCharacter {
     this.weight = weight;
     this.attack = attack;
     this.effects = new ArrayList<>();
+    this.paralyseCounter = 0;
   }
 
   /**
@@ -114,6 +120,17 @@ public class Enemy extends AbstractCharacter {
     magic.enemyOn(this,character);
   }
   
+  @Override
+  public void dead() {
+    this.controller.getEnemies().remove(this);
+    this.controller.getQueue().get_queue().remove(this);
+  }
+  
+  @Override
+  public void selectTurn() {
+    this.controller.getState().enemyTurn(this.controller);
+  }
+  
   /**
    * Returns enemy's Effect state .
    */
@@ -122,10 +139,21 @@ public class Enemy extends AbstractCharacter {
     return this.effects;
   }
   
+  /**
+   * Returns enemy Paralyses states.
+   */
   
+  public int getParalyseCounter() {
+    return this.paralyseCounter;
+  }
+  
+  public void setParalyseCounter(int i) {
+    this.paralyseCounter=i;
+  }
   public boolean isAnyEffect(EffectsInterface effect) {
    
     for (EffectsInterface e : this.getEffects()) {
+      System.out.println(e.getClass());
       if (e.getClass() == effect.getClass()) {
         return true;
       }
@@ -137,11 +165,23 @@ public class Enemy extends AbstractCharacter {
    * Set enemy's Effect state .
    */
   public void setEffect(EffectsInterface effect) {
-    if (!isAnyEffect(effect)) {
-      this.effects.add(effect);
-    }
+    effect.addTo(this);
   }
   
+  /**
+   * Update Effect states of a character .
+   */
+  @Override
+  public void notifyEffects() throws InterruptedException, NullWeaponException {
+    //no pude  dejar todos los efectos en un arreglo ,pues como al aplicar paralysis esta se elimina de la lista
+    // de efectos me tira un Concurrent error (elimino un elemento de la lista en la que itero),
+    // el funcionamiento es el que se quiere  pues solo se ejecuta un Paralysis si es que el contador>0
+  
+    for (EffectsInterface e : this.getEffects()) {
+        e.applyEffect(this);
+    }
+    Paralysis.uniqueInstance().applyEffect(this);
+  }
   
   
 }

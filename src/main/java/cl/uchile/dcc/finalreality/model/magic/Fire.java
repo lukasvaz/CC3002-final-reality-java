@@ -32,7 +32,9 @@ public class Fire extends BlackMagic {
       ((PlayerMage) m).setCurrentMp(mpPoints);
       int num = random.nextInt(1, 100);
       if (num <= 20) {
-        ((Enemy) g).setEffect(Burned.uniqueInstance());
+        Burned b=new Burned();
+        b.setAssociatedDmg(m.getAttack()/2);
+        ((Enemy) g).setEffect(b);
       }
     } else {
       throw new NotEnughMpException();

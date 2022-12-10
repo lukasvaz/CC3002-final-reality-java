@@ -16,10 +16,11 @@ public class Poison extends WhiteMagic implements MagicInterface  {
    */
   public void magicOn(GameCharacter m, GameCharacter g) throws NotEnughMpException {
     if (((PlayerMage) m).getcurrentMp() >= 15) {
-     
       int mpPoints = Math.max(((PlayerMage) m).getcurrentMp() - 40, 0);
       ((PlayerMage) m).setCurrentMp(mpPoints);
-      ((Enemy) g).setEffect(Poisoned.uniqueInstance());
+      Poisoned p = new Poisoned();
+      p.setAssociatedDmg(m.getAttack());
+      ((Enemy) g).setEffect(p);
     } else {
       throw new NotEnughMpException();
     }

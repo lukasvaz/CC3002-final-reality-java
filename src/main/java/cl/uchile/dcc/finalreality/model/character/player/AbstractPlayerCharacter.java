@@ -8,6 +8,8 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
+import cl.uchile.dcc.finalreality.controller.States.CharacterTurn;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
@@ -92,6 +94,18 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
     }
   }
   
+
+  @Override
+  public void dead() {
+    this.controller.getCharacters().remove(this);
+    this.controller.getQueue().get_queue().remove(this);
+  }
+  
+  @Override
+  public void selectTurn() {
+    this.controller.getState().characterTurn(this.controller);
+    
+  }
 }
 
 

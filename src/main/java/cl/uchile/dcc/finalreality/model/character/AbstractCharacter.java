@@ -1,5 +1,7 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
+import cl.uchile.dcc.finalreality.controller.DeathObservable;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
@@ -11,14 +13,15 @@ import org.jetbrains.annotations.NotNull;
  *@author <a href="https://www.github.com/r8vnhill">R8V</a>
  *@author ~Lukas Vasquez~
  */
-public abstract class AbstractCharacter implements GameCharacter {
+public abstract class AbstractCharacter implements GameCharacter, DeathObservable {
+  
 
   private int currentHp;
   protected int maxHp;
   protected int defense;
   protected final TurnsQueue turnsQueue;
   protected final String name;
-  
+  protected Controller controller;
 
   /**
    * Creates a new character.
@@ -90,5 +93,20 @@ public abstract class AbstractCharacter implements GameCharacter {
     Require.statValueAtLeast(0, hp, "Current HP");
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
+  }
+  
+  
+  public  void setController(Controller controller) {
+    this.controller = controller;
+  }
+  
+  public  Controller getController() {
+    return this.controller;
+  }
+  
+  @Override
+  public void notifyDmg() {
+    this.controller.updateDeaths(this);
+    
   }
 }

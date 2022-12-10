@@ -1,6 +1,5 @@
 package cl.uchile.dcc.finalreality.model.magic;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
@@ -8,13 +7,12 @@ import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.effects.Burned;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
-import cl.uchile.dcc.finalreality.model.effects.NullEffect;
-import cl.uchile.dcc.finalreality.model.effects.Paralysis;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,7 +50,7 @@ class FireTest {
   e.setCurrentHp(e.getMaxHp());
   f.setSeed(172);
   f.magicOn( bm,e);
-  assertEquals(true,e.isAnyEffect(Burned.uniqueInstance()));
+  assertEquals(Burned.class,e.getEffects().get(0).getClass());
  
   // hp to 0
   bm.setCurrentMp(30);

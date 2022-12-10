@@ -10,20 +10,17 @@ import cl.uchile.dcc.finalreality.model.character.Enemy;
 public class Burned implements EffectsInterface {
   int associatedDmg;
   private static Burned uniqueInstance;
- 
-  /**
-  * This method gurantee that the instance of Burned effect is unique.
-  *
-  * @author ~Lukas Vasquez~
-  * */
- 
-  public static  Burned uniqueInstance() {
-    if (uniqueInstance == null) {
-      uniqueInstance = new Burned();
-    }
-    return  uniqueInstance;
+  
+  @Override
+  public void addTo(Enemy e) {
+    e.getEffects().add(0, this);
   }
- 
+  
+  
+  public void setAssociatedDmg(int associatedDmg) {
+    this.associatedDmg = associatedDmg;
+  }
+  
   /**
   * This method implements the actions asociated to the effect.In this case
   * Burned does send the character to the queue.
@@ -31,7 +28,9 @@ public class Burned implements EffectsInterface {
   * @author ~Lukas Vasquez~
   * */
  
-  public void updateEffect(Enemy e) {
+  public void applyEffect(Enemy e) {
+    System.out.println(e.getCurrentHp());
+    System.out.println(associatedDmg);
     e.setCurrentHp(e.getCurrentHp() - this.associatedDmg);
   }
 }

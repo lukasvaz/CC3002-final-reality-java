@@ -1,8 +1,10 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.effects.*;
@@ -27,8 +29,14 @@ class EnemyTest {
  Enemy enemy5;
  Knight knight;
  
+ Controller controller;
+ 
+ Burned burned;
+ Paralysis paralysis;
+ Poisoned poisoned;
  @BeforeEach
  void setup() throws InvalidStatValueException {
+  controller = new Controller();
   queue = new TurnsQueue();
   enemy1 = new Enemy("enemy1", 30, 100, 40,10, queue);
   enemy2 = new Enemy("enemy1", 30, 100,40,20,queue);
@@ -36,7 +44,9 @@ class EnemyTest {
   enemy4 = new Enemy("enemy1", 30, 10,40,40,queue);
   enemy5 = new Enemy("enemy1", 30, 100,30,10,queue);
   knight = new Knight("enemy1", 30, 40,queue);
- 
+  burned= new Burned();
+  paralysis= Paralysis.uniqueInstance();
+  poisoned = new Poisoned();
  }
   @Test
  void getWeight() throws InvalidStatValueException {
@@ -62,17 +72,23 @@ class EnemyTest {
  
  @Test
  void waitTurn() throws InvalidStatValueException, InterruptedException {
-  enemy1 = new Enemy("enemy1", 30, 100, 40,10, queue);
-  enemy2 = new Enemy("enemy2", 20, 100,40,10,queue);
-  enemy3 = new Enemy("enemy3", 10, 100,40,10,queue);
-  enemy1.waitTurn();
-  enemy2.waitTurn();
-  enemy3.waitTurn();
-  Thread.sleep(12000);
-  assertEquals(enemy3,queue.get_queue().poll());
-  assertEquals(enemy2,queue.get_queue().poll());
-  assertEquals(enemy1,queue.get_queue().poll());
+ 
+  System.out.println("wait Turn"+queue.get_queue());
+  Enemy enemyLast = new Enemy("enemyLast", 30, 100, 40,10, queue);
+  Enemy enemymidlle = new Enemy("enemyMidlle", 20, 100,40,10,queue);
+  Enemy enemyFirst = new Enemy("enemyFirst", 10, 100,40,10,queue);
   
+  enemyLast.waitTurn();
+  enemymidlle.waitTurn();
+  enemyFirst.waitTurn();
+  
+  Thread.sleep(8000);
+  assertEquals(enemyFirst,queue.get_queue().poll());
+  assertEquals(enemymidlle,queue.get_queue().poll());
+  assertEquals(enemyLast,queue.get_queue().poll());
+  
+  queue.get_queue().clear();
+ 
  }
  
  @Test
@@ -98,27 +114,31 @@ class EnemyTest {
  void getAndSetandIsAnyEffect(){
   //inicialy emtpy
   assertEquals(true, enemy1.getEffects().isEmpty());
+  
   //after setting some effects
   enemy1.setEffect( Paralysis.uniqueInstance() );
-  assertEquals(1, enemy1.getEffects().size());
-  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance())), enemy1.getEffects());
-  assertEquals(true, enemy1.isAnyEffect(Paralysis.uniqueInstance()));
-  //after setting  the same effect remains equals
+  assertEquals(1, enemy1.getParalyseCounter());
+  
+  //after setting  the same effect
   enemy1.setEffect( Paralysis.uniqueInstance() );
-  assertEquals(1, enemy1.getEffects().size());
-  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance())), enemy1.getEffects());
-  assertEquals(true, enemy1.isAnyEffect(Paralysis.uniqueInstance()));
- //setting another effect
-  enemy1.setEffect( Poisoned.uniqueInstance() );
-  assertEquals(2, enemy1.getEffects().size());
-  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance(),Poisoned.uniqueInstance())), enemy1.getEffects());
-  assertEquals(true, enemy1.isAnyEffect(Poisoned.uniqueInstance()));
+  assertEquals(2, enemy1.getParalyseCounter());
+  assertEquals(new ArrayList<EffectsInterface>(),
+          enemy1.getEffects());
+  
   //setting another effect
-  enemy1.setEffect( Burned.uniqueInstance() );
-  assertEquals(3, enemy1.getEffects().size());
-  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(Paralysis.uniqueInstance(),Poisoned.uniqueInstance(),
-          Burned.uniqueInstance())), enemy1.getEffects());
-  assertEquals(true, enemy1.isAnyEffect(Burned.uniqueInstance()));
+  Poisoned p =new Poisoned();
+  enemy1.setEffect( p);
+  assertEquals(1, enemy1.getEffects().size());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(p)), enemy1.getEffects());
+  assertEquals(true, enemy1.isAnyEffect(p));
+  
+  //setting another effect
+  Burned b = new Burned();
+  enemy1.setEffect( b );
+  assertEquals(2, enemy1.getEffects().size());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(b,p)),
+          enemy1.getEffects());
+  assertEquals(true, enemy1.isAnyEffect(new Burned()));
  }
  
  @Test
@@ -127,6 +147,58 @@ class EnemyTest {
   Heal h = new Heal();
   assertThrows(NotImplementsMagicException.class, ()-> enemy1.implementsMagic (h,enemy2));
   assertThrows(NotImplementsMagicException.class, ()-> enemy1.implementsMagic (t,enemy2));
+ }
+ 
+ @Test
+ void notifyEffects() throws InterruptedException, NullWeaponException {
+  //each effect by separate
+  //paralysis
+  
+  enemy1=new Enemy("",20,100,30,30,controller.getQueue());
+  enemy1.notifyEffects();
+  enemy1.setController(controller);
+  enemy1.setEffect(paralysis);
+  assertEquals(1,enemy1.getParalyseCounter());
+  enemy1.notifyEffects();
+  assertEquals(0,enemy1.getParalyseCounter());
+  Thread.sleep(5000);
+  assertEquals( enemy1, controller.getQueue().get_queue().poll());
+  //Burned
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList()),enemy1.getEffects());
+  enemy1.setCurrentHp(100);
+  burned.setAssociatedDmg(20);
+  enemy1.setEffect(burned);
+  System.out.println(enemy1.getEffects());
+  enemy1.notifyEffects();
+  assertEquals(80, enemy1.getCurrentHp());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(burned)),enemy1.getEffects());
+  
+  enemy1.getEffects().remove(burned);
+  //Poisoned
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList()),enemy1.getEffects());
+  poisoned.setAssociatedDmg(30);
+  enemy1.setCurrentHp(100);
+  enemy1.setEffect(poisoned);
+  enemy1.notifyEffects();
+  assertEquals(70, enemy1.getCurrentHp());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(poisoned)),enemy1.getEffects());
+ 
+  enemy1.getEffects().remove(poisoned);
+  
+  //multiples Effects
+  enemy1.setCurrentHp(100);
+  assertEquals(0,enemy1.getParalyseCounter());
+  enemy1.setEffect(paralysis);
+  assertEquals(1,enemy1.getParalyseCounter());
+  enemy1.setEffect(poisoned);
+  poisoned.setAssociatedDmg(30);
+  enemy1.setEffect(burned);
+  burned.setAssociatedDmg(20);
+  enemy1.notifyEffects();
+  assertEquals(0,enemy1.getParalyseCounter());
+  assertEquals(50, enemy1.getCurrentHp());
+  assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(burned,poisoned)),enemy1.getEffects());
+  
  }
  
 }

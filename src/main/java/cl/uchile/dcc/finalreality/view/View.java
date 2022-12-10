@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.view;
 
 import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.controller.factories.*;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 
 import java.util.Scanner;

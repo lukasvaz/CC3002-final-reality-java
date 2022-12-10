@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.effects;
 
 
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.AbstractMage;
 
@@ -10,10 +11,10 @@ import cl.uchile.dcc.finalreality.model.character.player.AbstractMage;
  * @author ~Lukas Vasquez~
  */
 public interface EffectsInterface {
-
- void updateEffect(Enemy e);
  
- public  static EffectsInterface uniqueInstance() {
-  return null;
- }
+ void addTo(Enemy e);
+
+ void applyEffect(Enemy e) throws InterruptedException, NullWeaponException;
+ 
+
 }
