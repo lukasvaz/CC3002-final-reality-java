@@ -76,6 +76,7 @@ differents characters classes (double dispatch).</li>
 <li>factories(default values)</li>
 <li> bool implements </li>
 <>refactor magic attacks<>
+<>magic attack in weapons<>
 
 <>add to  in effects<>
 </ol>

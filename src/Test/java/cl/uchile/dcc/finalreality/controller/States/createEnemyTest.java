@@ -11,6 +11,8 @@ import cl.uchile.dcc.finalreality.view.PrimitiveView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class createEnemyTest {
@@ -25,7 +27,7 @@ class createEnemyTest {
  }
  
  @Test
- void action() throws NullWeaponException, InterruptedException, InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+ void action() throws NullWeaponException, InterruptedException, InvalidWeaponAssignmentException, WeaponNotInInventoryException, IOException {
   c.setState(createEnemy);
   c.setView(new PrimitiveView());
  //simulate character creation  as in selecCharacter
@@ -44,7 +46,7 @@ class createEnemyTest {
  @Test
  void initTurn() {
   c.setState(createEnemy);
-  createEnemy.initTurn(c);
+  c.getState().initTurn(c);
   assertEquals(initTurn.class,c.getState().getClass());
  }
 }

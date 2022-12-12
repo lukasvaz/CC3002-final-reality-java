@@ -52,6 +52,8 @@ public interface GameCharacter {
   
   int getAttack();
   
+  void attack(GameCharacter g);
+  
   void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException;
   void setController(Controller controller);
   
@@ -60,6 +62,8 @@ public interface GameCharacter {
   public void dead();
   
   void selectTurn();
+  
+  void notifyDmg();
 }
 
 

@@ -17,7 +17,7 @@ public class SelectCharacter extends AbstractState {
       controller.getView().askForCharacter();
       controller.defaultCharacterSelection();
     }
-    controller.getView().showCharacters(controller);
+    controller.getView().showCharacters(controller.getCharacters());
     while (!controller.isMaxWeapon()) {
       //add Weapons
       controller.defaultInventary();

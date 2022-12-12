@@ -26,4 +26,10 @@ public abstract class NonMagicCharacters extends AbstractPlayerCharacter {
   public void implementsMagic (MagicInterface magic, GameCharacter character) throws NotImplementsMagicException {
     magic.nonMagicCharacterOn(this,character);
   }
+ 
+ @Override
+ public void selectTurn() {
+  this.controller.getState().characterTurn(this.controller);
+  
+ }
 }

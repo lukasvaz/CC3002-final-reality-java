@@ -113,6 +113,11 @@ public class Enemy extends AbstractCharacter implements EffectsObservable {
   public int getAttack() {
     return this.attack;
   }
+  public void setDefense(int defense) {
+    this.defense=defense;
+  }
+  
+  
   
   @Override
   public void implementsMagic(MagicInterface magic, GameCharacter character)

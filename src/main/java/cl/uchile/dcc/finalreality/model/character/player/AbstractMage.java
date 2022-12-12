@@ -72,4 +72,10 @@ public abstract class AbstractMage extends AbstractPlayerCharacter implements Pl
     return this.getEquippedWeapon().magicAttack();
   }
   
+  @Override
+  public void selectTurn() {
+    this.controller.getState().magicCharacterTurn(this.controller);
+    
+  }
+  
 }

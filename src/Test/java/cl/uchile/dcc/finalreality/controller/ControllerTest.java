@@ -111,10 +111,13 @@ class ControllerTest {
   Enemy e2 = new Enemy("",100,100,60,40,c.getQueue());
   
   k.equip(a);
+  
   c.attack(k,e);
   assertEquals(90,e.getCurrentHp());
+  
   c.attack(k,e2);
   assertEquals(100,e2.getCurrentHp());
+  
   c.attack(e2,k);
   assertEquals(80,k.getCurrentHp());
  }

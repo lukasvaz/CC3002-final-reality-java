@@ -107,6 +107,10 @@ public abstract class AbstractCharacter implements GameCharacter, DeathObservabl
   @Override
   public void notifyDmg() {
     this.controller.updateDeaths(this);
-    
+  }
+  
+  public void attack(GameCharacter g) {
+    int attackPoints = Math.max(this.getAttack() - g.getDefense(),0);
+    g.setCurrentHp(Math.max(g.getCurrentHp() - attackPoints,0));
   }
 }

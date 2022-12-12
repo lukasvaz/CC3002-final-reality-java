@@ -94,7 +94,7 @@ public class Bow implements Weapon {
   @Override
   public String toString() {
     return "Bow{name='%s', damage=%d, weight=%d, type=%s}"
-                   .formatted(name, weight, damage, type);
+                   .formatted(name, damage, weight, type);
   }
   
   @Override

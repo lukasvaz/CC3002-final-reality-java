@@ -200,5 +200,19 @@ class EnemyTest {
   assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(burned,poisoned)),enemy1.getEffects());
   
  }
+ @Test
+ void dead() throws NullWeaponException, InterruptedException {
+  controller.getEnemies().clear();
+  controller.getQueue().get_queue().clear();
+  Enemy e = controller.createRandomEnemy();
+  controller.getQueue().get_queue().add(e);
+  assertEquals(new ArrayList<Enemy>(Arrays.asList(e)), controller.getEnemies());
+  assertEquals(true, controller.getQueue().get_queue().contains(e));
+  //kill e , means extract it from queue and  array
+  e.dead();
+  assertEquals(new ArrayList<Enemy>(Arrays.asList()), controller.getEnemies());
+  assertEquals(false, controller.getQueue().get_queue().contains(e));
+
+ }
  
 }

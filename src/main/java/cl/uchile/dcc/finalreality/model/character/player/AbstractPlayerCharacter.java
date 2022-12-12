@@ -76,7 +76,9 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
   public int getAttack() {
     return this.getEquippedWeapon().getDamage();
   }
+  
 
+  
   @Override
   public void waitTurn() throws NullWeaponException {
     try {
@@ -101,11 +103,7 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
     this.controller.getQueue().get_queue().remove(this);
   }
   
-  @Override
-  public void selectTurn() {
-    this.controller.getState().characterTurn(this.controller);
-    
-  }
+  
 }
 
 

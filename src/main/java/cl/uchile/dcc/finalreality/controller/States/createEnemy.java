@@ -14,7 +14,7 @@ public class createEnemy extends AbstractState {
     while (!controller.isMaxEnemies()) {
       controller.createRandomEnemy();
     }
-    controller.getView().showEnemies(controller);
+    controller.getView().showEnemies(controller.getEnemies());
     controller.getView().showLoading();
     
     for (Enemy e : controller.getEnemies()) {

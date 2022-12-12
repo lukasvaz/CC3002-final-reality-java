@@ -10,6 +10,7 @@ import cl.uchile.dcc.finalreality.view.PrimitiveView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,7 +27,7 @@ class SelectCharacterTest {
  
 
  @Test
- void action() throws NullWeaponException, InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+ void action() throws NullWeaponException, InvalidWeaponAssignmentException, WeaponNotInInventoryException, IOException {
   c=new Controller();
   c.setState( selectCharacter);
   c.setView(new PrimitiveView());
@@ -46,7 +47,7 @@ class SelectCharacterTest {
  @Test
  void createEnemy() {
   c.setState(selectCharacter);
-  selectCharacter.createEnemy(c);
+  c.getState().createEnemy(c);
   assertEquals(createEnemy.class,c.getState().getClass());
  }
 }

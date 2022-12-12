@@ -20,6 +20,11 @@ import java.util.Random;
  */
 public class Controller implements DeathObserverInterface {
   
+  private Player player;
+  private  GameCharacter activeCharacter;
+  private  Weapon selectedWeapon;
+  private  GameCharacter target;
+  
   private static Controller uniqueInstance;
   
   private ViewInterface view;
@@ -28,6 +33,7 @@ public class Controller implements DeathObserverInterface {
   
   private  ArrayList<Weapon> inventary;
   
+  private String userInput="";
   
   private static TurnsQueue queue;
   public static  int  maxCharacters = 5;
@@ -39,9 +45,8 @@ public class Controller implements DeathObserverInterface {
   
   private StateInterface state;
   
-  /**
-   * A template method to ask the user  which character will use.
-   */
+  Random random = new Random();
+  
   
   public  Controller() {
     this.characters = new ArrayList<>();
@@ -57,6 +62,24 @@ public class Controller implements DeathObserverInterface {
     }
     return uniqueInstance;
   }
+  public void setSeed(int x){
+    this.random= new Random(x);
+  }
+  
+  public void setUserInput(String userInput) {
+    this.userInput=userInput;
+  }
+  public String getUserInput() {
+    return this.userInput;
+  }
+  
+  public Player getPlayer() {
+    return this.player;
+  }
+  
+  public void setPlayer(Player player) {
+    this.player = player;
+  }
   
   public void setState( StateInterface state) {
     this.state = state;
@@ -71,6 +94,31 @@ public class Controller implements DeathObserverInterface {
   public void setView(ViewInterface view) {
     this.view=view;
   }
+  
+  public GameCharacter getActiveCharacter() {
+    return  this.activeCharacter;
+  }
+  
+  public void setActiveCharacter(GameCharacter g) {
+    this.activeCharacter = g;
+  }
+  
+  public GameCharacter getTarget() {
+    return  this.target;
+  }
+  
+  public void setTarget(GameCharacter g) {
+    this.target = g;
+  }
+  
+  public Weapon getSelectedWeapon() {
+    return  this.selectedWeapon;
+  }
+  
+  public void setSelectedWeapon(Weapon w) {
+    this.selectedWeapon = w;
+  }
+  
   /**
    * A getter for the controller's factory.
    */
@@ -148,10 +196,10 @@ public class Controller implements DeathObserverInterface {
    *This method creates a new Enemy instance and append it  to the Enemies Array.
    */
   public Enemy createRandomEnemy() {
-    Random random = new Random();
+    Random random = this.random;
     int p = random.nextInt(30, 120);
     setFactory(new EnemyFactory());
-    this.factory.setDefense(p);
+    this.factory.setDefense(p/3);
     this.factory.setMaxHp(p);
     ((EnemyFactory) this.factory).setWeight(p);
     ((EnemyFactory) this.factory).setAttack(p - 20);
@@ -169,7 +217,7 @@ public class Controller implements DeathObserverInterface {
    *(Adapter) Method to simulate an attack between two GameCharacters, an attacker  and  target .
    */
   public void attack(GameCharacter c1, GameCharacter c2) {
-    c2.setCurrentHp(c2.getCurrentHp() - Math.max(0, c1.getAttack() - c2.getDefense()));
+    c1.attack(c2);
   }
   
   /**

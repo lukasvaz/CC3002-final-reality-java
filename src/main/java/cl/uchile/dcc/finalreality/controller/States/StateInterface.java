@@ -5,6 +5,8 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.WeaponNotInInventoryException;
 
+import java.io.IOException;
+
 public interface StateInterface {
 
   void selectCharacters(Controller controller) ;
@@ -19,8 +21,14 @@ public interface StateInterface {
   
   void end(Controller controller) ;
   
-
- 
-  void action(Controller c) throws NullWeaponException, InvalidWeaponAssignmentException, WeaponNotInInventoryException;
   
+  void magicCharacterTurn(Controller controller);
+  
+  void action(Controller c) throws NullWeaponException, InvalidWeaponAssignmentException, WeaponNotInInventoryException, IOException;
+  
+  void selectCharacterMove(String s, Controller c);
+  void selectEnemyMove(String s, Controller c);
+  void selectWeaponMove(String s, Controller c) throws InvalidWeaponAssignmentException, WeaponNotInInventoryException;
+  
+  void chooseMove(String line, Controller c);
 }
