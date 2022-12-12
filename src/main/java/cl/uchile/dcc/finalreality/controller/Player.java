@@ -50,35 +50,6 @@ public class Player {
     System.out.println("Null Input");
    }
  }
- 
-  public void selectEnemyMove(Controller c) throws IOException {
-   try{
-   String line;
-   line = in.readLine();
-    c.getState().selectEnemyMove(line, c);}
-   catch (NullPointerException n){
-    System.out.println("Null input");
-   }
-   }
- 
-  public void chooseMove(Controller c) throws IOException {
-   try{
-  String line;
-  line = in.readLine();
-  c.getState().chooseMove(line, c);}
-   catch (NullPointerException n){
-    System.out.println("Null input");
-   }
- }
- public boolean ok() throws IOException {
- try{
-  String line;
-  line = in.readLine();
-  return line.equals("ok");
- } catch (NullPointerException i){
-  System.out.println("Null input");
-  return false;
- }
  }
  
-}
+

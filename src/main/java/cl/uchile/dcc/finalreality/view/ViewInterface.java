@@ -84,4 +84,8 @@ public interface ViewInterface {
  
  void showWeaponEquipment(GameCharacter g, Weapon w);
  void showAttack(GameCharacter g, GameCharacter r);
+ 
+ void showCharactersWin();
+ 
+ void showEnemiesWin();
 }

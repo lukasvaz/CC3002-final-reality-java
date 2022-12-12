@@ -4,6 +4,7 @@ import cl.uchile.dcc.finalreality.controller.factories.EnemyFactory;
 import cl.uchile.dcc.finalreality.exceptions.*;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
+import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
@@ -225,5 +226,33 @@ class ControllerTest {
   assertEquals(Sword.class,c.getCharacters().get(1).getEquippedWeapon().getClass());
   assertEquals(Knife.class,c.getCharacters().get(4).getEquippedWeapon().getClass());
  }
+ @Test
+ void setRandomCharacterTarget() {
+  //1char
+  c.getCharacters().clear();
+  c.setFactory(new KnightFactory());
+  GameCharacter k = c.createCharacter();
+  System.out.println(c.getCharacters());
+  assertEquals(1,c.getCharacters().size());
+  c.setRandomCharacterTarget();
+  assertEquals(k,c.getTarget());
+  c.setTarget(null);
  
+  //empty aray
+  c.getCharacters().clear();
+  c.setRandomCharacterTarget();
+  assertEquals(null,c.getTarget());
+  c.getCharacters().clear();
+  c.setTarget(null);
+ 
+  c.defaultCharacterSelection();
+  c.setSeed(20);
+  //3 examples
+  c.setRandomCharacterTarget();
+  assertEquals(c.getCharacters().get(3),c.getTarget());
+  c.setRandomCharacterTarget();
+  assertEquals(c.getCharacters().get(1),c.getTarget());
+  c.setRandomCharacterTarget();
+  assertEquals(c.getCharacters().get(1),c.getTarget());
+ }
 }

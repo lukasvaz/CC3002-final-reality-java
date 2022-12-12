@@ -110,6 +110,16 @@ public class Controller implements DeathObserverInterface {
   public void setTarget(GameCharacter g) {
     this.target = g;
   }
+
+  
+  public void setRandomCharacterTarget() {
+    Random r = this.random;
+    if (this.getCharacters().size() > 0) {
+      int n = r.nextInt(this.getCharacters().size());
+      System.out.println(n);
+      setTarget(this.getCharacters().get(n));
+    }
+  }
   
   public Weapon getSelectedWeapon() {
     return  this.selectedWeapon;

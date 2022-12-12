@@ -14,8 +14,8 @@ import cl.uchile.dcc.finalreality.model.character.player.Knight;
 public class KnightFactory implements IFactory {
   
   
-  private int maxHp = 200;
-  private int defense = 100;
+  private int maxHp = 150;
+  private int defense = 50;
   private String name = "Knight";
   
   @Override

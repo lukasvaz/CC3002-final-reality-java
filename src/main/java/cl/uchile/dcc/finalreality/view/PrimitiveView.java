@@ -40,7 +40,10 @@ public class PrimitiveView implements ViewInterface {
  
  
  @Override
- public void askAction() {}
+ public void askAction() {
+  System.out.println("Which you like to do:\nType: Magic|Attack");
+  
+ }
  
   @Override
  public void showMagicOptions() {}
@@ -99,22 +102,32 @@ public class PrimitiveView implements ViewInterface {
  
  @Override
  public void showInvalidWeaponMsg() {
-  System.out.println("Choose a Valid Weapon.");
- }
+    System.out.println("Choose a Valid Weapon.");
+  }
  
  @Override
  public void showInvalidEnemyMsg() {
-  System.out.println("Choose a valid Enemy");
- }
+    System.out.println("Choose a valid Enemy");
+  }
  
- @Override
+  @Override
  public void showWeaponEquipment(GameCharacter g, Weapon w) {
-  System.out.println(g.getName()+ " select "+w.getName());
- }
+    System.out.println(g.getName()+ " select "+w.getName());
+  }
  
- @Override
+  @Override
  public void showAttack(GameCharacter g, GameCharacter r) {
-  System.out.println(g.getName()+" attacks to "+r.getName());
- }
+    System.out.println(g.getName()+" attacks to "+r.getName());
+  }
+ 
+  @Override
+ public void showCharactersWin() {
+    System.out.println("Congrats You win !!");
+  }
+ 
+  @Override
+ public void showEnemiesWin() {
+  System.out.println("Enemies win, try again");
+  }
 }
 

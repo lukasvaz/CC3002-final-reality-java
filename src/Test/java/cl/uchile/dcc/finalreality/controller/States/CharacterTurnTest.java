@@ -36,16 +36,12 @@ class CharacterTurnTest {
  void setUp(){
   c = new Controller();
   characterTurn = new CharacterTurn();
-  System.setIn(new ByteArrayInputStream("1\n4".getBytes()));
- 
  }
 
  
  
  @Test
  void action() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException, NullWeaponException, IOException {
-  c.getEnemies().clear();
-  c.getQueue().get_queue().clear();
   c.setState(characterTurn);
   c.setView(new PrimitiveView());
   c.setFactory(new EngineerFactory());
@@ -86,9 +82,6 @@ class CharacterTurnTest {
   System.out.println(c.getEnemies());
   assertEquals(true,c.getEnemies().isEmpty());
   assertEquals(End.class,c.getState().getClass());
- 
-  c.getEnemies().clear();
-  c.getQueue().get_queue().clear();
  }
  
 }

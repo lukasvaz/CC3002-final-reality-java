@@ -32,45 +32,24 @@ class PlayerTest {
   c.defaultInventary();
   GameCharacter k = c.getFactory().create(c.getQueue());
   c.setActiveCharacter(k);
-  //State: CharacterTurn
+  //1 input
   c.setPlayer(new Player("0"));
-  c.getPlayer().selectWeaponMove(c);
-  assertEquals(Axe.class, ((PlayerCharacter)c.getActiveCharacter()).getEquippedWeapon().getClass());
-  //Knight equips Axe, read only first line
+  c.getPlayer().move(c);
+  assertEquals("0",c.getUserInput());
+  //multilpleinput
   c.setPlayer(new Player("0\n3"));
+  c.getPlayer().move(c);
+  assertEquals("0", c.getUserInput());
+  c.getPlayer().move(c);
+  assertEquals("3", c.getUserInput());
+
+  //null
+  c.setPlayer(new Player(""));
   c.getPlayer().selectWeaponMove(c);
-  assertEquals(Axe.class, ((PlayerCharacter)c.getActiveCharacter()).getEquippedWeapon().getClass());
-  //Knight equips Axe, read only first line
-  c.setPlayer(new Player("0\n3"));
-  c.getPlayer().selectWeaponMove(c);
-  assertEquals(Axe.class, ((PlayerCharacter)c.getActiveCharacter()).getEquippedWeapon().getClass());
-  //prints
-  c.setPlayer(new Player("10"));
-  c.getPlayer().selectWeaponMove(c);
-  c.setPlayer(new Player("1"));
-  c.getPlayer().selectWeaponMove(c);
+  assertEquals("", c.getUserInput());
  
-  c.setPlayer(new Player("holaa"));
-  c.getPlayer().selectWeaponMove(c);
+ 
  }
  
- @Test
- void selectCharacterMove() {
- }
- 
- @Test
- void selectEnemyMove() {
- }
- 
- @Test
- void ok() throws IOException {
-  //direct ok
-  Player p = new Player("ok");
-  assertEquals(true,p.ok());
- //after one try
-  Player p2 = new Player("1\nok");
-  assertEquals(false,p2.ok());
-  assertEquals(true,p2.ok());
- }
  
 }
