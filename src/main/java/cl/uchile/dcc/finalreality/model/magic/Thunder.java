@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.magic;
 
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerMage;
@@ -23,9 +24,9 @@ public class Thunder extends BlackMagic {
   /**
   * This method declares the effects asociated to Thunder usage.
   */
-  public void magicOn(GameCharacter m, GameCharacter g) throws NotEnughMpException {
+  public void magicOn(GameCharacter m, GameCharacter g) throws NotEnughMpException, NullWeaponException {
     if (((PlayerMage) m).getcurrentMp() >= 15) {
-      int points = Math.max(g.getCurrentHp() - ((PlayerMage) m).getEquippedWeapon().magicAttack() , 0);
+      int points = Math.max(g.getCurrentHp() - m.getMagicAttack() , 0);
       g.setCurrentHp(points);
       ((PlayerMage) m).setCurrentMp(((PlayerMage) m).getcurrentMp() - 15);
       int num = random.nextInt(1, 100);

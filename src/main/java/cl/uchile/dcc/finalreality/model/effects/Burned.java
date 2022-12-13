@@ -33,4 +33,12 @@ public class Burned implements EffectsInterface {
     System.out.println(associatedDmg);
     e.setCurrentHp(e.getCurrentHp() - this.associatedDmg);
   }
+  
+  @Override
+  public int getAssociatedDamage() {
+    return this.associatedDmg;
+  }
+  
+ 
+  
 }

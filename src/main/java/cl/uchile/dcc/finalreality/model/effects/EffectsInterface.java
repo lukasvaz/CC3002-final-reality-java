@@ -14,7 +14,7 @@ public interface EffectsInterface {
  
  void addTo(Enemy e);
 
- void applyEffect(Enemy e) throws InterruptedException, NullWeaponException;
+ void applyEffect(Enemy e) throws  NullWeaponException;
  
-
+ int getAssociatedDamage();
 }

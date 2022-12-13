@@ -18,10 +18,7 @@ import cl.uchile.dcc.finalreality.model.magic.BlackMagic;
 import cl.uchile.dcc.finalreality.model.magic.Poison;
 import cl.uchile.dcc.finalreality.model.magic.Thunder;
 import cl.uchile.dcc.finalreality.model.magic.WhiteMagic;
-import cl.uchile.dcc.finalreality.model.weapon.Axe;
-import cl.uchile.dcc.finalreality.model.weapon.Knife;
-import cl.uchile.dcc.finalreality.model.weapon.Staff;
-import cl.uchile.dcc.finalreality.model.weapon.Sword;
+import cl.uchile.dcc.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -106,7 +103,7 @@ class ControllerTest {
  
  
  @Test
- void attack() throws InvalidWeaponAssignmentException {
+ void attack() throws InvalidWeaponAssignmentException, NullWeaponException {
  
   Axe a = new Axe("",50,40);
   Enemy e2 = new Enemy("",100,100,60,40,c.getQueue());
@@ -144,7 +141,7 @@ class ControllerTest {
  }
  
  @Test
- void useMagic() throws NotImplementsMagicException, NotEnughMpException, InvalidWeaponAssignmentException {
+ void useMagic() throws NotImplementsMagicException, NotEnughMpException, InvalidWeaponAssignmentException, NullWeaponException {
 
   WhiteMage wm= wmfac.create(c.getQueue());
   BlackMage bm= bmfac.create(c.getQueue());
@@ -198,7 +195,7 @@ class ControllerTest {
  }
  
  @Test
- void equipfromInventary() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+ void equipfromInventary() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException, NullWeaponException {
   BlackMage w = new BlackMage("",100,100,100,c.getQueue());
   Staff s=new Staff("",30,30,30);
   Knife k=new Knife("",30,30);
@@ -218,7 +215,7 @@ class ControllerTest {
   assertEquals(5,c.getInventary().size());
  }
  @Test
- void defWeaponAssignment() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+ void defWeaponAssignment() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException, NullWeaponException {
   c.defaultInventary();
   c.defaultCharacterSelection();
   c.defaultWpnAssignment();
@@ -255,4 +252,18 @@ class ControllerTest {
   c.setRandomCharacterTarget();
   assertEquals(c.getCharacters().get(1),c.getTarget());
  }
+ @Test
+ void countEquippedCharacters() throws InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+  //equip 0 char
+  c.defaultCharacterSelection();
+  assertEquals(0,c.countEquippedCharacter());
+  //equip 1 char
+  c.getCharacters().get(0).equip(new Bow("",30,30));
+  assertEquals(1,c.countEquippedCharacter());
+  //equip all 5 char
+  c.defaultInventary();
+  c.defaultWpnAssignment();
+  assertEquals(5,c.countEquippedCharacter());
+ }
+ 
 }

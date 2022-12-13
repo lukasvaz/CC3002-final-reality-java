@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.magic;
 
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerMage;
@@ -23,7 +24,7 @@ public class Fire extends BlackMagic {
   * This method declares the effects asociated to Fire usage.
   */
   
-  public void magicOn(GameCharacter m, GameCharacter g) throws NotEnughMpException {
+  public void magicOn(GameCharacter m, GameCharacter g) throws NotEnughMpException, NullWeaponException {
     if (((PlayerMage) m).getcurrentMp() >= 15) {
       int points = Math.max(g.getCurrentHp() - ((PlayerMage)m).getEquippedWeapon().magicAttack(),
               0);
@@ -33,7 +34,7 @@ public class Fire extends BlackMagic {
       int num = random.nextInt(1, 100);
       if (num <= 20) {
         Burned b=new Burned();
-        b.setAssociatedDmg(m.getAttack()/2);
+        b.setAssociatedDmg(m.getMagicAttack()/2);
         ((Enemy) g).setEffect(b);
       }
     } else {

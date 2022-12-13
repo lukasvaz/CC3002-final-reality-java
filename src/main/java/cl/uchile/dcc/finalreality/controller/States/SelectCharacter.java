@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.controller.States;
 
 import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.WeaponNotInInventoryException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;

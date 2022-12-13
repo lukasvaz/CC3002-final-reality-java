@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.magic;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PoisonTest {
  
  @Test
- void magicOn() throws InvalidWeaponAssignmentException, NotEnughMpException {
+ void magicOn() throws InvalidWeaponAssignmentException, NotEnughMpException, NullWeaponException {
   TurnsQueue q = new TurnsQueue();
   Staff s= new Staff("",30,30,10);
   WhiteMage wm = new WhiteMage("",20,50,50,q);
@@ -33,6 +34,8 @@ class PoisonTest {
   assertEquals(100,e.getCurrentHp());
   assertEquals(10,wm.getcurrentMp());
   assertEquals(1, e.getEffects().size());
+  assertEquals(10, e.getEffects().get(0).getAssociatedDamage());
+
   
   //mp=0
   wm.setCurrentMp(0);

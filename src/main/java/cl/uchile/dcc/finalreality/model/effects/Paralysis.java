@@ -41,7 +41,15 @@ public class Paralysis implements EffectsInterface {
     if (e.getParalyseCounter() > 0) {
       e.setParalyseCounter(e.getParalyseCounter() - 1);
       e.getController().sendToQueue(e);
+      e.setParalysedTurn(true);
     }
-    //e.getController().newTurn;
+    
   }
+  
+  @Override
+  public int getAssociatedDamage() {
+    return 0;
+  }
+  
+
 }

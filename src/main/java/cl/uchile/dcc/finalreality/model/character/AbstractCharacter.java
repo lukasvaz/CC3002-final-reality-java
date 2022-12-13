@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.controller.DeathObservable;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import org.jetbrains.annotations.NotNull;
@@ -109,8 +110,10 @@ public abstract class AbstractCharacter implements GameCharacter, DeathObservabl
     this.controller.updateDeaths(this);
   }
   
-  public void attack(GameCharacter g) {
+  public void attack(GameCharacter g) throws NullWeaponException {
     int attackPoints = Math.max(this.getAttack() - g.getDefense(),0);
     g.setCurrentHp(Math.max(g.getCurrentHp() - attackPoints,0));
   }
+  
+
 }

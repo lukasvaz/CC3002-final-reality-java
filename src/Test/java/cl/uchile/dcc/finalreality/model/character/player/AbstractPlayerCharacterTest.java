@@ -46,14 +46,22 @@ class AbstractPlayerCharacterTest {
  }
  
  @Test
- void getAttack() throws InvalidWeaponAssignmentException {
+ void getAttack() throws InvalidWeaponAssignmentException, NullWeaponException {
   knight.equip(sword);
   assertEquals(knight.getAttack(),sword.getDamage());
   wmage.equip(staff);
-  assertEquals(wmage.getAttack(),staff.getMagicDamage());
+  assertEquals(wmage.getAttack(),staff.getDamage());
   thief.equip(knife);
   assertEquals(thief.getAttack(),knife.getDamage());
-  
+ }
+ @Test
+ void getMagicAttack() throws InvalidWeaponAssignmentException, NullWeaponException {
+  knight.equip(sword);
+  assertEquals(knight.getMagicAttack(),sword.getDamage());
+  wmage.equip(staff);
+  assertEquals(wmage.getMagicAttack(),staff.getMagicDamage());
+  thief.equip(knife);
+  assertEquals(thief.getAttack(),knife.getDamage());
  }
   @Test
  void RestrictionsWeapontests(){
@@ -90,7 +98,7 @@ class AbstractPlayerCharacterTest {
   
  }
  @Test
- void equipAndGetWeapontests() throws InvalidWeaponAssignmentException {
+ void equipAndGetWeapontests() throws InvalidWeaponAssignmentException, NullWeaponException {
   knight.equip(sword);
   assertEquals(sword,knight.getEquippedWeapon());
   knight.equip(axe);

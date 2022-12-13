@@ -34,6 +34,8 @@ public class Enemy extends AbstractCharacter implements EffectsObservable {
   private final int attack;
   private final int weight;
   protected ScheduledExecutorService scheduledExecutor;
+  
+  boolean isParalysedTurn ;
 
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
@@ -57,6 +59,7 @@ public class Enemy extends AbstractCharacter implements EffectsObservable {
     this.attack = attack;
     this.effects = new ArrayList<>();
     this.paralyseCounter = 0;
+    this.isParalysedTurn=false;
   }
 
   /**
@@ -113,6 +116,12 @@ public class Enemy extends AbstractCharacter implements EffectsObservable {
   public int getAttack() {
     return this.attack;
   }
+  
+  @Override
+  public int getMagicAttack() throws NullWeaponException {
+    return this.attack;
+  }
+  
   public void setDefense(int defense) {
     this.defense=defense;
   }
@@ -134,6 +143,11 @@ public class Enemy extends AbstractCharacter implements EffectsObservable {
   @Override
   public void selectTurn() {
     this.controller.getState().enemyTurn(this.controller);
+  }
+  
+  @Override
+  public void show() {
+    this.controller.getView().showEnemy(this.name,this.getCurrentHp(),this.defense,this.effects,this.paralyseCounter);
   }
   
   /**
@@ -177,16 +191,20 @@ public class Enemy extends AbstractCharacter implements EffectsObservable {
    * Update Effect states of a character .
    */
   @Override
-  public void notifyEffects() throws InterruptedException, NullWeaponException {
+  public void notifyEffects() throws  NullWeaponException {
     //no pude  dejar todos los efectos en un arreglo ,pues como al aplicar paralysis esta se elimina de la lista
     // de efectos me tira un Concurrent error (elimino un elemento de la lista en la que itero),
     // el funcionamiento es el que se quiere  pues solo se ejecuta un Paralysis si es que el contador>0
-  
     for (EffectsInterface e : this.getEffects()) {
         e.applyEffect(this);
     }
     Paralysis.uniqueInstance().applyEffect(this);
   }
   
-  
+  public boolean isParalysedTurn() {
+    return isParalysedTurn;
+  }
+  public void setParalysedTurn(boolean val) {
+    this.isParalysedTurn = val;
+  }
 }

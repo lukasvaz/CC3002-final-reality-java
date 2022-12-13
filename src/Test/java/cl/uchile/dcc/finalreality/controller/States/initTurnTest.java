@@ -14,6 +14,7 @@ import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Axe;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.view.NullView;
 import cl.uchile.dcc.finalreality.view.PrimitiveView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ class initTurnTest {
   
   //Character creation sim
   c.setState(new initTurn());
-  c.setView(new PrimitiveView());
+  c.setView(new NullView());
   c.setFactory(new KnightFactory());
   PlayerCharacter p=c.createCharacter();
   p.equip(new Axe("test",30,30));
@@ -48,7 +49,7 @@ class initTurnTest {
   //test state change
   c.getState().action(c);
   assertEquals(p,c.getActiveCharacter());
-  assertEquals(CharacterTurn.class,c.getState().getClass());
+  assertEquals(selectEnemy.class,c.getState().getClass());
   c.getQueue().get_queue().clear();
  
   // magic Character creation sim
@@ -64,7 +65,7 @@ class initTurnTest {
   //test state change
   c.getState().action(c);
   assertEquals(w,c.getActiveCharacter());
-  assertEquals(MagicCharacterTurn.class,c.getState().getClass());
+  assertEquals(selectEnemy.class,c.getState().getClass());
   c.getQueue().get_queue().clear();
  
   //Enemy example
@@ -89,17 +90,11 @@ class initTurnTest {
  }
  
  @Test
- void characterTurn() {
+ void selectEnemy() {
   c.setState(new initTurn());
-  c.getState().characterTurn(c);
-  assertEquals(CharacterTurn.class,c.getState().getClass());
+  c.getState().selectEnemy(c);
+  assertEquals(selectEnemy.class,c.getState().getClass());
  }
  
- @Test
- void magicCharacterTurn() {
-  c.setState(new initTurn());
-  c.getState().magicCharacterTurn(c);
-  assertEquals(MagicCharacterTurn.class,c.getState().getClass());
-  
- }
+ 
 }

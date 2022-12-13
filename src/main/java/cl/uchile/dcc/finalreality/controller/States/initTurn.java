@@ -15,13 +15,7 @@ public class initTurn extends AbstractState {
     controller.setState(new EnemyTurn());
   }
  
-  public  void characterTurn(Controller controller) {
-    controller.setState(new CharacterTurn());
+  public void selectEnemy(Controller controller){
+   controller.setState( new selectEnemy());
   }
- 
- public  void magicCharacterTurn(Controller controller) {
-  controller.setState(new MagicCharacterTurn());
- }
- 
- 
 }

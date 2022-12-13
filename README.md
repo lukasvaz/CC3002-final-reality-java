@@ -69,14 +69,29 @@ differents characters classes (double dispatch).</li>
 
 <b>T3</b>
 <ol>
-<>Random Enemy Specific Enemy<>
-<li>factories</li>
-<li>getattack</li>
-<li> Singleton in effects</li>
-<li>factories(default values)</li>
-<li> bool implements </li>
-<>refactor magic attacks<>
-<>magic attack in weapons<>
+<li>A new set of factories were implemented in order to instanciate characters and unified their
+stats</li>
+<li>It as implemented 2 methods to get attack's points , getAttack which  returns the  Dmg of
+weapon assigned  to the character and getMagicAttack which return the magicDmg of the weapon (just
+for Staff cases) or the Dmgs points of the weapon ( in this case returns Dmg/2), if the character corresponds
+an Enemy getAttack() and getMagicAttack() returns Dmg</li>
+<li>In order to implement the Effects associated to Magic attacks. Enemies were given 
+of notifyEffects() method which send a meessage to every Effect Class.</li>
+<li> Every time a character gets damaged  the character notifies (notifyDmg()) the controller, to check if its dead. If the 
+character currentHp is equal to zero, the controller extracts the chracter from the queue and Arrays.</li>
 
-<>add to  in effects<>
+<li>Every step of the game was implemented following the State Design Pattern.When the  game is setted up
+the user have to choose characters and their inventary(selectCharacters), then Enemies are created
+(createEnemy).Both of this States in this Primitive version of the Game were given of defaults
+behaviours.Then a Character is pull from the queue at the begining of the turn (init Turn).When 
+a character is  selected states goes to EnemyTurn (if it's an Enemy) or selectEnemy(if it's not an Enemy
+, i this state the Palyer should select an Enemy target to Attack).In enemyTurn the Active Enemy updates its effects
+ select a random character from the Characters array  and attack it.If there are not any remain character
+ goes to End state.In other way,inside the selectEnemy State (character playing) the character is free to move using inputs
+to selectWeapon (equips a Weapon) select Magic (select a Megic to Use) or back to select an Enemy target.The purpose of this
+design is to simulate a Graphic Interface, where buttons are pressed in Asynchronus way.If the character wants to attack 
+or use Magic, the user have to input "MagicAttack" or "Attack" from every state ( error handling takes care of 
+the anomalous behaviours).To make the decissions according the user inputs, it was implemented a Input ListenerClass (
+acts as an observer) which updates the Game State.
+<li>To simulate inputs from the command line it was implemented a PlayerClass which can behave as a Scripted player.</li>
 </ol>

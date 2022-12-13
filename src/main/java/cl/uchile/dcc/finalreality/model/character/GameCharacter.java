@@ -50,11 +50,12 @@ public interface GameCharacter {
    * Gets this character's attack points.
    */
   
-  int getAttack();
+  int getAttack() throws NullWeaponException;
+  int getMagicAttack() throws NullWeaponException;
   
-  void attack(GameCharacter g);
+  void attack(GameCharacter g) throws NullWeaponException;
   
-  void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException;
+  void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException, NullWeaponException;
   void setController(Controller controller);
   
   Controller getController();
@@ -64,6 +65,8 @@ public interface GameCharacter {
   void selectTurn();
   
   void notifyDmg();
+ 
+ void show();
 }
 
 

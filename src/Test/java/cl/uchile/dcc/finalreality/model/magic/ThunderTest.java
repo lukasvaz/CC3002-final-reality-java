@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.magic;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ThunderTest {
  
  @Test
- void magicOn() throws InvalidWeaponAssignmentException, NotEnughMpException {
+ void magicOn() throws InvalidWeaponAssignmentException, NotEnughMpException, NullWeaponException {
   
   
   TurnsQueue q = new TurnsQueue();

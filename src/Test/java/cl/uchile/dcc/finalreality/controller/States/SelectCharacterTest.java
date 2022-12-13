@@ -6,6 +6,7 @@ import cl.uchile.dcc.finalreality.controller.factories.KnightFactory;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.WeaponNotInInventoryException;
+import cl.uchile.dcc.finalreality.view.NullView;
 import cl.uchile.dcc.finalreality.view.PrimitiveView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,15 +31,10 @@ class SelectCharacterTest {
  void action() throws NullWeaponException, InvalidWeaponAssignmentException, WeaponNotInInventoryException, IOException {
   c=new Controller();
   c.setState( selectCharacter);
-  c.setView(new PrimitiveView());
+  c.setView(new NullView());
   assertEquals(SelectCharacter.class,c.getState().getClass());
   c.getState().action(c);
   
-  assertNotEquals(null,c.getCharacters().get(0).getEquippedWeapon());
-  assertNotEquals(null,c.getCharacters().get(1).getEquippedWeapon());
-  assertNotEquals(null,c.getCharacters().get(2).getEquippedWeapon());
-  assertNotEquals(null,c.getCharacters().get(3).getEquippedWeapon());
-  assertNotEquals(null,c.getCharacters().get(4).getEquippedWeapon());
   assertEquals(true,c.isMaxCharacters());
   assertEquals(true,c.isMaxWeapon());
   assertEquals(createEnemy.class,c.getState().getClass());

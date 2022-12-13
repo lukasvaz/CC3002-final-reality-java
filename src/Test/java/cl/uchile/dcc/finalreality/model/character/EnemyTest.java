@@ -73,7 +73,6 @@ class EnemyTest {
  @Test
  void waitTurn() throws InvalidStatValueException, InterruptedException {
  
-  System.out.println("wait Turn"+queue.get_queue());
   Enemy enemyLast = new Enemy("enemyLast", 30, 100, 40,10, queue);
   Enemy enemymidlle = new Enemy("enemyMidlle", 20, 100,40,10,queue);
   Enemy enemyFirst = new Enemy("enemyFirst", 10, 100,40,10,queue);
@@ -168,7 +167,6 @@ class EnemyTest {
   enemy1.setCurrentHp(100);
   burned.setAssociatedDmg(20);
   enemy1.setEffect(burned);
-  System.out.println(enemy1.getEffects());
   enemy1.notifyEffects();
   assertEquals(80, enemy1.getCurrentHp());
   assertEquals(new ArrayList<EffectsInterface>(Arrays.asList(burned)),enemy1.getEffects());

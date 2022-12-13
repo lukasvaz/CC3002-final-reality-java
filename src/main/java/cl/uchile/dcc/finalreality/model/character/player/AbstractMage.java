@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import org.jetbrains.annotations.NotNull;
@@ -64,18 +65,6 @@ public abstract class AbstractMage extends AbstractPlayerCharacter implements Pl
     return maxMp;
   }
   
-  /**
-   * get the attack points for this character.
-   */
-  @Override
-  public int getAttack() {
-    return this.getEquippedWeapon().magicAttack();
-  }
   
-  @Override
-  public void selectTurn() {
-    this.controller.getState().magicCharacterTurn(this.controller);
-    
-  }
-  
+ 
 }

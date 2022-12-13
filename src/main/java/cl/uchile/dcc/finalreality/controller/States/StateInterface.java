@@ -12,6 +12,7 @@ public interface StateInterface {
   void selectCharacters(Controller controller) ;
  
   void createEnemy(Controller controller) ;
+  void Attack(Controller controller) ;
  
   void initTurn(Controller controller) ;
   
@@ -31,4 +32,15 @@ public interface StateInterface {
   void selectWeaponMove(String s, Controller c) throws InvalidWeaponAssignmentException, WeaponNotInInventoryException;
   
   void chooseMove(String line, Controller c);
+ 
+ void updateState(Controller c);
+  
+  void magicAttack(Controller c);
+  
+  void selectWeapon(Controller c);
+  
+  
+  void selectEnemy(Controller c);
+ 
+ void selectMagic(Controller c);
 }

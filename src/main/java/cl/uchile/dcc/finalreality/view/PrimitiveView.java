@@ -6,7 +6,9 @@ import cl.uchile.dcc.finalreality.controller.factories.KnightFactory;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerMage;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
 import java.util.ArrayList;
@@ -45,8 +47,23 @@ public class PrimitiveView implements ViewInterface {
   
  }
  
-  @Override
- public void showMagicOptions() {}
+ @Override
+ public void showMagic(ArrayList<MagicInterface> magicArray) {
+ 
+  System.out.println("Available:\n");
+  int count = 0;
+  for (MagicInterface m : magicArray) {
+   System.out.println(count + " " + magicArray.get(count).toString());
+   System.out.println();
+   count++;
+  }
+ }
+ 
+ @Override
+ public void askForMagic(ArrayList<MagicInterface> magicArray) {
+   System.out.println("Type the number of Magic:");
+   this.showMagic(magicArray);
+  }
  
  
  @Override
@@ -129,5 +146,42 @@ public class PrimitiveView implements ViewInterface {
  public void showEnemiesWin() {
   System.out.println("Enemies win, try again");
   }
+ 
+ @Override
+ public void showOptions() {
+  System.out.println("Or Type:\n'Magic': to select Magic|'Enemy': to select a target|'Weapon': to equip weapon|" +
+                             "'Magic' Attack: to use magic|'Attack': to attack");
+ }
+ 
+ @Override
+ public void showInvalidMagicMsg() {
+  System.out.println("Choose a Valid Magic");
+  
+ }
+ 
+ @Override
+ public void showNullWeaponExceptionMsg(GameCharacter activeCharacter) {
+  System.out.println("%s (%s) does not have a weapon".formatted(activeCharacter.getName(),activeCharacter.getClass()));
+  
+ }
+ 
+ @Override
+ public void showMagicAttack(GameCharacter activeCharacter, GameCharacter target) {
+ 
+ }
+ 
+ @Override
+ public void showNotEnoughMpExceptionMsg(GameCharacter activeCharacter) {
+  System.out.println( "%s (%s) has not enough mp points: %d mp".formatted(activeCharacter.getName(),
+          activeCharacter.getClass().getName(),((PlayerMage)activeCharacter).getcurrentMp()));
+  
+ }
+ 
+ @Override
+ public void showNotImplementsMagicExceptionMsg(GameCharacter activeCharacter) {
+  System.out.println(" %s (%s) does not implements this magic".formatted(activeCharacter.getName(),
+          activeCharacter.getClass().getName()));
+  
+ }
 }
 

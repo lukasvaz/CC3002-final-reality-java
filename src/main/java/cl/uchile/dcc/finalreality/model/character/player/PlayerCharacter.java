@@ -9,6 +9,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
  */
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Axe;
 import cl.uchile.dcc.finalreality.model.weapon.Bow;
@@ -54,7 +55,7 @@ public interface PlayerCharacter extends GameCharacter {
   /**
    * Return this character's equipped weapon.
    */
-  Weapon getEquippedWeapon();
+  Weapon getEquippedWeapon() throws NullWeaponException;
   
   
 }

@@ -1,6 +1,6 @@
 package cl.uchile.dcc.finalreality.controller;
 
-import cl.uchile.dcc.finalreality.controller.States.CharacterTurn;
+import cl.uchile.dcc.finalreality.controller.States.selectEnemy;
 import cl.uchile.dcc.finalreality.controller.factories.KnightFactory;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.WeaponNotInInventoryException;
@@ -25,9 +25,8 @@ class PlayerTest {
  }
  
  @Test
- void selectWeaponMove() throws IOException, InvalidWeaponAssignmentException, WeaponNotInInventoryException {
+ void Move() throws IOException, InvalidWeaponAssignmentException, WeaponNotInInventoryException {
   c.setView(new PrimitiveView());
-  c.setState(new CharacterTurn());
   c.setFactory( new KnightFactory());
   c.defaultInventary();
   GameCharacter k = c.getFactory().create(c.getQueue());
@@ -45,8 +44,8 @@ class PlayerTest {
 
   //null
   c.setPlayer(new Player(""));
-  c.getPlayer().selectWeaponMove(c);
-  assertEquals("", c.getUserInput());
+  c.getPlayer().move(c);
+  assertEquals(null, c.getUserInput());
  
  
  }

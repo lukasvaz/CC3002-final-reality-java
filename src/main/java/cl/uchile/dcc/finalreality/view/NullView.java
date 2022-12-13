@@ -7,6 +7,7 @@ import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
 import java.util.ArrayList;
@@ -49,9 +50,16 @@ public class NullView implements ViewInterface {
  }
  
  @Override
- public void showMagicOptions() {
+ public void showMagic(ArrayList<MagicInterface> magicArray) {
  
  }
+ 
+ @Override
+ public void askForMagic(ArrayList<MagicInterface> magicArray) {
+ 
+ }
+ 
+ 
  
  @Override
  public void showCharacters(ArrayList<PlayerCharacter> characters) {
@@ -115,6 +123,36 @@ public class NullView implements ViewInterface {
  
  @Override
  public void showEnemiesWin() {
+ 
+ }
+ 
+ @Override
+ public void showOptions() {
+ 
+ }
+ 
+ @Override
+ public void showInvalidMagicMsg() {
+ 
+ }
+ 
+ @Override
+ public void showNullWeaponExceptionMsg(GameCharacter activeCharacter) {
+ 
+ }
+ 
+ @Override
+ public void showMagicAttack(GameCharacter activeCharacter, GameCharacter target) {
+ 
+ }
+ 
+ @Override
+ public void showNotEnoughMpExceptionMsg(GameCharacter activeCharacter) {
+ 
+ }
+ 
+ @Override
+ public void showNotImplementsMagicExceptionMsg(GameCharacter activeCharacter) {
  
  }
 }

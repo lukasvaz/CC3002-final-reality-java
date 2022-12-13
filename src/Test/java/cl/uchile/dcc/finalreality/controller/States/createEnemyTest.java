@@ -7,6 +7,7 @@ import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.WeaponNotInInventoryException;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.effects.Paralysis;
+import cl.uchile.dcc.finalreality.view.NullView;
 import cl.uchile.dcc.finalreality.view.PrimitiveView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ class createEnemyTest {
  @Test
  void action() throws NullWeaponException, InterruptedException, InvalidWeaponAssignmentException, WeaponNotInInventoryException, IOException {
   c.setState(createEnemy);
-  c.setView(new PrimitiveView());
+  c.setView(new NullView());
  //simulate character creation  as in selecCharacter
   c.defaultCharacterSelection();
   c.defaultInventary();

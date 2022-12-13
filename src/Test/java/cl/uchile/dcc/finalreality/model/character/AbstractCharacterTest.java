@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
@@ -81,7 +82,7 @@ class AbstractCharacterTest {
  }
  
  @Test
- void attack() throws InvalidWeaponAssignmentException {
+ void attack() throws InvalidWeaponAssignmentException, NullWeaponException {
   //avg case:enemy def=30
   knight.equip(new Axe("",60,30));
   enemy2.setCurrentHp(40);

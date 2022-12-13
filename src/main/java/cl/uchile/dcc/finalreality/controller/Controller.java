@@ -1,5 +1,7 @@
 package cl.uchile.dcc.finalreality.controller;
 
+import cl.uchile.dcc.finalreality.controller.States.InputListener;
+import cl.uchile.dcc.finalreality.controller.States.InputListenerInterface;
 import cl.uchile.dcc.finalreality.controller.States.StateInterface;
 import cl.uchile.dcc.finalreality.controller.factories.*;
 import cl.uchile.dcc.finalreality.exceptions.*;
@@ -7,7 +9,7 @@ import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.*;
-import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
+import cl.uchile.dcc.finalreality.model.magic.*;
 import cl.uchile.dcc.finalreality.model.weapon.*;
 import cl.uchile.dcc.finalreality.view.ViewInterface;
 
@@ -34,6 +36,7 @@ public class Controller implements DeathObserverInterface {
   private  ArrayList<Weapon> inventary;
   
   private String userInput="";
+  private InputListenerInterface inputListener = new InputListener();
   
   private static TurnsQueue queue;
   public static  int  maxCharacters = 5;
@@ -42,6 +45,7 @@ public class Controller implements DeathObserverInterface {
   private IFactory factory;
   
   private MagicInterface magic;
+  private ArrayList<MagicInterface> magicArray ;
   
   private StateInterface state;
   
@@ -54,6 +58,7 @@ public class Controller implements DeathObserverInterface {
     this.inventary = new ArrayList<>();
     this.queue = new TurnsQueue();
     this.setMaxCharacters(5);
+    this.defaultMagicArray();
   }
   
   public  static Controller getUniqueInstance() {
@@ -68,6 +73,9 @@ public class Controller implements DeathObserverInterface {
   
   public void setUserInput(String userInput) {
     this.userInput=userInput;
+  }
+  public InputListenerInterface getInputListener() {
+    return this.inputListener;
   }
   public String getUserInput() {
     return this.userInput;
@@ -226,7 +234,7 @@ public class Controller implements DeathObserverInterface {
   /**
    *(Adapter) Method to simulate an attack between two GameCharacters, an attacker  and  target .
    */
-  public void attack(GameCharacter c1, GameCharacter c2) {
+  public void attack(GameCharacter c1, GameCharacter c2) throws NullWeaponException {
     c1.attack(c2);
   }
   
@@ -245,13 +253,33 @@ public class Controller implements DeathObserverInterface {
   public MagicInterface getMagic() {
     return this.magic;
   }
+  public void setMagic(MagicInterface magic) {
+    this.magic=magic;
+  }
   
+  /**
+   *Method to set the Magic array.
+   */
+  
+  public void defaultMagicArray() {
+    
+    ArrayList<MagicInterface> arr= new ArrayList<MagicInterface>();
+    arr.add(new Fire());
+    arr.add(new Thunder());
+    arr.add(new Poison());
+    arr.add( new Heal());
+    this.magicArray = arr;
+  }
+  
+  public ArrayList<MagicInterface> getMagicArray() {
+    return this.magicArray;
+  }
   
   /**
    *Method to simulate a  magic attack  from a Mage to a Game Character.
    */
   
-  public void useMagic(GameCharacter m, GameCharacter c) throws NotImplementsMagicException, NotEnughMpException {
+  public void useMagic(GameCharacter m, GameCharacter c) throws NotImplementsMagicException, NotEnughMpException, NullWeaponException {
       m.implementsMagic(this.magic,c);
   }
   
@@ -335,10 +363,12 @@ public class Controller implements DeathObserverInterface {
   public boolean isMaxWeapon(){
     return this.getInventary().size()==this.maxWeapon;
   }
-  public int countEquippedCharacter(){
+  public int countEquippedCharacter()  {
     int count=0;
     for (PlayerCharacter p: this.getCharacters()){
+      try{
       if (p.getEquippedWeapon()!=null){count++;}
+      } catch (NullWeaponException n){}
     }
     return count;
   }

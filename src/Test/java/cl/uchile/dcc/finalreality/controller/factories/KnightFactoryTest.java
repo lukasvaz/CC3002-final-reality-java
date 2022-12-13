@@ -22,8 +22,8 @@ class KnightFactoryTest {
    TurnsQueue q = new TurnsQueue();
    KnightFactory fac = new KnightFactory();
    Knight knight =  fac.create(q);
-   assertEquals(200,knight.getCurrentHp());
-   assertEquals(100,knight.getDefense());
+   assertEquals(150,knight.getCurrentHp());
+   assertEquals(50,knight.getDefense());
    assertEquals("Knight",knight.getName());
  
   // set Defense

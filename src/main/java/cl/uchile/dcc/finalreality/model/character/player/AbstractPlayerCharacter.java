@@ -9,7 +9,6 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.controller.Controller;
-import cl.uchile.dcc.finalreality.controller.States.CharacterTurn;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
 import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
@@ -65,7 +64,8 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
   }
   
   @Override
-  public Weapon getEquippedWeapon() {
+  public Weapon getEquippedWeapon() throws NullWeaponException {
+    if (this.equippedWeapon == null) {throw new NullWeaponException();}
     return equippedWeapon;
   }
   
@@ -73,11 +73,15 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
    * get the attack points for this character.
    */
   @Override
-  public int getAttack() {
+  public int getAttack() throws NullWeaponException {
     return this.getEquippedWeapon().getDamage();
   }
+  @Override
+  public int  getMagicAttack() throws NullWeaponException {
+    return this.getEquippedWeapon().magicAttack();
+  }
   
-
+  
   
   @Override
   public void waitTurn() throws NullWeaponException {
@@ -103,7 +107,16 @@ public abstract class AbstractPlayerCharacter  extends AbstractCharacter impleme
     this.controller.getQueue().get_queue().remove(this);
   }
   
+  @Override
+  public void show() {
+    this.controller.getView().showCharacter(this.name, this.getCurrentHp(),this.defense,this.equippedWeapon);
+  }
   
+  @Override
+  public void selectTurn() {
+    this.controller.getState().selectEnemy(this.controller);
+    
+  }
 }
 
 

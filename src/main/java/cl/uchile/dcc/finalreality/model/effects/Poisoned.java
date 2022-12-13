@@ -18,8 +18,16 @@ public class Poisoned implements  EffectsInterface {
   public void applyEffect(Enemy e) {
     e.setCurrentHp(e.getCurrentHp() - this.associatedDmg);
   }
+  
+  @Override
+  public int getAssociatedDamage() {
+    return this.associatedDmg;
+  }
+  
+  
   public void setAssociatedDmg(int dmg) {
     this.associatedDmg = dmg;
   }
   
+
 }

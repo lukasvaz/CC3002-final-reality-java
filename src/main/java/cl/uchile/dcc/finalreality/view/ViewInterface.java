@@ -6,6 +6,7 @@ import cl.uchile.dcc.finalreality.model.character.Enemy;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.effects.EffectsInterface;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
 import java.io.IOException;
@@ -48,7 +49,10 @@ public interface ViewInterface {
  /**
   * Show a message of the magic to select.
   */
- public void showMagicOptions();
+ public void showMagic(ArrayList<MagicInterface> magicArray);
+ 
+ public void askForMagic(ArrayList<MagicInterface> magicArray);
+ 
  
  /**
   * Show a message of the characters available to use.
@@ -88,4 +92,16 @@ public interface ViewInterface {
  void showCharactersWin();
  
  void showEnemiesWin();
+ 
+ void showOptions();
+ 
+ void showInvalidMagicMsg();
+ 
+ void showNullWeaponExceptionMsg(GameCharacter activeCharacter);
+ 
+ void showMagicAttack(GameCharacter activeCharacter, GameCharacter target);
+ 
+ void showNotEnoughMpExceptionMsg(GameCharacter activeCharacter);
+ 
+ void showNotImplementsMagicExceptionMsg(GameCharacter activeCharacter);
 }

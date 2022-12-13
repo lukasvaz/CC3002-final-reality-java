@@ -110,7 +110,7 @@ public class WhiteMage extends AbstractMage {
   }
   
   @Override
-  public void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException {
+  public void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException, NullWeaponException {
     magic.whiteMageOn(this, character);
   }
 }

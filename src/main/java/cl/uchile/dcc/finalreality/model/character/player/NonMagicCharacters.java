@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
@@ -27,9 +28,7 @@ public abstract class NonMagicCharacters extends AbstractPlayerCharacter {
     magic.nonMagicCharacterOn(this,character);
   }
  
- @Override
- public void selectTurn() {
-  this.controller.getState().characterTurn(this.controller);
-  
- }
+ 
+ 
+ 
 }

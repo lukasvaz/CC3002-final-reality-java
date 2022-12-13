@@ -2,6 +2,7 @@ package cl.uchile.dcc.finalreality.model.magic;
 
 import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
 import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerMage;
 
@@ -24,7 +25,7 @@ public abstract  class WhiteMagic implements MagicInterface {
     throw new NotImplementsMagicException();
   }
   
-  public void whiteMageOn(GameCharacter atacker,GameCharacter reciever) throws NotEnughMpException {
+  public void whiteMageOn(GameCharacter atacker,GameCharacter reciever) throws NotEnughMpException, NullWeaponException {
    this.magicOn(atacker, reciever);
    
   }
