@@ -8,11 +8,17 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
-import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -23,12 +29,12 @@ import org.jetbrains.annotations.NotNull;
  * waiting for their turn ({@code turnsQueue}), and can equip a {@link Weapon}.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
-public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
+public abstract class AbstractPlayerCharacter  extends AbstractCharacter implements
     PlayerCharacter {
-
-  private Weapon equippedWeapon = null;
+  protected ScheduledExecutorService scheduledExecutor;
+  protected Weapon equippedWeapon = null;
 
   /**
    * Creates a new character.
@@ -44,18 +50,73 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    *     the queue with the characters waiting for their turn
    */
   protected AbstractPlayerCharacter(@NotNull final String name, final int maxHp,
-      final int defense, @NotNull final BlockingQueue<GameCharacter> turnsQueue)
+      final int defense, @NotNull final TurnsQueue turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
   }
-
+  /**
+   * Equips a weapon to the character.
+   */
+  
   @Override
-  public void equip(Weapon weapon) {
-    this.equippedWeapon = weapon;
+  public void equip(Weapon weapon) throws InvalidWeaponAssignmentException {
+    weapon.equippedby(this);
   }
-
+  
   @Override
-  public Weapon getEquippedWeapon() {
+  public Weapon getEquippedWeapon() throws NullWeaponException {
+    if (this.equippedWeapon == null) {throw new NullWeaponException();}
     return equippedWeapon;
   }
+  
+  /**
+   * get the attack points for this character.
+   */
+  @Override
+  public int getAttack() throws NullWeaponException {
+    return this.getEquippedWeapon().getDamage();
+  }
+  @Override
+  public int  getMagicAttack() throws NullWeaponException {
+    return this.getEquippedWeapon().magicAttack();
+  }
+  
+  
+  
+  @Override
+  public void waitTurn() throws NullWeaponException {
+    try {
+      scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+  
+      scheduledExecutor.schedule(
+              /* command = */ this::addToQueue,
+              /* delay = */ this.getEquippedWeapon().getWeight() / 10,
+              /* unit = */ TimeUnit.SECONDS);
+     
+      scheduledExecutor.shutdown();
+    
+    } catch (Exception e) {
+      throw new NullWeaponException();
+    }
+  }
+  
+
+  @Override
+  public void dead() {
+    this.controller.getCharacters().remove(this);
+    this.controller.getQueue().get_queue().remove(this);
+  }
+  
+  @Override
+  public void show() {
+    this.controller.getView().showCharacter(this.name, this.getCurrentHp(),this.defense,this.equippedWeapon);
+  }
+  
+  @Override
+  public void selectTurn() {
+    this.controller.getState().selectEnemy(this.controller);
+    
+  }
 }
+
+

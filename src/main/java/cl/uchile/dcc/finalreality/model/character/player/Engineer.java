@@ -9,9 +9,14 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Bow;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import java.util.Objects;
-import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -19,11 +24,10 @@ import org.jetbrains.annotations.NotNull;
  * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
-public class Engineer extends AbstractPlayerCharacter {
-
-
+public class Engineer extends NonMagicCharacters {
+  
   /**
    * Creates a new engineer.
    *
@@ -37,7 +41,7 @@ public class Engineer extends AbstractPlayerCharacter {
    *     the queue with the characters waiting for their turn
    */
   public Engineer(final @NotNull String name, final int maxHp, final int defense,
-      final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+      final TurnsQueue turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
   }
@@ -64,5 +68,31 @@ public class Engineer extends AbstractPlayerCharacter {
         && name.equals(that.name)
         && maxHp == that.maxHp
         && defense == that.defense;
+  }
+  
+  @Override
+  public void equipSword(Sword sword) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipAxe(Axe axe) {
+    this.equippedWeapon = axe;
+  }
+  
+  @Override
+  public void equipKnife(Knife knife) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipStaff(Staff staff) throws InvalidWeaponAssignmentException {
+    throw  new InvalidWeaponAssignmentException();
+  
+  }
+  
+  @Override
+  public void equipBow(Bow bow) {
+    this.equippedWeapon = bow;
   }
 }

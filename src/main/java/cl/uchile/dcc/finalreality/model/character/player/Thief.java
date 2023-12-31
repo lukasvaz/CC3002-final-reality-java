@@ -9,9 +9,14 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Bow;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import java.util.Objects;
-import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -22,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Your name~
  * @version 2.0
  */
-public class Thief extends AbstractPlayerCharacter {
+public class Thief extends NonMagicCharacters {
 
   /**
    * Creates a new Thief.
@@ -37,7 +42,7 @@ public class Thief extends AbstractPlayerCharacter {
    *     the queue with the characters waiting for their turn
    */
   public Thief(final @NotNull String name, final int maxHp, final int defense,
-      final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+      final @NotNull TurnsQueue turnsQueue)
       throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
   }
@@ -64,5 +69,30 @@ public class Thief extends AbstractPlayerCharacter {
   @Override
   public String toString() {
     return "Thief{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
+  }
+  
+  @Override
+  public void equipSword(Sword sword) {
+    this.equippedWeapon = sword;
+  }
+  
+  @Override
+  public void equipAxe(Axe axe) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipKnife(Knife knife) {
+    this.equippedWeapon = knife;
+  }
+  
+  @Override
+  public void equipStaff(Staff staff) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipBow(Bow bow) {
+    this.equippedWeapon = bow;
   }
 }

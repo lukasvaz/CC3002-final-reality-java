@@ -8,7 +8,14 @@ package cl.uchile.dcc.finalreality.model.character.player;
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidWeaponAssignmentException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Bow;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 
 /**
@@ -18,10 +25,37 @@ public interface PlayerCharacter extends GameCharacter {
   /**
    * Equips a weapon to the character.
    */
-  void equip(Weapon weapon);
-
+  void equip(Weapon weapon) throws InvalidWeaponAssignmentException;
+  
+  /**
+   * Equips a Sword to the character.
+   */
+  void equipSword(Sword sword) throws InvalidWeaponAssignmentException;
+  
+  /**
+   * Equips an Axe to the character.
+   */
+  void equipAxe(Axe axe) throws InvalidWeaponAssignmentException;
+  
+  /**
+   * Equips a Knife to the character.
+   */
+  void equipKnife(Knife knife) throws InvalidWeaponAssignmentException;
+  
+  /**
+   * Equips a Staff to the character.
+   */
+  void equipStaff(Staff staff) throws InvalidWeaponAssignmentException;
+  
+  /**
+   * Equips a Bow to the character.
+   */
+  void equipBow(Bow bow) throws InvalidWeaponAssignmentException;
+  
   /**
    * Return this character's equipped weapon.
    */
-  Weapon getEquippedWeapon();
+  Weapon getEquippedWeapon() throws NullWeaponException;
+  
+  
 }

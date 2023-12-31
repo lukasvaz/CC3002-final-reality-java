@@ -1,6 +1,11 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.NotEnughMpException;
+import cl.uchile.dcc.finalreality.exceptions.NotImplementsMagicException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
 
 /**
  * This represents a character from the game.
@@ -15,7 +20,7 @@ public interface GameCharacter {
    * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
    * seconds before adding the character to the queue.
    */
-  void waitTurn();
+  void waitTurn() throws NullWeaponException;
 
   /**
    * Returns this character's name.
@@ -41,4 +46,27 @@ public interface GameCharacter {
    * Sets this character's current HP to {@code newHp}.
    */
   void setCurrentHp(int hp) throws InvalidStatValueException;
+  /**
+   * Gets this character's attack points.
+   */
+  
+  int getAttack() throws NullWeaponException;
+  int getMagicAttack() throws NullWeaponException;
+  
+  void attack(GameCharacter g) throws NullWeaponException;
+  
+  void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException, NullWeaponException;
+  void setController(Controller controller);
+  
+  Controller getController();
+  
+  public void dead();
+  
+  void selectTurn();
+  
+  void notifyDmg();
+ 
+ void show();
 }
+
+

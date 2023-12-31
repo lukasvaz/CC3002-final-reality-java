@@ -1,28 +1,28 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.controller.Controller;
+import cl.uchile.dcc.finalreality.controller.DeathObservable;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.NullWeaponException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An abstract class that holds the common behaviour of all the characters in the game.
+ *An abstract class that holds the common behaviour of all the characters in the game.
  *
- * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ *@author <a href="https://www.github.com/r8vnhill">R8V</a>
+ *@author ~Lukas Vasquez~
  */
-public abstract class AbstractCharacter implements GameCharacter {
+public abstract class AbstractCharacter implements GameCharacter, DeathObservable {
+  
 
   private int currentHp;
   protected int maxHp;
   protected int defense;
-  protected final BlockingQueue<GameCharacter> turnsQueue;
+  protected final TurnsQueue turnsQueue;
   protected final String name;
-  private ScheduledExecutorService scheduledExecutor;
+  protected Controller controller;
 
   /**
    * Creates a new character.
@@ -37,7 +37,7 @@ public abstract class AbstractCharacter implements GameCharacter {
    *     the queue with the characters waiting for their turn
    */
   protected AbstractCharacter(@NotNull String name, int maxHp, int defense,
-      @NotNull BlockingQueue<GameCharacter> turnsQueue) throws InvalidStatValueException {
+      TurnsQueue turnsQueue) throws InvalidStatValueException {
     Require.statValueAtLeast(1, maxHp, "Max HP");
     Require.statValueAtLeast(0, defense, "Defense");
     this.maxHp = maxHp;
@@ -47,59 +47,73 @@ public abstract class AbstractCharacter implements GameCharacter {
     this.name = name;
   }
 
-  @Override
-  public void waitTurn() {
-    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter player) {
-      scheduledExecutor.schedule(
-          /* command = */ this::addToQueue,
-          /* delay = */ player.getEquippedWeapon().getWeight() / 10,
-          /* unit = */ TimeUnit.SECONDS);
-    } else {
-      var enemy = (Enemy) this;
-      scheduledExecutor.schedule(
-          /* command = */ this::addToQueue,
-          /* delay = */ enemy.getWeight() / 10,
-          /* unit = */ TimeUnit.SECONDS);
-    }
-  }
-
   /**
    * Adds this character to the turns queue.
    */
-  private void addToQueue() {
-    try {
-      turnsQueue.put(this);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    scheduledExecutor.shutdown();
+  protected void addToQueue() {
+    turnsQueue.push(this);
   }
 
+  /**
+   * returns the character's name.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Returns the character's current Hp points.
+   */
   @Override
   public int getCurrentHp() {
     return currentHp;
   }
+  /**
+   * Returns the limit of hp points that this character could have.
+   */
 
   @Override
   public int getMaxHp() {
     return maxHp;
   }
+  /**
+   * Returns the Defense points.
+   */
 
   @Override
   public int getDefense() {
     return defense;
   }
 
+  /**
+   *Set the Hp points.
+   */
   @Override
   public void setCurrentHp(int hp) throws InvalidStatValueException {
     Require.statValueAtLeast(0, hp, "Current HP");
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
   }
+  
+  
+  public  void setController(Controller controller) {
+    this.controller = controller;
+  }
+  
+  public  Controller getController() {
+    return this.controller;
+  }
+  
+  @Override
+  public void notifyDmg() {
+    this.controller.updateDeaths(this);
+  }
+  
+  public void attack(GameCharacter g) throws NullWeaponException {
+    int attackPoints = Math.max(this.getAttack() - g.getDefense(),0);
+    g.setCurrentHp(Math.max(g.getCurrentHp() - attackPoints,0));
+  }
+  
+
 }

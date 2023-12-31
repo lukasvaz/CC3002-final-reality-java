@@ -8,26 +8,28 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.exceptions.*;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Bow;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import java.util.Objects;
-import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * A {@link PlayerCharacter} that can equip {@code Staff}s and use <i>white magic</i>.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  */
-public class WhiteMage extends AbstractPlayerCharacter {
-
-  private int currentMp;
-  private final int maxMp;
+public class WhiteMage extends AbstractMage {
 
   /**
-   * Creates a new character.
+   * Creates a new White Mage.
    *
    * @param name
    *     the character's name
@@ -35,15 +37,16 @@ public class WhiteMage extends AbstractPlayerCharacter {
    *     the character's max hp
    * @param defense
    *     the character's defense
+   * @param maxMp
+   *         the character's limit of Mana Points.
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
    */
-  protected WhiteMage(final @NotNull String name, final int maxHp, final int defense,
-      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+  public WhiteMage(final @NotNull String name, final int maxHp, final int defense,
+      int maxMp, final @NotNull TurnsQueue turnsQueue)
       throws InvalidStatValueException {
-    super(name, maxHp, defense, turnsQueue);
-    this.maxMp = maxMp;
-    this.currentMp = maxMp;
+    super(name, maxHp, defense, maxMp, turnsQueue);
+    Require.statValueAtLeast(0, maxMp, "Max MP");
   }
 
   @Override
@@ -68,30 +71,46 @@ public class WhiteMage extends AbstractPlayerCharacter {
 
   @Override
   public String toString() {
-    return "WhiteMage{maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(maxMp, maxHp, defense, name);
+    return "WhiteMage{currentMp=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
+        .formatted(getcurrentMp(), maxMp, maxHp, defense, name);
   }
-
-  /**
-   * Returns the current MP of the character.
-   */
-  public int getCurrentMp() {
-    return currentMp;
+  
+  @Override
+  public void equipSword(Sword sword) throws InvalidWeaponAssignmentException {
+    throw  new InvalidWeaponAssignmentException();
   }
-
-  /**
-   * Sets the current MP of the character to {@code newMp}.
-   */
-  public void setCurrentMp(final int newMp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, newMp, "Current MP");
-    Require.statValueAtMost(maxMp, newMp, "Current MP");
-    this.currentMp = newMp;
+  
+  @Override
+  public void equipAxe(Axe axe) throws InvalidWeaponAssignmentException {
+    throw  new InvalidWeaponAssignmentException();
   }
-
-  /**
-   * Returns the max MP of the character.
-   */
-  public int getMaxMp() {
-    return maxMp;
+  
+  @Override
+  public void equipKnife(Knife knife) throws InvalidWeaponAssignmentException {
+    throw  new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipStaff(Staff staff) {
+    this.equippedWeapon = staff;
+  }
+  
+  @Override
+  public void equipBow(Bow bow) throws InvalidWeaponAssignmentException {
+    throw  new InvalidWeaponAssignmentException();
+  }
+  
+  public boolean implementsWhiteMagic() {
+    return true;
+  }
+  
+  
+  public boolean implementsBlackMagic() {
+    return false;
+  }
+  
+  @Override
+  public void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException, NullWeaponException {
+    magic.whiteMageOn(this, character);
   }
 }

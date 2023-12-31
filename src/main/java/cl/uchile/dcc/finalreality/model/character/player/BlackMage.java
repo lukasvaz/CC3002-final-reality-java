@@ -8,25 +8,26 @@
 
 package cl.uchile.dcc.finalreality.model.character.player;
 
-import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.exceptions.*;
+import cl.uchile.dcc.finalreality.model.TurnsQueue;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.magic.MagicInterface;
+import cl.uchile.dcc.finalreality.model.weapon.Axe;
+import cl.uchile.dcc.finalreality.model.weapon.Bow;
+import cl.uchile.dcc.finalreality.model.weapon.Knife;
+import cl.uchile.dcc.finalreality.model.weapon.Staff;
+import cl.uchile.dcc.finalreality.model.weapon.Sword;
 import java.util.Objects;
-import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * A Black Mage is a type of player character that can cast black magic.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Lukas Vasquez~
  * @version 2.0
  */
-public class BlackMage extends AbstractPlayerCharacter {
-
-  private int currentMp;
-  private final int maxMp;
-
+public class BlackMage extends AbstractMage {
   /**
    * Creates a new Black Mage.
    *
@@ -36,44 +37,21 @@ public class BlackMage extends AbstractPlayerCharacter {
    *     the character's max hp
    * @param defense
    *     the character's defense
+   * @param maxMp
+   *         the character's limit of Mana Points.
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
    */
-  protected BlackMage(final @NotNull String name, final int maxHp, final int defense,
-      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+
+  public BlackMage(final @NotNull String name,  final int defense, final int maxHp,
+                   int maxMp, final @NotNull TurnsQueue turnsQueue)
       throws InvalidStatValueException {
-    super(name, maxHp, defense, turnsQueue);
+    super(name, maxHp, defense, maxMp, turnsQueue);
     Require.statValueAtLeast(0, maxMp, "Max MP");
-    this.maxMp = maxMp;
-    this.currentMp = maxMp;
   }
-
-  // region : ACCESSORS
-
-  /**
-   * Returns the character's current MP.
-   */
-  private int getCurrentMp() {
-    return currentMp;
-  }
-
-  /**
-   * Sets the character's current MP.
-   */
-  private void setCurrentMp(final int currentMp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, currentMp, "Current MP");
-    Require.statValueAtMost(maxMp, currentMp, "Current MP");
-    this.currentMp = currentMp;
-  }
-
-  /**
-   * Returns the character's max MP.
-   */
-  private int getMaxMp() {
-    return maxMp;
-  }
-  // endregion
-
+  
+ 
+  
   // region : UTILITY METHODS
   @Override
   public boolean equals(final Object o) {
@@ -92,13 +70,52 @@ public class BlackMage extends AbstractPlayerCharacter {
 
   @Override
   public String toString() {
+
     return "BlackMage{currentMp=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(currentMp, maxMp, maxHp, defense, name);
+        .formatted(getcurrentMp(), getmaxMp(), maxHp, defense, name);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(BlackMage.class, name, maxHp, defense, maxMp);
   }
-  // endregion
+  
+  @Override
+  public void equipSword(Sword sword) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipAxe(Axe axe) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  @Override
+  public void equipKnife(Knife knife) {
+    this.equippedWeapon = knife;
+  }
+  
+  @Override
+  public void equipStaff(Staff staff) {
+    this.equippedWeapon = staff;
+  }
+  
+  @Override
+  public void equipBow(Bow bow) throws InvalidWeaponAssignmentException {
+    throw new InvalidWeaponAssignmentException();
+  }
+  
+  public boolean implementsWhiteMagic() {
+    return false;
+  }
+  
+
+  public boolean implementsBlackMagic() {
+    return true;
+  }
+  
+  @Override
+  public void implementsMagic(MagicInterface magic, GameCharacter character) throws NotImplementsMagicException, NotEnughMpException, NullWeaponException {
+    magic.blackMageOn(this, character);
+  }
 }
